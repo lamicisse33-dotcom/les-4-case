@@ -4729,7 +4729,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v142";
+const BUILD_TAG = "cases-v144";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -5486,11 +5486,12 @@ async function terminer(){
   if(enLigne()) return terminerDuel();
   fini=true; sel=null; locked=false; render();
   const v=verdict(T);
-  /* Plus une carte en main : ce qui brûle ne sera plus éteint. Tout s'embrase — et si
-     la défaite est jouée, les cases en feu EXPLOSENT avant que le verdict s'affiche. */
+  /* L'embrasement est une SANCTION, pas un spectacle : il ne tombe que sur le joueur,
+     et seulement quand il perd avec des cases encore en feu. Rara qui perd ne brûle
+     pas — sinon l'enfant verrait le même incendie en gagnant, et le signal ne voudrait
+     plus rien dire. */
   try{
-    const mesFeux = feuxDe(T,1);
-    if(mesFeux || feuxDe(T,2)) await embrasement(v.gagnant === 2 && mesFeux > 0);
+    if(v.gagnant === 2 && feuxDe(T,1) > 0) await embrasement(true);
   }catch(e){}
   const gagne = v.gagnant===1;
   if(v.gagnant===1) matchMe++; else if(v.gagnant===2) matchIA++;
@@ -7136,6 +7137,27 @@ function guidePlacement(els){
       }
     }
   }catch(e){}
+  /* RÈGLE ABSOLUE : elle ne recouvre jamais ce qu'elle montre. Elle se tenait sur la
+     case qu'elle désignait, bulle par-dessus le score — le geste devenait illisible :
+     on ne voyait ni le bras, ni la cible. On la pousse entièrement hors de la boîte
+     visée : dessous si la place existe, dessus sinon. */
+  const hautElle = HAUT * ech;
+  const chevauche = (gy - hautElle) < boite.bottom + 4 && gy > boite.top - 4;
+  if(chevauche){
+    const dessous = boite.bottom + hautElle + 8;
+    const dessus  = boite.top - 8;
+    if(dessous <= H - MARGE)                  gy = dessous;
+    else if(dessus - hautElle >= MARGE)       gy = dessus;
+    else {
+      /* Ni au-dessus ni en dessous : on la met de côté, et on la rapetisse pour
+         qu'elle tienne à côté sans mordre. */
+      ech = Math.min(ech, 0.6);
+      const he = HAUT * ech;
+      gx = (cx > W/2) ? Math.max(DEMI, boite.left - DEMI - 10)
+                      : Math.min(W - DEMI, boite.right + DEMI + 10);
+      gy = Math.max(he + MARGE, Math.min(H - MARGE, cy + he/2));
+    }
+  }
   return {gx:gx, gy:gy, ech:ech};
 }
 let _recalQuand = 0;
