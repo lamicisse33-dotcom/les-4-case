@@ -543,9 +543,14 @@ html.lite .rara-photo .rp-clos,html.lite .rara-photo.parle .rp-m{animation:none;
   background:radial-gradient(120% 90% at 50% 12%, #2C6FC4, #123E77 55%, #08203F);}
 .rara-ov.on{display:flex;animation:raraEntre .5s ease-out;}
 @keyframes raraEntre{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
-.rara-visage{width:min(96vw, 460px);margin-top:max(6px, env(safe-area-inset-top));
+/* Sa hauteur est bornée par celle de l'ÉCRAN, pas seulement par sa largeur : sur un
+   téléphone court, un portrait large de 96 % occupait tout et repoussait les boutons
+   hors du champ. Ici elle ne prend jamais plus de la moitié de la hauteur visible. */
+.rara-visage{width:min(78vw, 300px);max-height:48vh;max-height:48dvh;overflow:hidden;
+  display:flex;justify-content:center;margin-top:max(4px, env(safe-area-inset-top));
   filter:drop-shadow(0 10px 24px rgba(0,0,0,.55));animation:raraRespire 3.4s ease-in-out infinite;}
-.rara-visage svg{width:100%;height:auto;display:block;}
+.rara-visage svg,.rara-visage .rara-photo{width:100%;height:auto;display:block;}
+.rara-visage .rara-photo img{max-height:48vh;max-height:48dvh;width:auto;margin:0 auto;}
 @keyframes raraRespire{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}
 .r-yeux{animation:gCligne 4.4s infinite;transform-origin:110px 112px;}
 .rara-bas{width:min(92vw,420px);display:flex;flex-direction:column;align-items:center;
@@ -4791,7 +4796,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v126";
+const BUILD_TAG = "cases-v127";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
