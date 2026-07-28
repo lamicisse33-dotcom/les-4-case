@@ -222,14 +222,6 @@ button.reg-l:active{background:rgba(255,255,255,.06);border-color:rgba(201,162,3
 .instbar .ib-ic{display:inline-block;padding:0 5px;border-radius:5px;
   background:rgba(255,255,255,.16);font-weight:900;transform:translateY(-1px);}
 .instbar .ib-x{flex-shrink:0;background:none;border:none;color:#8d84a8;font-size:18px;line-height:1;padding:4px 4px;cursor:pointer;font-family:inherit}
-.inst-t{font-family:'Cinzel',serif;font-weight:700;font-size:11.5px;letter-spacing:1.1px;
-  text-transform:uppercase;color:var(--goldL);margin-bottom:6px;padding-right:22px;}
-.inst-p{font-size:13.5px;line-height:1.5;color:#d8d0e6;margin:0;}
-.inst-p b{color:#F7EFD2;}
-.inst-x{position:absolute;top:6px;right:8px;background:none;border:none;color:#8d84a8;
-  font-size:19px;line-height:1;padding:4px 6px;cursor:pointer;font-family:inherit;}
-.inst-b{width:100%;margin-top:9px;}
-.mem-efface{text-align:center;margin:10px 0 4px;}
 .mem-build{font-size:9px;color:#6b6280;letter-spacing:1.2px;margin-top:8px;font-family:'Cinzel',serif;font-weight:400;}
 .mem-signoff{text-align:center;margin-top:20px;}
 .mem-signoff .mem-balance{font-size:32px;line-height:1;filter:drop-shadow(0 0 10px rgba(240,208,96,.35));}
@@ -254,20 +246,7 @@ button.reg-l:active{background:rgba(255,255,255,.06);border-color:rgba(201,162,3
 .xp-next{font-size:9px;color:var(--muet);letter-spacing:.4px;margin-top:6px;text-align:right;}
 .xpbox.up{border-color:var(--goldL);box-shadow:0 0 22px rgba(240,208,96,.3);}
 .xp-up{font-family:'Cinzel',serif;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--goldL);text-align:center;margin-bottom:8px;animation:winpulse 1.4s ease-in-out infinite;}
-/* ── Miroir ── */
-#miroir .card{max-height:92dvh;overflow:auto;}
-#miroirBody{margin-top:4px;}
-.mir-empty{text-align:center;font-style:italic;color:#d6cee6;font-size:15.5px;line-height:1.6;padding:20px 6px;}
-.mir-empty b{color:var(--goldL);font-style:normal;}
 .mm-emb{font-size:34px;line-height:1;display:inline-block;margin-bottom:8px;opacity:.55;filter:grayscale(.4);}
-.mir-stat{text-align:center;font-family:'Cinzel',serif;font-weight:900;font-size:12px;color:var(--goldL);letter-spacing:1px;margin-bottom:12px;}
-.mir-cap{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muet);text-align:center;margin-bottom:8px;}
-.mir-bars{display:flex;flex-direction:column;gap:7px;margin-bottom:6px;}
-.mir-row{display:flex;align-items:center;gap:8px;}
-.mir-emb .embimg{width:20px;height:20px;border-radius:50%;display:block;}
-.mir-lbl{font-size:11px;color:#d7cfe6;width:82px;text-align:left;flex-shrink:0;}
-.mir-bar{flex:1;height:9px;border-radius:5px;background:rgba(0,0,0,.35);overflow:hidden;border:1px solid rgba(255,255,255,.08);}
-.mir-bar i{display:block;height:100%;border-radius:5px;transform-origin:left;animation:xpgrow .8s cubic-bezier(.2,1,.3,1) both;}
 
 /* Le badge était placé par space-between : à gauche deux boutons (66 px), à droite un seul
    (30 px). L'espace restant se partageant en deux, le badge se retrouvait 18 px trop à
@@ -843,18 +822,6 @@ span.orb{width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);b
 @keyframes cardin{0%{transform:scale(.8) translateY(14px);opacity:0;}100%{transform:scale(1) translateY(0);opacity:1;}}
 .ttl{font-family:'Cinzel',serif;font-size:20px;font-weight:900;color:var(--goldL);letter-spacing:1px;margin-bottom:4px;}
 .ttlmini{font-family:'Cinzel',serif;font-size:11px;color:var(--muet);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
-.obody{font-size:13px;color:#d7cfe6;line-height:1.65;min-height:96px;}
-.obody b{color:var(--goldL);}
-.pillrow{display:flex;justify-content:center;gap:10px;margin:12px 0 4px;}
-.pillrow .pp{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:22px;}
-.pillrow .pp small{font-size:8px;letter-spacing:.5px;font-family:'Cinzel',serif;font-weight:900;}
-.specrow{display:flex;justify-content:center;gap:8px;margin:12px 0 4px;}
-.specrow .sp{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:20px;width:88px;}
-.specrow .sp small{font-size:8px;font-family:'Cinzel',serif;font-weight:900;}
-.specrow .sp em{font-size:8.5px;color:var(--muet);font-style:normal;line-height:1.3;}
-.dots-nav{display:flex;justify-content:center;gap:6px;margin:14px 0 12px;}
-.dots-nav i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:.2s;}
-.dots-nav i.a{background:var(--goldL);transform:scale(1.25);}
 .orow{display:flex;gap:8px;justify-content:center;margin-top:4px;flex-wrap:wrap;}
 .diffgrid{display:flex;flex-direction:column;gap:0;margin:16px 0 6px;}
 .diffseg{display:flex;gap:6px;background:rgba(0,0,0,.28);border:1px solid rgba(201,162,39,.25);border-radius:13px;padding:5px;margin-bottom:10px;}
@@ -883,7 +850,6 @@ span.orb{width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);b
 .modepill span{font-size:22px;line-height:1;}
 .modepill:hover,.modepill:active{border-color:var(--goldL);color:#fff;background:rgba(201,162,39,.1);}
 .modepill:active{transform:scale(.96);}
-.menulinks{display:flex;justify-content:center;gap:20px;margin-top:16px;}
 /* ── Menu : « l'or est rare » — un seul héros doré, tout le reste en filet ── */
 #niveau .card{padding:30px 24px 24px;
   background:radial-gradient(125% 72% at 50% -8%, rgba(74,52,120,.42), transparent 60%), linear-gradient(180deg, rgba(20,13,38,.985), rgba(9,5,20,.995));
@@ -971,24 +937,12 @@ span.orb{width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);b
 .menusep{display:flex;align-items:center;gap:10px;margin:14px 2px 10px;color:var(--muet);
   font-size:9px;letter-spacing:2.5px;text-transform:uppercase;}
 .menusep::before,.menusep::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,162,39,.35),transparent);}
-/* démo « ton point faible décide » (onboarding) */
-.demo4{display:flex;gap:14px;justify-content:center;align-items:flex-end;height:104px;margin:6px 0 20px;}
-.dcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;}
-.dcol .em .embimg{width:18px;height:18px;border-radius:50%;margin-bottom:4px;display:block;}
-.dbar{width:38px;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,var(--c),rgba(0,0,0,.25));
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);transform-origin:bottom;animation:barGrow .55s cubic-bezier(.2,1,.3,1) both;}
 @keyframes barGrow{from{transform:scaleY(0);}to{transform:scaleY(1);}}
-.dcol.faible .dbar{animation:barGrow .55s cubic-bezier(.2,1,.3,1) both, faiblePulse 1.4s ease-in-out .9s infinite;}
 @keyframes faiblePulse{0%,100%{box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 0 0 0 rgba(201,162,39,0);}
   50%{box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 0 16px 3px rgba(201,162,39,.7);}}
-.dcol.faible .em .embimg{box-shadow:0 0 10px rgba(201,162,39,.9);}
-.dlab{position:absolute;bottom:-19px;left:50%;transform:translateX(-50%);white-space:nowrap;
-  font-family:'Cinzel',serif;font-weight:900;font-size:8.5px;letter-spacing:1px;color:var(--goldL);opacity:0;animation:fadeIn .4s ease 1s forwards;}
 @keyframes fadeIn{to{opacity:1;}}
 .hook{font-family:'Cinzel',serif;font-weight:900;font-size:19px;line-height:1.35;color:var(--goldL);text-align:center;margin-top:6px;letter-spacing:.3px;text-shadow:0 0 18px rgba(240,208,96,.3);}
 .hook b{color:#fff;}
-.hooksub{text-align:center;font-size:12.5px;color:#c4bbd6;margin-top:6px;font-style:italic;}
-.hooksub b{color:var(--goldL);font-style:normal;}
 .diffbtn{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px;border-radius:13px;
   background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.12);color:var(--text);width:100%;}
 .diffbtn:hover,.diffbtn.on{border-color:var(--goldL);background:rgba(201,162,39,.12);}
@@ -996,97 +950,27 @@ span.orb{width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);b
 .diffbtn .dt{font-family:'Cinzel',serif;font-weight:900;font-size:14px;color:var(--goldL);}
 .diffbtn .dd{font-size:10.5px;color:var(--muet);line-height:1.4;}
 .aide{display:none;}
-#findetail{font-size:11px;color:#c9c0dd;margin:10px 0 4px;line-height:1.7;}
-/* ── La question du Phénix : son propre écran, calme, toujours contenu ── */
-#qphenix{z-index:60;}   /* au-dessus de l'écran de fin, sinon il la recouvrirait */
+#findetail{font-size:11px;color:#c9c0dd;margin:10px 0 4px;line-height:1.7;}   /* au-dessus de l'écran de fin, sinon il la recouvrirait */
 /* La scène du Phœnix : par-dessus tout, même la question qu'elle annonce */
 #cinephenix{position:fixed;inset:0;z-index:80;background:#050403;opacity:1;
   transition:opacity .7s ease;touch-action:none;}
 #cinephenix.sortie{opacity:0;}
 #cinephenix canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
-#miroir.auto{z-index:60;}   /* quand il vient de lui-même : par-dessus l'écran de fin */
-/* Le Phœnix vient de s'embraser pour l'annoncer : le miroir ne doit pas surgir en 3 dixièmes.
-   Il monte des cendres, lentement. Uniquement en mode auto — le miroir manuel reste vif. */
-#miroir.auto.on{animation:mirlent 2.2s cubic-bezier(.16,.8,.28,1) both;}
-#miroir.auto.on > .card{animation:mircard 2.6s cubic-bezier(.16,.8,.28,1) both;}
 @keyframes mirlent{ from{opacity:0;} 35%{opacity:1;} to{opacity:1;} }
 @keyframes mircard{
   0%  {opacity:0; transform:translateY(26px) scale(.965); filter:blur(7px) brightness(1.8);}
   45% {opacity:1; filter:blur(1.5px) brightness(1.15);}
   100%{opacity:1; transform:translateY(0) scale(1); filter:blur(0) brightness(1);}
 }
-/* les lignes du verdict se posent l'une après l'autre, jamais toutes d'un coup */
-#miroir.auto.on .lecture{animation:mirtxt .9s ease both;}
-#miroir.auto.on .mir-conf{animation:mirtxt .9s ease both; animation-delay:.5s;}
 @keyframes mirtxt{ from{opacity:0; transform:translateY(9px);} to{opacity:1; transform:none;} }
-html.lite #miroir.auto.on, html.lite #miroir.auto.on > .card,
-html.lite #miroir.auto.on .lecture, html.lite #miroir.auto.on .mir-conf{animation:none;}
 @media (prefers-reduced-motion: reduce){
   #miroir.auto.on, #miroir.auto.on > .card,
   #miroir.auto.on .lecture, #miroir.auto.on .mir-conf{animation:none;}
 }
-#qphenix .qcard{position:relative;max-width:380px;width:92%;max-height:90dvh;overflow-y:auto;
-  text-align:center;padding:24px 18px 20px;
-  background:radial-gradient(120% 70% at 50% -6%, rgba(120,52,20,.45), transparent 62%), linear-gradient(180deg,rgba(26,14,32,.99),rgba(10,5,20,.99));
-  border:1px solid rgba(224,145,42,.4);box-shadow:0 30px 80px rgba(0,0,0,.7), 0 0 60px -10px rgba(224,122,26,.35);}
-.q-fab{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;cursor:pointer;z-index:6;
-  border:1px solid rgba(255,215,160,.6);color:#2c1a05;font-size:17px;line-height:1;
-  background:linear-gradient(180deg,#f6d9a0,#d99a3a 55%,#b5711c);
-  box-shadow:0 4px 14px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.5);
-  display:flex;align-items:center;justify-content:center;transition:transform .1s,filter .15s;}
-.q-fab:active{transform:scale(.93);}
-#qphenix .q-emb{font-size:34px;line-height:1;filter:drop-shadow(0 0 12px rgba(255,140,40,.65));
-  animation:qFlame 2.6s ease-in-out infinite;}
 @keyframes qFlame{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-3px) scale(1.06);}}
-#qphenix .q-kick{font-family:'Cinzel',serif;font-weight:900;font-size:9.5px;letter-spacing:1.8px;
-  text-transform:uppercase;color:#e0912a;margin:10px 0 14px;}
-#qphenix .q-txt{font-size:17px;line-height:1.5;color:#f4ead6;font-style:italic;margin-bottom:16px;}
-#qphenix .q-rep{display:flex;flex-direction:column;gap:7px;}
-.q-btn{padding:13px 10px;border-radius:12px;cursor:pointer;font-family:'Crimson Text',Georgia,serif;
-  font-size:16px;line-height:1.3;color:#e7dcf0;text-align:center;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.17);
-  transition:background .15s,border-color .15s,transform .1s;}
-.q-btn:hover{background:rgba(224,145,42,.15);border-color:rgba(224,145,42,.65);color:#fff;}
-.q-btn:active{transform:translateY(1px);}
-/* tout a été dit : les réponses appellent ensemble.
-   Halo peint une fois, seule l'opacité varie -> aucun repeint. */
-.q-btn{position:relative;}
-.q-btn.attend::after{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
-  border:1px solid rgba(224,145,42,.85);box-shadow:0 0 16px -3px rgba(224,145,42,.6);
-  background:rgba(224,145,42,.10);animation:qAttend 1.9s ease-in-out infinite;}
 @keyframes qAttend{0%,100%{opacity:0;}50%{opacity:1;}}
-.q-btn.attend:hover::after{animation:none;opacity:0;}
-html.lite .q-btn.attend::after{animation:none;display:none;}
-.q-skip{margin-top:14px;background:none;border:none;cursor:pointer;font-size:13px;
-  color:#8f86a8;font-style:italic;text-decoration:underline;text-underline-offset:3px;}
-.q-skip:hover{color:#c9bfe0;}
 .q-merci{color:#f0e6d0;}
 .q-merci b{color:var(--goldL);font-style:normal;}
-html.lite #qphenix .q-emb{animation:none;}
-
-/* ── Le reflet du Miroir (styles restaurés) ── */
-#miroir .mir-conf{margin-top:12px;background:linear-gradient(180deg,rgba(224,122,26,.08),rgba(0,0,0,.14));
-  border:1px solid rgba(224,145,42,.3);}
-#miroir .mir-conf .lec-h{color:#e0912a;}
-#miroir .mir-conf p{font-size:13px;}
-#miroir .mir-vu{margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid rgba(201,162,39,.16);}
-#miroir .mir-vu:last-of-type{border-bottom:none;padding-bottom:0;margin-bottom:6px;}
-#miroir .mir-vu p{margin:0 0 5px;}
-#miroir .mir-clos{margin-top:8px !important;font-style:italic;color:var(--goldL);opacity:.92;}
-#miroir .mir-proche{font-size:12.5px;color:#bdb2d4;line-height:1.5;}
-.mir-proche b{color:var(--goldL);}
-.mir-compte{font-size:13px;color:#c4bad9;font-style:normal;letter-spacing:.2px;}
-.mir-attend .ma-t{color:var(--goldL);font-style:normal;font-weight:700;margin:0 0 2px;}
-.mir-attend .ma-s{margin:0 0 7px;opacity:.85;}
-.mir-attend .ma-l{list-style:none;margin:0;padding:0;text-align:left;max-width:250px;margin-inline:auto;}
-.mir-attend .ma-l li{display:flex;align-items:center;gap:7px;padding:4px 2px;font-style:normal;
-  border-top:1px solid rgba(201,162,39,.14);}
-.mir-attend .ma-l li:first-child{border-top:none;}
-.mir-attend .ma-l li b{color:#e8e0f2;}
-.mir-attend .ma-l li span{margin-left:auto;font-size:12px;color:#a99fc0;white-space:nowrap;}
-.mir-attend .ma-l li span b{color:var(--goldL);}
-.mir-attend{font-style:italic;color:#a99fc0;text-align:center;margin:0 0 12px;line-height:1.6;}
-#miroir .mir-attend b{color:var(--goldL);font-style:normal;}
 .conf-oubli{margin-top:10px;background:none;border:none;cursor:pointer;font-size:11px;color:#8f86a8;
   font-style:italic;text-decoration:underline;text-underline-offset:3px;display:block;width:100%;text-align:center;}
 .conf-oubli:hover{color:#e0912a;}
@@ -1204,18 +1088,7 @@ html.lite #qphenix .q-emb{animation:none;}
   .fin-hero .fh-v{font-size:22px;}
   .fin-hero .fh-vs{font-size:9px;letter-spacing:1px;padding-top:20px;}
 }
-.fin-tot{display:flex;align-items:center;justify-content:space-between;margin:6px 6px 2px;padding-top:7px;
-  border-top:1px solid rgba(201,162,39,.2);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#7d749a;}
-.fin-tot b{font-family:'Cinzel',serif;font-size:16px;letter-spacing:0;}
-.fin-tot .tm{color:var(--goldL);} .fin-tot .ti{color:#e0708a;}
 .fin-rows{margin:4px 0 4px;}
-.fin-line{padding:4px 6px;margin:2px -6px;border-radius:8px;}
-.fin-line.hero{background:rgba(201,162,39,.08);box-shadow:inset 0 0 0 1px rgba(201,162,39,.25);}
-.fin-line .l{padding:0;}
-.fin-bar{display:flex;height:6px;border-radius:4px;overflow:hidden;margin-top:5px;background:rgba(0,0,0,.35);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);}
-.fin-bar i{display:block;height:100%;}
-.fin-bar .me{background:linear-gradient(90deg,var(--gold),var(--goldL));}
-.fin-bar .ia{background:linear-gradient(90deg,#e0708a,#b0455a);}
 .reason.lose{border-color:rgba(224,90,110,.5);background:linear-gradient(180deg,rgba(224,90,110,.13),rgba(224,90,110,.02));color:#f3d9df;}
 .reason.win{border-color:rgba(69,201,122,.45);background:linear-gradient(180deg,rgba(69,201,122,.11),rgba(69,201,122,.02));color:#d8f0e0;}
 .reason .ric{font-size:18px;line-height:1.1;flex-shrink:0;}
@@ -1226,11 +1099,6 @@ html.lite #qphenix .q-emb{animation:none;}
   transition:border-color .15s,background .15s,transform .1s;}
 .reason-btn:hover{border-color:var(--goldL);background:rgba(201,162,39,.15);}
 .reason-btn:active{transform:scale(.92);}
-.mir-lire{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(201,162,39,.45);
-  background:rgba(0,0,0,.3);color:#f0e6c8;font-size:15px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;
-  transition:border-color .15s,background .15s;}
-.mir-lire:hover{border-color:var(--goldL);background:rgba(201,162,39,.15);}
-#miroir .lecture{position:relative;}
 .lecture{position:relative;}
 .reason.lose b[style]{color:#e0708a!important;}
 .lecture .embimg{width:15px;height:15px;border-radius:50%;vertical-align:middle;border:1px solid rgba(201,162,39,.8);}
@@ -1428,101 +1296,6 @@ html.lite #liens .lien{animation:none;}
 .carte.brule::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(ellipse at 50% 108%, rgba(255,180,40,.95), rgba(255,70,0,.5) 42%, transparent 72%);mix-blend-mode:screen;animation:bruleGlow .78s ease-in forwards;pointer-events:none}
 .coris-btn{background:linear-gradient(180deg,#f4e6a8,#c9a227 46%,#a9812a);color:#1a1207;border:1px solid rgba(255,244,200,.6);box-shadow:0 0 22px -4px rgba(201,162,39,.7);font-weight:800;letter-spacing:.04em}
 .coris-btn:hover{box-shadow:0 0 30px -2px rgba(201,162,39,.9)}
-.coris-ov{position:fixed;inset:0;z-index:9999;background:#000;display:none}
-.coris-ov.on{display:block}
-.coris-ov iframe{width:100%;height:100%;border:0;display:block}
-.coris-close{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 16px);right:16px;z-index:10000;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:22px;cursor:pointer;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#e6ce7a;background:rgba(0,0,0,.55);border:1px solid rgba(201,162,39,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease}
-.coris-close.show{opacity:1;visibility:visible;pointer-events:auto}
-.coris-close:hover{box-shadow:0 0 18px -4px rgba(201,162,39,.8)}
-/* ══════════ BOUTIQUE DES HABILLAGES ══════════ */
-/* Chaque habillage = surcharge des variables + fond + halos. Défaut = valeurs de base. */
-/* 2. Bronze — chaleur ancestrale, métal patiné.
-   Entièrement en CSS : le bronze est une matière, pas un paysage. Aucune image, aucun octet
-   ajouté au chargement — même méthode que le fond de Verre. */
-html[data-skin="bronze"]{ --gold:#C98A42;--goldL:#F5DCAE;--goldD:#7A4A18;--pan1:#3a2410;--pan2:#1e1206;
-  --cface1:#FBF2E0;--cface2:#EDD9B4;--cardfr:#8A5A28;--vise:#FFE7A8;--viseTxt:#2A1A05;}
-html[data-skin="bronze"],html[data-skin="bronze"] body{
-  background-color:#160C04;
-  background-image:
-    /* la lumière chaude qui tombe du haut, comme une flamme hors champ */
-    radial-gradient(58% 30% at 50% 2%, rgba(255,186,96,.34), rgba(255,186,96,0) 72%),
-    /* la patine : deux voiles, un vert-de-gris et un cuivre, jamais alignés */
-    radial-gradient(46% 26% at 18% 40%, rgba(86,132,104,.16), rgba(86,132,104,0) 70%),
-    radial-gradient(52% 30% at 84% 62%, rgba(190,110,44,.18), rgba(190,110,44,0) 72%),
-    linear-gradient(180deg,#3A2109 0%,#4E2E10 22%,#3C2409 46%,#2A1808 70%,#1D1005 88%,#160C04 100%);}
-html[data-skin="bronze"] #ambiance .g1{background:radial-gradient(circle,rgba(214,138,58,.42),transparent 62%);}
-html[data-skin="bronze"] #ambiance .g2{background:radial-gradient(circle,rgba(244,186,104,.34),transparent 62%);}
-html[data-skin="bronze"] .mote{background:radial-gradient(circle,#FFD79A,rgba(255,215,154,0) 70%);
-  box-shadow:0 0 7px rgba(255,186,96,.7);}
-html[data-skin="bronze"] #vignette{background:radial-gradient(ellipse at 50% 40%,transparent 60%,rgba(18,9,3,.32) 86%,rgba(12,6,2,.52) 100%);}
-/* le cadre : liseré de bronze poli, halo chaud */
-html[data-skin="bronze"] body::after{
-  content:"";position:fixed;pointer-events:none;z-index:3;border-radius:24px;
-  left:calc(env(safe-area-inset-left,0px) + 5px);   right:calc(env(safe-area-inset-right,0px) + 5px);
-  top:calc(env(safe-area-inset-top,0px) + 5px);     bottom:calc(env(safe-area-inset-bottom,0px) + 5px);
-  border:2px solid rgba(230,178,106,.72);
-  box-shadow:0 0 13px rgba(226,150,62,.45), 0 0 34px rgba(180,104,32,.24),
-             inset 0 0 20px 2px rgba(226,160,80,.18);}
-html[data-skin="bronze"] #app h1{color:#FCE9C4;text-shadow:0 0 14px rgba(255,178,88,.45),0 2px 6px rgba(0,0,0,.7);}
-html[data-skin="bronze"] #app .sub{color:#E8CFA4;}
-html[data-skin="bronze"] #app #balance .cap{color:#EFD9B0;}
-html[data-skin="bronze"] .iconbtn,html[data-skin="bronze"] #niveauBadge{
-  background:linear-gradient(180deg,rgba(255,208,144,.16),rgba(255,208,144,.05));
-  border-color:rgba(226,170,102,.5);color:#F2DCB4;}
-html[data-skin="bronze"] .tb{width:30px;height:30px;border-radius:50%;
-  background:linear-gradient(180deg,rgba(255,208,144,.16),rgba(255,208,144,.05));
-  border:1px solid rgba(226,170,102,.5);color:#F2DCB4;font-size:14px;
-  display:flex;align-items:center;justify-content:center;}
-html[data-skin="bronze"] #matchbar .moi{color:#FBE6BE;}
-html[data-skin="bronze"] #matchbar .mc{color:#DEC49A;background:rgba(255,208,144,.09);border-color:rgba(226,170,102,.38);}
-html[data-skin="bronze"] .pip{border-color:rgba(240,200,146,.55);}
-/* « il en faut / à égalité » sont posés en style INLINE avec var(--muet) et var(--goldL) :
-   on redéfinit ces variables SUR #score, seul moyen de les atteindre sans toucher au JS. */
-html[data-skin="bronze"] #score{--muet:#D3B78E;--goldL:#FBE6BE;}
-html[data-skin="bronze"] #score .c{border-color:rgba(226,170,102,.42);}
-html[data-skin="bronze"] #score .moi{color:#FBE6BE;border-color:rgba(240,190,120,.6);
-  background:linear-gradient(180deg,rgba(150,96,40,.4),rgba(78,46,16,.4));}
-html[data-skin="bronze"] #score .ia{color:#FFD9DE;border-color:rgba(230,140,150,.5);
-  background:linear-gradient(180deg,rgba(150,60,60,.32),rgba(80,26,26,.32));}
-/* panneaux : plaques de bronze posées sur le cuir sombre */
-html[data-skin="bronze"] #but,html[data-skin="bronze"] #etape{
-  background:linear-gradient(180deg,rgba(255,208,144,.13),rgba(255,208,144,.04) 52%,rgba(20,10,4,.4));
-  border-color:rgba(226,170,102,.4);
-  box-shadow:inset 0 1px 0 rgba(255,224,178,.34),0 3px 12px rgba(0,0,0,.42);}
-html[data-skin="bronze"] #but{color:#EEDBB6;}
-html[data-skin="bronze"] #but b{color:#FFE3B0;}
-html[data-skin="bronze"] #etape #msg{color:#F1E1C4;}
-html[data-skin="bronze"] #etape #msg b{color:#FFDF9E;}
-html[data-skin="bronze"] #etapenum{background:linear-gradient(180deg,#F3D9A4,#B77F36);color:#2A1A05;}
-/* Tuiles en BRONZE PATINÉ. Comme pour l'argent, ce qui se lit comme du métal, ce sont les
-   bandes de réflexion alternées — pas un dégradé régulier. Teintes tenues assez sombres
-   pour que le texte reste clair et lisible. */
-html[data-skin="bronze"] .borne{color:#F6E7CC;overflow:hidden;
-  background:linear-gradient(163deg,#A87A3E 0%,#8A6130 10%,#5E3F1C 26%,#7C5528 38%,
-    #A97840 50%,#6C4A22 64%,#4A3013 80%,#2E1D0A 100%);
-  border:1px solid rgba(238,192,128,.7);
-  box-shadow:inset 0 1px 0 rgba(255,224,170,.55),inset 0 -12px 20px rgba(20,10,3,.4),
-             0 0 12px rgba(200,130,50,.28),0 4px 16px rgba(0,0,0,.45);}
-/* la brillance qui balaye, plus douce que sur l'argent : le bronze est satiné, pas miroir */
-html[data-skin="bronze"] .borne::before{content:"";position:absolute;inset:0;border-radius:inherit;
-  pointer-events:none;z-index:0;
-  background:linear-gradient(114deg,transparent 41%,rgba(255,226,170,.34) 49%,transparent 58%);
-  background-size:250% 100%;animation:argentSheen 6.4s ease-in-out infinite;}
-html.lite[data-skin="bronze"] .borne::before{animation:none;background:none;}
-html.lite[data-skin="bronze"] .borne{box-shadow:inset 0 1px 0 rgba(255,224,170,.4);}
-@media (prefers-reduced-motion: reduce){ html[data-skin="bronze"] .borne::before{animation:none;} }
-/* les noms gardent la couleur de leur pilier : un liseré sombre les détache du métal */
-html[data-skin="bronze"] .borne .nom{
-  text-shadow:0 0 2px rgba(20,10,3,.95),0 0 4px rgba(20,10,3,.75),0 1px 1px rgba(20,10,3,.7);}
-html[data-skin="bronze"] .borne .mini{color:#CBAE84;}
-/* 3,24 de contraste sur la bande la plus claire du métal : au seuil. Une ombre sombre
-   sous le chiffre le décolle partout, quelle que soit la bande qui passe dessous. */
-html[data-skin="bronze"] .borne .tot{text-shadow:0 0 3px rgba(20,10,3,.9),0 1px 2px rgba(20,10,3,.8);}
-html[data-skin="bronze"] .borne .tot.moi{color:#FFF0D2;}
-html[data-skin="bronze"] .borne .jtrack{background:rgba(24,13,4,.5);border-color:rgba(226,170,102,.32);}
-html[data-skin="bronze"] .carte{box-shadow:0 3px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,248,232,.9);}
-html[data-skin="bronze"] .carte .filet{border-color:rgba(138,90,40,.55);}
-html[data-skin="bronze"] .btn{background:linear-gradient(135deg,#F7E2B6,#C98A42 45%,#7A4A18);color:#2A1A05;}
 /* 3. Plastique — ciel de laque (illustration externe, comme Phénix)
    L'image ne contient QUE le ciel : les tuiles peintes ont été retirées (sinon elles se
    seraient superposées aux vraies), et le cadre néon aussi (il aurait été rogné par le
@@ -1608,330 +1381,7 @@ html[data-skin="plastique"] .carte .filet{border-color:rgba(92,139,245,.6);}
 /* boutons : le dégradé de base va du très clair au bleu foncé avec du texte sombre → illisible.
    Bleus resserrés, texte blanc. */
 html[data-skin="plastique"] .btn{background:linear-gradient(135deg,#6FA6F5,#2F6BE0 45%,#1B4BA8);color:#FFFFFF;}
-/* 4. Verre — cristal sombre (couleurs relevées sur le gabarit fourni)
-   Aucune image : le verre est fait de transparence, de liserés et de reflets, que le CSS
-   restitue sans un octet. index.html porte déjà quatre habillages embarqués. */
-html[data-skin="verre"]{ --gold:#9FB4CC;--goldL:#EEF4FC;--goldD:#5E7288;--pan1:#26313F;--pan2:#141C26;
-  --cface1:#EDF1F7;--cface2:#C9D2DF;--cardfr:#7C8EA4;--vise:#FFFFFF;--viseTxt:#16202C;}
-html[data-skin="verre"],html[data-skin="verre"] body{
-  background-color:#161F2B;
-  background-image:
-    radial-gradient(46% 28% at 88% 5%, rgba(226,236,248,.50), rgba(226,236,248,0) 70%),
-    linear-gradient(211deg, rgba(222,232,246,.20) 0%, rgba(222,232,246,0) 33%),
-    radial-gradient(92% 42% at 50% 27%, rgba(88,114,148,.50), rgba(88,114,148,0) 74%),
-    linear-gradient(180deg,#1D2836 0%,#374557 26%,#46576E 44%,#2C3947 70%,#222D3D 88%,#161F2B 100%);}
-html[data-skin="verre"] #ambiance .g1{background:radial-gradient(circle,rgba(200,224,252,.30),transparent 62%);}
-html[data-skin="verre"] #ambiance .g2{background:radial-gradient(circle,rgba(150,190,235,.26),transparent 62%);}
-html[data-skin="verre"] .mote{background:radial-gradient(circle,#ffffff,rgba(255,255,255,0) 70%);
-  box-shadow:0 0 6px rgba(220,238,255,.9);}
-html[data-skin="verre"] #vignette{background:radial-gradient(ellipse at 50% 40%,transparent 60%,rgba(6,12,20,.30) 86%,rgba(4,8,14,.50) 100%);}
-/* Le cadre du gabarit, à l'identique : 4 coins fixes, les 2 losanges centraux, et 4 rebords
-   qui se répètent. Découpé plutôt que posé en une image plein écran — sinon les côtés
-   seraient rognés en portrait. Chaque morceau s'efface vers l'intérieur pour se fondre. */
-html[data-skin="verre"] body::after{
-  content:"";position:fixed;left:0;top:0;width:100%;height:100%;z-index:3;pointer-events:none;
-  background-image:url("data:image/webp;base64,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"),url("data:image/webp;base64,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"),url("data:image/webp;base64,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"),url("data:image/webp;base64,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"),url("data:image/webp;base64,UklGRiYFAABXRUJQVlA4WAoAAAAQAAAAlQAAOQAAQUxQSB0AAAABuYzof8BMADL69/XSwMUWMQET4PD+L6ASCr04AABWUDgg4gQAALAVAJ0BKpYAOgA+VSiPRiOioSMhuA3gcAqJZ20OJsovR+Tudln//h/38Nt/uR5pAeu/X2mNDMu5t/tfZ8LIf9n7K/hj9G+jF/pCjwqJ1hT45yPWj1lN7UTA3kixqqb+gcxGk+BofkSiI9XdtNWnGxpcuPnIF4bn84JH3XKxkHPrEX66ZT9PeqhBeivW9aVRYYIR4RYfF01q4snJWfQlhs4xzWBxHUnIayEZwsTgOY+63K6ITdwwAP79XU5UL/+Of8dJ9DO28ap3FFeG6wf9q4/ge5WZB2/dxbXPHbAHBtSt7WwlWUK4eRFzZ/HP9PQmSzrTsnRfoTIdgHFtDudOf5see6V/76t4mFKEJiex3zSYX5ZckashvnF0LrVSV+zhtIXVBQi/BZ3FzxmSfCtSGVkNoUrXFmsePJPgs0xJWxsJUs/hlXq2xp2vlKkSXfPUX9s9tG0Y1HLYP4PjiGZxFM2+AkQxKwonleKcY8TE/l3IRItdC8wlyvfQE8sqJ+AxHe3cycmLZs0GF3In7wo9GIVP9OL1tH5VPMn8V1hDvTK/ymikanybr7eWTLssRjb/p5b9jghUh0T/DXiSsUDQ8L+RC8PzoS/nopeYnpos+zv4H5rNukrhPsuP4IHa4xs1XyQkcewKMWoK2EhhQZn18jJ9XrE2Ie0iV03zXdUaJ//7H4ifyMWEJ+zF079N9/UIX3W58CsuBbJ+sv8ywpJ8GFZI0qQOTjQkMEGU1UKILmIJtqsC7H4m4vCs3kgSsKrswocZXQhi3W8FuIu6Hp5PqBZZQxKrdw2kASOVhop4a0wndhRKROJYcLom66TsADbJFaU9tq5Vefvl0sVYcyFfjnFMynxgWYzRff5nrF33TP9sVsy7D7lnsIyQ6hA78f9kQJrpm+fPBnuKK5JxcTtRAsuKC4HNCjl+nKdZey7hqCWjyuY6u6857/BdEHUtCQ1M+dLoHkUSrXmsLlrjzV+7MCIqL85O5nn5l2CdUVVfqiWv5mvy7lB7BvTgNO77phmaYy1yR+wYj5pf6GtJZPB/w8bhx0iy1t51kQvKMEv4Ot1v8/N86dSeETsZ7t+J/2JsvBEpEDUjSJZyy23H26f6YpdiF/aXQxgWS3ZQ8zSoJYgMYSWMwf3Tq0tvuN7wNZgFXxnhzKbBMDHnnifQX+2w4qoEw9heEjW6MYIV9A5dVsoE9EPEqZUWVILFgGmKqPQFcHa2jI7RliKGKKbAnIlGQwQgfzBTsIZ0WNmh1lmTBxMW3qlbuTLyCty8/dFB+SQbCzl8OhNWL9DPa6kfqSKRfs4PoZfQLSgTzZ10EHuE96n/s1Ln32OoJmuJ3fReN0ntMYg7W8+OeI6hQ6gEyAq7zvrERfGTv23G4m96+QN1sZ/9iFYJ4/+SRdeQqfYY3SYyUHyu+pQW2Ssnikyxe6uweXjvgW4862cAZjEB2C1FmdFQRSaRLTIFA/g9iW7Kq84c1M9getPkoD6d0w1rlvPZ2e7xQuO9fKPuW/+W4SbNRxggB6qrCAlFq5XDhRZU2PFdmKCgkeGqvfs2BefpPq1PnLdmnHSPibLGOMpR+vNKTI8cquxUEW4QOoK/esgdu4e0qJxSzDEKbNpp9Q4Oh3bfGdUXEqQGMGfaUYu+SAfKnCGSl6LOBSyXV4dqFUBuXAdngAAA"),url("data:image/webp;base64,UklGRugEAABXRUJQVlA4WAoAAAAQAAAAlQAAOQAAQUxQSB4AAAABuQpE9D+gtm0bxvDq/99OLxETkAo2yYtDRsH73+tWUDggpAQAABAWAJ0BKpYAOgA+VSaPRiOiJSMkFm4ooAqJaTtTWAAggvLmuAN1tv9h2vs3WC/bR9X/1/q+zNZgD/b+273kfQP/X9wn9Sf9PwMiRBORQS7w3ty8Zq6K2nhvDsd59m1ciDb+D/JgzCEY4de2PQQrapr7gOmwBMfOTVcdgICqe2iZKxx+3pR+nbF48x8geKDLYWtyeQKGMiI03zoXJEX+NxfMmvyWRLkvGyvclnWTZTv05pIET7i8cwWAAP78SR1P36sxXeszrVLcazEMhNBlQ5t+uM6E5p0I9lgkyCmTep6F4CTfGMEbyWc3zVxsMq2Gf9Wl39fSrH9U22aaPTiM4wIHp5jsNXB5wAzJPb5pJl5IZYIL9WqF3uaQRzdprJuSQuEx3/8pKTF2RP0geu3/51N6ePYGnYC9PcRaswJGuERm5cb0hES6BVqWqWu7Bjc6Xl+XyDKSlRY+X/QoBpmxhLfQydWHF9gdr5QnY5vl51YWIi/seSqTdzNO/nETDR4vOIRld4OF/pe/4hXY1EDfdHYIKZAZzDYdz+lR1OsOEcWIYBGux1nq3EMpN9iiuNXkFqDBPX2TpsJk3+mD7v7KFhHct7+7EoSVZ0/OOqDiyQ8SSR4bJxdKOhV4dUN47iv452eDeuio6uAmPrrXYulQlMug/v0A41S5J6cZnE+f+nlr3yI/XG7N9BZLYfB7BKcBXzyJoS9FoRxSxfdYqmIkIuYie/cQhJ59vNHmqWHzYgX+6PsEGaJnqISPnY06n2IvgG/v+5/XCYppbZKAF4WduNoOM9Nqf3IEgdqEiWbenRtGZKvhVuJwb1hKsEiXhiCfFWCK9Z7WqMlFx++b6lGb/soGpZgl9R5ojhgJJK/2Kspjj/J9uManoWqdLm9/Sati0ijZYgDqOXoZrhFParAcru79Yx12f9LevHMKi6KPl4JNItiHZI16ypKoVnl/p96UXdK0UyUvKeRfdk8tVOESvA08PUiHOHcXptOLwMg68gWfRP/+vf3hM6sIxk4/8vBwK80KkzooCOH58sQYLXetcGIqYa8+1QKkOjX8wdT4ikwEZHR+RX4ve4BYdQ4viBFQPdQUv9WKl4nJcN/Wf/8R0Taj1c/J359xJlj+h474PXv/ZlGDzrOxNJh+Cn8QA/eTV6c517pcs6U9Ik7PN5Vga832R6DthOFGaCC7g3whWG+EmriIGNU3IOhJR8Zer89LUnGlVklvBnUFG7TsehomOE014YD94OmO+2g5x+3dfRJXg7DTF9ZHt2G6a6E8I/iYdqg/vPUQW5CrFul1U+0FXdjkZ372FlhRqpKmQAAzhp3caavKEHcL3428Zab8rtp/7yu46gj7vuqRd2yqH1EYtxx9vxTBbD1IUZZUokBcMGTnfB/4wbb9Sn9RJc9aVYTi98J4KTL6xEPyagV6mDUb7ccKzZ1wPKvpd7RajkQeivp7wtG4sbsovRYN/edQeRMzEW1u2AYl9cKscCB8FEHHeLAjaL+ilaLwBaQN8qt/pgd4rHqxTbdMHtLC7c7QodZBDomh6fzHiq7BWQ2Sd+OC96C/DVsjv/4Jc0dT/VhEoaOyAAAAAA=="),url("data:image/webp;base64,UklGRloBAABXRUJQVlA4WAoAAAAQAAAATwAAOQAAQUxQSBoAAAABuYzof4BMBOP797VSwMpFTMAEJN5uqyPzBlZQOCAaAQAAcAcAnQEqUAA6AD5VIo5EI6IhIzAIAHAKiWlq3l9LS4/CQzxgAHr9zb9CDtU6U4N1mDUM73T6EUCQjdhEoIbcRj2f8gAA/v5JlvvmX+dDn6Nr9Didv7rtl7to1wDD4a5V60T3uxCDQktfZEO+0u+iG5FjDGNFrz8vxKm9pZ6E8mdRj6OEn/ivBeCuN8EOptyfbJZH/ZplSEub/OXZLR2DsosVqVn/HMCd/+AXwR/5SsoF2Q8BpqzXzflDp9ub1spe3xkM8yPrhJ3MequREctchACMPcIIcP0b2dzRtUoSchMdtcsBs9xsQQaXVSNyXlpjVrssaNr7Plzxvp0brQyfsoGGwQZYwNGZseY0H7dNOk/FcT4SUub37UAA"),url("data:image/webp;base64,UklGRkIBAABXRUJQVlA4WAoAAAAQAAAATwAAOQAAQUxQSBsAAAABuQpE9D9ANmkTuub/r7u2RExAGm2at6jDPQUAVlA4IAABAAAwBwCdASpQADoAPkUcikQioaEiOYgAUAiJaTt/t/t8vH4SJAad4D7dvRL2qLq8ocsBvrf7NRqvOsYxtErq7jPfazgA/vvTSRyr1eZVcn6XDqwMypU3I5JvXSxmLzb77//jnwL/58cpyv/8vbvpJamLQfOS5a+SIS+4CKboZcXg4bzFMRVH1rYAAkrRy+mEFAATLpqFz4xEZY9z//q//mX//tLmGpf/JiqSBB8h5aHnpSjGTy2CySiV6ctJeoCNlpOBJbqwKYJctOjYB0raWHesX0QMp5/kTKF8/Qks2PFQG4lRjfAye9/YbpR4KNIeG0hBRjH1bqhB3WLyGoahwsoA"),url("data:image/webp;base64,UklGRpQBAABXRUJQVlA4WAoAAAAQAAAAOQAATwAAQUxQSBUAAAAFINqA8P+/KtU0SURMgFEohnH/rQwAVlA4IFgBAACQCwCdASo6AFAAPk0ijUQioqGbOt1UKATEtLWgz+j/5/ugH8A5//l9LQyjGQAfiBzbKVV/ECx/wrpxxEVgrDMPq9BtEsuih8JsABm2waWI6eWiEWuj6oG5T+t/TX0TCyXB2YLjAAD+/uKcj/fQ/6fI0HPAupfZO2rw2KDDC+LXGgSjocqtfr9gMjTS5NcA7F/+sX/+ufL2Qstzxy0sKHLKqnUM6UP9Vlxo7p3yzT+xorNmwUBmHuAYFgPfG0f53YTPybXkWIXAZACQvXZqKK6suMplEG46VMDDWAKpASJKk09Or6HDflMQ1X47Xt1ZHhXkaczC2c9AFie0RpZinNNscjaCT4H0+9MIXCTRBPacrviP9tsCOZAJIy3di3waOeo/q5PbmPnxQaWLV7rDQxSAS2MCXZ8jZgFYq+udPFTHnUpWimxPMvFIyPPuISiD6Ts90IbqhwgAAA=="),url("data:image/webp;base64,UklGRpgBAABXRUJQVlA4WAoAAAAQAAAAOQAATwAAQUxQSBQAAAAFINuwaKz+/1lsJhExAU6LxvtvZVZQOCBeAQAAMAoAnQEqOgBQAD5JIotEIqKhG/1UACgEhLS15s/o/+f8CBL/w3Wr+ciX8K45gxgDxZvb/FXj+U59W2oAUuF0K6F35gLiz2+0hYY+zjXoPnq8OG4AwyjGE1YAAP7zHX+ggwfsHgcsXdK0j+0Jv9TlV7wdCsf9a5W2efeLhj5OUTzDb8Yv8Zl/+O0FYfjXBwUw6CE5qpP5zH6GZKrDR64jPblPIDNrDGxz9mY9OzXvZR2x2edXW3gCVFt12AvLlmtK2PXLw46dY1cGvileM1Jj4v46O6hwvu6NuQmscXFe2cyDT9IfSZx7pyHyaIXKsvSNYT88ea1eKDBiDY/NUM3xz41a9Pudee4NuuBK8JFeckIq71twGK9qbws4/CKVmPQIwIIr6TpPThkgwdgM7ZCgypNB/hlv+ft2lmxkwWjlWe6k05r3RmOHinFYS4EVPnNSyaUijB0KvgOmInrwwAA=");
-  background-position:left top,right top,left bottom,right bottom,center top,center bottom,left top,left bottom,left top,right top;
-  background-size:58px 58px,58px 58px,58px 58px,58px 58px,58px 22.4px,58px 22.4px,31px 22.4px,31px 22.4px,22.4px 31px,22.4px 31px;
-  background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,round no-repeat,round no-repeat,no-repeat round,no-repeat round;}
-/* les rebords occupent ~22 px : on écarte le contenu pour qu'il ne morde pas dessus */
-html[data-skin="verre"] #app{padding-left:20px;padding-right:20px;
-  padding-top:calc(env(safe-area-inset-top,0px) + 24px);
-  padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);}
-html[data-skin="verre"] #app h1{color:#FFFFFF;text-shadow:0 0 14px rgba(190,220,255,.55),0 2px 6px rgba(0,0,0,.6);}
-html[data-skin="verre"] #app .sub{color:#DCE6F4;}
-html[data-skin="verre"] #app #balance .cap{color:#E4EDF9;}
-html[data-skin="verre"] .iconbtn,html[data-skin="verre"] #niveauBadge{
-  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));
-  border-color:rgba(214,232,252,.55);color:#EAF2FC;}
-html[data-skin="verre"] .tb{width:30px;height:30px;border-radius:50%;
-  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));
-  border:1px solid rgba(214,232,252,.55);color:#EAF2FC;font-size:14px;
-  display:flex;align-items:center;justify-content:center;}
-html[data-skin="verre"] #matchbar .moi{color:#FFFFFF;}
-html[data-skin="verre"] #matchbar .mc{color:#DCE6F4;background:rgba(255,255,255,.08);border-color:rgba(214,232,252,.42);}
-html[data-skin="verre"] .pip{border-color:rgba(226,240,255,.6);}
-/* « il en faut / à égalité » sont posés en style INLINE avec var(--muet) et var(--goldL) :
-   on redéfinit ces variables SUR #score, seul moyen de les atteindre sans toucher au JS. */
-html[data-skin="verre"] #score{--muet:#C2D0E2;--goldL:#FFFFFF;}
-html[data-skin="verre"] #score .c{border-color:rgba(214,232,252,.45);}
-html[data-skin="verre"] #score .moi{color:#FFFFFF;border-color:rgba(226,240,255,.62);
-  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));}
-html[data-skin="verre"] #score .ia{color:#FFD9E2;border-color:rgba(255,170,190,.5);
-  background:linear-gradient(180deg,rgba(200,90,115,.24),rgba(120,40,60,.24));}
-html[data-skin="verre"] #score .lbl{color:#B9C8DC;}
-/* panneaux : plaques de verre posées sur le fond */
-html[data-skin="verre"] #but,html[data-skin="verre"] #etape{
-  background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.03) 55%,rgba(8,14,22,.34));
-  border-color:rgba(214,232,252,.42);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.42),0 3px 12px rgba(0,0,0,.3);
-  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);}
-html[data-skin="verre"] #but{color:#E8F0FA;}
-html[data-skin="verre"] #but b{color:#FFFFFF;}
-html[data-skin="verre"] #etape #msg{color:#EDF3FB;}
-html[data-skin="verre"] #etape #msg b{color:#FFFFFF;}
-html[data-skin="verre"] #etapenum{background:linear-gradient(180deg,#EAF2FC,#8FA6BE);color:#16202C;}
-/* Tuiles en ARGENT POLI. Un métal ne se rend pas par un dégradé simple : il faut alterner
-   clair et sombre, car ce qu'on lit comme du brillant, ce sont les bandes de réflexion. */
-html[data-skin="verre"] .borne{color:#16202C;overflow:hidden;
-  background:linear-gradient(163deg,#FBFDFF 0%,#DDE5EF 9%,#A9B7C7 24%,#7F8D9E 34%,
-    #EDF3F9 46%,#C3CFDC 56%,#8B98A8 70%,#616E7E 84%,#414C58 100%);
-  border:1px solid rgba(255,255,255,.9);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.98),inset 0 -12px 20px rgba(20,30,44,.28),
-             0 0 14px rgba(196,216,240,.35),0 4px 16px rgba(0,0,0,.45);}
-/* la brillance qui balaye. background-position plutôt que transform : rien ne déborde. */
-html[data-skin="verre"] .borne::before{content:"";position:absolute;inset:0;border-radius:inherit;
-  pointer-events:none;z-index:0;
-  background:linear-gradient(114deg,transparent 40%,rgba(255,255,255,.62) 48%,rgba(255,255,255,.18) 52%,transparent 60%);
-  background-size:250% 100%;animation:argentSheen 5.6s ease-in-out infinite;}
 @keyframes argentSheen{0%{background-position:170% 0;}32%{background-position:-70% 0;}100%{background-position:-70% 0;}}
-html.lite[data-skin="verre"] .borne::before{animation:none;background:none;}
-@media (prefers-reduced-motion: reduce){ html[data-skin="verre"] .borne::before{animation:none;} }
-/* encre sombre : sur un métal clair, le texte blanc disparaissait */
-/* Les noms gardent la couleur de leur pilier (règle du projet) mais le vert et l'or
-   tombaient à 2,3 et 1,8 de contraste sur le métal clair. Un liseré sombre les détache
-   sans toucher à leur teinte — et il tient quelle que soit la bande du dégradé dessous. */
-html[data-skin="verre"] .borne .nom{
-  text-shadow:0 0 2px rgba(8,16,26,.95),0 0 4px rgba(8,16,26,.7),0 1px 1px rgba(8,16,26,.6);}
-html[data-skin="verre"] .borne .mini{color:#3E4A58;}
-html[data-skin="verre"] .borne .tot.moi{color:#101A26;}
-html[data-skin="verre"] .borne{--iaTot:#7A2436;--totOmbre:rgba(255,255,255,.75);}   /* tuiles claires : on inverse le liseré */
-html[data-skin="verre"] .borne .jtrack{background:rgba(30,42,58,.42);border-color:rgba(60,76,94,.45);}
-html[data-skin="verre"] .borne .emb{background:radial-gradient(circle at 50% 42%, var(--pc,rgba(120,140,170,.5)), transparent 72%);}
-/* cartes : givre clair, filet froid, reflet en haut */
-html[data-skin="verre"] .carte{box-shadow:0 3px 12px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.95);}
-html[data-skin="verre"] .carte .filet{border-color:rgba(124,142,164,.55);}
-html[data-skin="verre"] .btn{background:linear-gradient(135deg,#F2F7FD,#A9BCD2 45%,#6E8298);color:#16202C;}
-html[data-skin="verre"] .overlay .card{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
-/* 5. Argent — raffinement métallique. Platine froid, halo blanc.
-   Verre pose de l'argent sur du cristal sombre ; ici tout est métal, et le fond est
-   une plaque brossée, pas une vitre. */
-html[data-skin="argent"]{ --gold:#C3CCD8;--goldL:#F4F8FC;--goldD:#7E8896;--pan1:#333941;--pan2:#1b2026;
-  --cface1:#F7F9FC;--cface2:#DFE4EB;--cardfr:#8A93A0;--vise:#FFFFFF;--viseTxt:#14181E;}
-html[data-skin="argent"],html[data-skin="argent"] body{
-  background-color:#101317;
-  background-image:
-    radial-gradient(56% 28% at 50% 3%, rgba(238,246,255,.28), rgba(238,246,255,0) 72%),
-    /* le brossage : deux voiles froids décalés, jamais alignés */
-    radial-gradient(44% 26% at 16% 44%, rgba(190,206,226,.12), rgba(190,206,226,0) 70%),
-    radial-gradient(50% 28% at 86% 64%, rgba(150,166,188,.14), rgba(150,166,188,0) 72%),
-    linear-gradient(180deg,#2C3238 0%,#3C444C 22%,#2E343B 48%,#22272D 72%,#171B20 90%,#101317 100%);}
-html[data-skin="argent"] #ambiance .g1{background:radial-gradient(circle,rgba(214,226,242,.34),transparent 62%);}
-html[data-skin="argent"] #ambiance .g2{background:radial-gradient(circle,rgba(244,250,255,.26),transparent 62%);}
-html[data-skin="argent"] .mote{background:radial-gradient(circle,#FFFFFF,rgba(255,255,255,0) 70%);
-  box-shadow:0 0 6px rgba(232,242,255,.8);}
-html[data-skin="argent"] #vignette{background:radial-gradient(ellipse at 50% 40%,transparent 60%,rgba(8,10,14,.30) 86%,rgba(5,7,10,.50) 100%);}
-html[data-skin="argent"] body::after{
-  content:"";position:fixed;pointer-events:none;z-index:3;border-radius:24px;
-  left:calc(env(safe-area-inset-left,0px) + 5px);   right:calc(env(safe-area-inset-right,0px) + 5px);
-  top:calc(env(safe-area-inset-top,0px) + 5px);     bottom:calc(env(safe-area-inset-bottom,0px) + 5px);
-  border:2px solid rgba(226,236,248,.72);
-  box-shadow:0 0 13px rgba(214,230,248,.42), 0 0 34px rgba(150,172,198,.22),
-             inset 0 0 20px 2px rgba(200,216,238,.16);}
-html[data-skin="argent"] #app h1{color:#FFFFFF;text-shadow:0 0 14px rgba(214,234,255,.45),0 2px 6px rgba(0,0,0,.7);}
-html[data-skin="argent"] #app .sub{color:#D9E1EB;}
-html[data-skin="argent"] #app #balance .cap{color:#E4EAF2;}
-html[data-skin="argent"] .iconbtn,html[data-skin="argent"] #niveauBadge{
-  background:linear-gradient(180deg,rgba(240,248,255,.15),rgba(240,248,255,.05));
-  border-color:rgba(210,224,240,.5);color:#EEF3F9;}
-html[data-skin="argent"] .tb{width:30px;height:30px;border-radius:50%;
-  background:linear-gradient(180deg,rgba(240,248,255,.15),rgba(240,248,255,.05));
-  border:1px solid rgba(210,224,240,.5);color:#EEF3F9;font-size:14px;
-  display:flex;align-items:center;justify-content:center;}
-html[data-skin="argent"] #matchbar .moi{color:#FFFFFF;}
-html[data-skin="argent"] #matchbar .mc{color:#D5DDE7;background:rgba(240,248,255,.08);border-color:rgba(210,224,240,.36);}
-html[data-skin="argent"] .pip{border-color:rgba(226,238,252,.55);}
-html[data-skin="argent"] #score{--muet:#C4CDD9;--goldL:#FFFFFF;}
-html[data-skin="argent"] #score .c{border-color:rgba(210,224,240,.42);}
-html[data-skin="argent"] #score .moi{color:#FFFFFF;border-color:rgba(232,242,254,.6);
-  background:linear-gradient(180deg,rgba(120,134,152,.4),rgba(56,64,74,.4));}
-html[data-skin="argent"] #score .ia{color:#FFD9E0;border-color:rgba(230,150,164,.5);
-  background:linear-gradient(180deg,rgba(140,64,78,.3),rgba(70,28,36,.3));}
-html[data-skin="argent"] #but,html[data-skin="argent"] #etape{
-  background:linear-gradient(180deg,rgba(240,248,255,.12),rgba(240,248,255,.04) 52%,rgba(10,13,17,.38));
-  border-color:rgba(210,224,240,.38);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.36),0 3px 12px rgba(0,0,0,.4);}
-html[data-skin="argent"] #but{color:#E6ECF4;}
-html[data-skin="argent"] #but b{color:#FFFFFF;}
-html[data-skin="argent"] #etape #msg{color:#EDF1F7;}
-html[data-skin="argent"] #etape #msg b{color:#FFFFFF;}
-html[data-skin="argent"] #etapenum{background:linear-gradient(180deg,#F2F7FC,#909CAC);color:#14181E;}
-html[data-skin="argent"] .borne{color:#F2F6FB;overflow:hidden;
-  background:linear-gradient(163deg,#8E99A8 0%,#6D7886 12%,#49525E 28%,#606B79 40%,
-    #939FAE 52%,#5C6672 66%,#3D454F 82%,#262C34 100%);
-  border:1px solid rgba(232,242,254,.72);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -12px 20px rgba(8,11,15,.4),
-             0 0 12px rgba(190,210,236,.26),0 4px 16px rgba(0,0,0,.45);}
-html[data-skin="argent"] .borne::before{content:"";position:absolute;inset:0;border-radius:inherit;
-  pointer-events:none;z-index:0;
-  background:linear-gradient(114deg,transparent 40%,rgba(255,255,255,.55) 48%,transparent 58%);
-  background-size:250% 100%;animation:argentSheen 5.2s ease-in-out infinite;}
-html.lite[data-skin="argent"] .borne::before{animation:none;background:none;}
-html.lite[data-skin="argent"] .borne{box-shadow:inset 0 1px 0 rgba(255,255,255,.5);}
-@media (prefers-reduced-motion: reduce){ html[data-skin="argent"] .borne::before{animation:none;} }
-html[data-skin="argent"] .borne .nom{
-  text-shadow:0 0 2px rgba(8,11,15,.95),0 0 4px rgba(8,11,15,.75),0 1px 1px rgba(8,11,15,.7);}
-html[data-skin="argent"] .borne .mini{color:#C0C9D5;}
-html[data-skin="argent"] .borne .tot{text-shadow:0 0 3px rgba(8,11,15,.9),0 1px 2px rgba(8,11,15,.8);}
-html[data-skin="argent"] .borne .tot.moi{color:#FFFFFF;}
-html[data-skin="argent"] .borne .jtrack{background:rgba(12,16,21,.5);border-color:rgba(210,224,240,.3);}
-html[data-skin="argent"] .carte{box-shadow:0 3px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.95);}
-html[data-skin="argent"] .carte .filet{border-color:rgba(138,147,160,.55);}
-html[data-skin="argent"] .btn{background:linear-gradient(135deg,#F7FAFD,#B6C1CE 45%,#78828F);color:#14181E;}
-
-/* 6. Or — majesté royale. Or massif et lumière chaude. */
-html[data-skin="or"]{ --gold:#E8BC3E;--goldL:#FDEBB4;--goldD:#8E6C12;--pan1:#3e3110;--pan2:#201806;
-  --cface1:#FDF6E2;--cface2:#F1E2B4;--cardfr:#A8811E;--vise:#FFF3C0;--viseTxt:#2A1E02;}
-html[data-skin="or"],html[data-skin="or"] body{
-  background-color:#140E02;
-  background-image:
-    radial-gradient(58% 30% at 50% 2%, rgba(255,214,110,.34), rgba(255,214,110,0) 72%),
-    radial-gradient(46% 26% at 18% 42%, rgba(214,164,52,.16), rgba(214,164,52,0) 70%),
-    radial-gradient(52% 30% at 84% 64%, rgba(160,116,24,.18), rgba(160,116,24,0) 72%),
-    linear-gradient(180deg,#3E2E06 0%,#54400C 22%,#3E2E06 48%,#2A1F04 72%,#1C1403 90%,#140E02 100%);}
-html[data-skin="or"] #ambiance .g1{background:radial-gradient(circle,rgba(234,190,62,.42),transparent 62%);}
-html[data-skin="or"] #ambiance .g2{background:radial-gradient(circle,rgba(255,228,140,.32),transparent 62%);}
-html[data-skin="or"] .mote{background:radial-gradient(circle,#FFE9A8,rgba(255,233,168,0) 70%);
-  box-shadow:0 0 7px rgba(255,214,110,.75);}
-html[data-skin="or"] #vignette{background:radial-gradient(ellipse at 50% 40%,transparent 60%,rgba(16,11,2,.32) 86%,rgba(10,7,1,.52) 100%);}
-html[data-skin="or"] body::after{
-  content:"";position:fixed;pointer-events:none;z-index:3;border-radius:24px;
-  left:calc(env(safe-area-inset-left,0px) + 5px);   right:calc(env(safe-area-inset-right,0px) + 5px);
-  top:calc(env(safe-area-inset-top,0px) + 5px);     bottom:calc(env(safe-area-inset-bottom,0px) + 5px);
-  border:2px solid rgba(250,222,140,.78);
-  box-shadow:0 0 14px rgba(240,196,70,.5), 0 0 36px rgba(190,140,24,.26),
-             inset 0 0 20px 2px rgba(244,206,102,.2);}
-html[data-skin="or"] #app h1{color:#FFF4CE;text-shadow:0 0 16px rgba(255,210,96,.5),0 2px 6px rgba(0,0,0,.7);}
-html[data-skin="or"] #app .sub{color:#EFDCA6;}
-html[data-skin="or"] #app #balance .cap{color:#F6E7BC;}
-html[data-skin="or"] .iconbtn,html[data-skin="or"] #niveauBadge{
-  background:linear-gradient(180deg,rgba(255,224,140,.16),rgba(255,224,140,.05));
-  border-color:rgba(238,196,110,.5);color:#F8E9BE;}
-html[data-skin="or"] .tb{width:30px;height:30px;border-radius:50%;
-  background:linear-gradient(180deg,rgba(255,224,140,.16),rgba(255,224,140,.05));
-  border:1px solid rgba(238,196,110,.5);color:#F8E9BE;font-size:14px;
-  display:flex;align-items:center;justify-content:center;}
-html[data-skin="or"] #matchbar .moi{color:#FFF0BE;}
-html[data-skin="or"] #matchbar .mc{color:#E4CE96;background:rgba(255,224,140,.09);border-color:rgba(238,196,110,.36);}
-html[data-skin="or"] .pip{border-color:rgba(250,220,140,.55);}
-html[data-skin="or"] #score{--muet:#DCC490;--goldL:#FFF0BE;}
-html[data-skin="or"] #score .c{border-color:rgba(238,196,110,.42);}
-html[data-skin="or"] #score .moi{color:#FFF4CE;border-color:rgba(250,216,130,.62);
-  background:linear-gradient(180deg,rgba(160,120,26,.4),rgba(84,64,12,.4));}
-html[data-skin="or"] #score .ia{color:#FFDADF;border-color:rgba(232,146,158,.5);
-  background:linear-gradient(180deg,rgba(150,58,62,.3),rgba(76,24,28,.3));}
-html[data-skin="or"] #but,html[data-skin="or"] #etape{
-  background:linear-gradient(180deg,rgba(255,224,140,.13),rgba(255,224,140,.04) 52%,rgba(18,12,2,.4));
-  border-color:rgba(238,196,110,.4);
-  box-shadow:inset 0 1px 0 rgba(255,232,166,.36),0 3px 12px rgba(0,0,0,.42);}
-html[data-skin="or"] #but{color:#F2E2B4;}
-html[data-skin="or"] #but b{color:#FFEFBE;}
-html[data-skin="or"] #etape #msg{color:#F6E9C6;}
-html[data-skin="or"] #etape #msg b{color:#FFE9A0;}
-html[data-skin="or"] #etapenum{background:linear-gradient(180deg,#FCE7A8,#C29418);color:#2A1E02;}
-html[data-skin="or"] .borne{color:#FDF3D4;overflow:hidden;
-  background:linear-gradient(163deg,#E0B646 0%,#BE9226 12%,#8A6812 28%,#B08A20 40%,
-    #E8C258 52%,#9A741A 66%,#6C500C 82%,#402F06 100%);
-  border:1px solid rgba(252,226,150,.78);
-  box-shadow:inset 0 1px 0 rgba(255,240,190,.68),inset 0 -12px 20px rgba(20,14,2,.42),
-             0 0 13px rgba(232,186,60,.32),0 4px 16px rgba(0,0,0,.45);}
-html[data-skin="or"] .borne::before{content:"";position:absolute;inset:0;border-radius:inherit;
-  pointer-events:none;z-index:0;
-  background:linear-gradient(114deg,transparent 40%,rgba(255,246,206,.55) 48%,transparent 58%);
-  background-size:250% 100%;animation:argentSheen 5.8s ease-in-out infinite;}
-html.lite[data-skin="or"] .borne::before{animation:none;background:none;}
-html.lite[data-skin="or"] .borne{box-shadow:inset 0 1px 0 rgba(255,240,190,.5);}
-@media (prefers-reduced-motion: reduce){ html[data-skin="or"] .borne::before{animation:none;} }
-html[data-skin="or"] .borne .nom{
-  text-shadow:0 0 2px rgba(22,15,2,.95),0 0 4px rgba(22,15,2,.78),0 1px 1px rgba(22,15,2,.7);}
-html[data-skin="or"] .borne .mini{color:#D3BC86;}
-html[data-skin="or"] .borne .tot{text-shadow:0 0 3px rgba(22,15,2,.92),0 1px 2px rgba(22,15,2,.8);}
-html[data-skin="or"] .borne .tot.moi{color:#FFF6DC;}
-html[data-skin="or"] .borne .jtrack{background:rgba(24,17,3,.5);border-color:rgba(238,196,110,.32);}
-html[data-skin="or"] .carte{box-shadow:0 3px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,250,232,.9);}
-html[data-skin="or"] .carte .filet{border-color:rgba(168,129,30,.55);}
-html[data-skin="or"] .btn{background:linear-gradient(135deg,#FDEEC0,#E8BC3E 45%,#8E6C12);color:#2A1E02;}
-
-/* 7. Diamant — prestige absolu. Cristal et feu : les éclats arc-en-ciel sont ce qui
-   distingue un diamant d'un simple verre, d'où le voile coloré sur les facettes. */
-html[data-skin="diamant"]{ --gold:#7FE0F2;--goldL:#DEFAFF;--goldD:#3A93AC;--pan1:#163e52;--pan2:#0b2432;
-  --cface1:#F0FCFF;--cface2:#D2EEF7;--cardfr:#5FA8BE;--vise:#FFFFFF;--viseTxt:#08202A;}
-html[data-skin="diamant"],html[data-skin="diamant"] body{
-  background-color:#06141C;
-  background-image:
-    radial-gradient(54% 26% at 50% 2%, rgba(226,250,255,.30), rgba(226,250,255,0) 72%),
-    /* le feu du diamant : trois éclats colorés, très dilués */
-    radial-gradient(30% 18% at 20% 30%, rgba(120,180,255,.18), rgba(120,180,255,0) 72%),
-    radial-gradient(28% 16% at 78% 46%, rgba(255,150,210,.14), rgba(255,150,210,0) 72%),
-    radial-gradient(30% 18% at 44% 74%, rgba(150,255,220,.13), rgba(150,255,220,0) 72%),
-    linear-gradient(180deg,#123646 0%,#1A4A5E 22%,#123B4C 48%,#0C2836 72%,#081C26 90%,#06141C 100%);}
-html[data-skin="diamant"] #ambiance .g1{background:radial-gradient(circle,rgba(130,224,246,.36),transparent 62%);}
-html[data-skin="diamant"] #ambiance .g2{background:radial-gradient(circle,rgba(214,250,255,.28),transparent 62%);}
-html[data-skin="diamant"] .mote{background:radial-gradient(circle,#FFFFFF,rgba(255,255,255,0) 70%);
-  box-shadow:0 0 8px rgba(190,246,255,.9);}
-html[data-skin="diamant"] #vignette{background:radial-gradient(ellipse at 50% 40%,transparent 60%,rgba(4,12,18,.30) 86%,rgba(2,8,12,.5) 100%);}
-html[data-skin="diamant"] body::after{
-  content:"";position:fixed;pointer-events:none;z-index:3;border-radius:24px;
-  left:calc(env(safe-area-inset-left,0px) + 5px);   right:calc(env(safe-area-inset-right,0px) + 5px);
-  top:calc(env(safe-area-inset-top,0px) + 5px);     bottom:calc(env(safe-area-inset-bottom,0px) + 5px);
-  border:2px solid rgba(232,252,255,.8);
-  box-shadow:0 0 15px rgba(150,236,255,.5), 0 0 40px rgba(90,180,220,.26),
-             inset 0 0 22px 2px rgba(180,240,255,.2);}
-html[data-skin="diamant"] #app h1{color:#FFFFFF;text-shadow:0 0 18px rgba(170,240,255,.55),0 2px 6px rgba(0,0,0,.7);}
-html[data-skin="diamant"] #app .sub{color:#D6EFF7;}
-html[data-skin="diamant"] #app #balance .cap{color:#E6F8FD;}
-html[data-skin="diamant"] .iconbtn,html[data-skin="diamant"] #niveauBadge{
-  background:linear-gradient(180deg,rgba(226,250,255,.16),rgba(226,250,255,.05));
-  border-color:rgba(190,238,250,.52);color:#EDFAFE;}
-html[data-skin="diamant"] .tb{width:30px;height:30px;border-radius:50%;
-  background:linear-gradient(180deg,rgba(226,250,255,.16),rgba(226,250,255,.05));
-  border:1px solid rgba(190,238,250,.52);color:#EDFAFE;font-size:14px;
-  display:flex;align-items:center;justify-content:center;}
-html[data-skin="diamant"] #matchbar .moi{color:#FFFFFF;}
-html[data-skin="diamant"] #matchbar .mc{color:#CFE9F2;background:rgba(226,250,255,.08);border-color:rgba(190,238,250,.36);}
-html[data-skin="diamant"] .pip{border-color:rgba(214,246,255,.58);}
-html[data-skin="diamant"] #score{--muet:#BCD9E4;--goldL:#FFFFFF;}
-html[data-skin="diamant"] #score .c{border-color:rgba(190,238,250,.42);}
-html[data-skin="diamant"] #score .moi{color:#FFFFFF;border-color:rgba(214,248,255,.62);
-  background:linear-gradient(180deg,rgba(46,124,150,.42),rgba(18,58,74,.42));}
-html[data-skin="diamant"] #score .ia{color:#FFDCE6;border-color:rgba(240,150,180,.5);
-  background:linear-gradient(180deg,rgba(140,54,90,.3),rgba(70,22,44,.3));}
-html[data-skin="diamant"] #but,html[data-skin="diamant"] #etape{
-  background:linear-gradient(180deg,rgba(226,250,255,.12),rgba(226,250,255,.04) 52%,rgba(4,14,20,.4));
-  border-color:rgba(190,238,250,.4);
-  box-shadow:inset 0 1px 0 rgba(240,254,255,.4),0 3px 12px rgba(0,0,0,.42);}
-html[data-skin="diamant"] #but{color:#E4F5FA;}
-html[data-skin="diamant"] #but b{color:#FFFFFF;}
-html[data-skin="diamant"] #etape #msg{color:#EEFAFE;}
-html[data-skin="diamant"] #etape #msg b{color:#FFFFFF;}
-html[data-skin="diamant"] #etapenum{background:linear-gradient(180deg,#EAFCFF,#5FA8BE);color:#08202A;}
-/* facettes : bandes claires et sombres, puis un voile coloré très dilué par-dessus */
-html[data-skin="diamant"] .borne{color:#EFFAFE;overflow:hidden;
-  background:
-    linear-gradient(28deg,rgba(140,180,255,.16) 0%,rgba(255,160,220,.12) 34%,rgba(150,255,220,.12) 66%,rgba(255,230,150,.12) 100%),
-    linear-gradient(163deg,#BCE6F2 0%,#8CC3D6 11%,#4E8296 27%,#79AFC2 39%,
-      #C6ECF6 51%,#5E92A8 66%,#3A6376 82%,#1E3E4E 100%);
-  border:1px solid rgba(236,252,255,.8);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -12px 20px rgba(4,16,24,.38),
-             0 0 14px rgba(150,232,250,.34),0 4px 16px rgba(0,0,0,.45);}
-html[data-skin="diamant"] .borne::before{content:"";position:absolute;inset:0;border-radius:inherit;
-  pointer-events:none;z-index:0;
-  background:linear-gradient(114deg,transparent 38%,rgba(255,255,255,.7) 47%,rgba(190,230,255,.3) 51%,transparent 60%);
-  background-size:250% 100%;animation:argentSheen 4.4s ease-in-out infinite;}
-html.lite[data-skin="diamant"] .borne::before{animation:none;background:none;}
-html.lite[data-skin="diamant"] .borne{box-shadow:inset 0 1px 0 rgba(255,255,255,.6);}
-@media (prefers-reduced-motion: reduce){ html[data-skin="diamant"] .borne::before{animation:none;} }
-html[data-skin="diamant"] .borne .nom{
-  text-shadow:0 0 2px rgba(4,16,24,.95),0 0 4px rgba(4,16,24,.78),0 1px 1px rgba(4,16,24,.7);}
-/* .mini est tout en bas de la tuile, sur la facette SOMBRE (#1E3E4E) : une encre sombre
-   y tombait à 1,5 de contraste. Clair, comme sur les autres métaux. */
-html[data-skin="diamant"] .borne .mini{color:#BAD8E6;}
-html[data-skin="diamant"] .borne .tot{text-shadow:0 0 3px rgba(4,16,24,.9),0 1px 2px rgba(4,16,24,.8);}
-html[data-skin="diamant"] .borne .tot.moi{color:#FFFFFF;}
-html[data-skin="diamant"] .borne .jtrack{background:rgba(8,26,36,.44);border-color:rgba(190,238,250,.32);}
-html[data-skin="diamant"] .carte{box-shadow:0 3px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.95);}
-html[data-skin="diamant"] .carte .filet{border-color:rgba(95,168,190,.55);}
-html[data-skin="diamant"] .btn{background:linear-gradient(135deg,#EEFDFF,#7FE0F2 45%,#3A93AC);color:#08202A;}
 
 /* 9. Phénix — feu de renaissance.
    Deux couches volontairement redondantes : un BRASIER EN CSS qui tient tout seul, et
@@ -2097,26 +1547,12 @@ html[data-skin="elements"] #app{padding-left:6px;padding-right:6px;}
 html[data-skin="elements"] .carte{box-shadow:0 3px 12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.85);}
 html[data-skin="elements"] .carte .filet{border-color:rgba(160,130,230,.55);}
 html[data-skin="elements"] .btn{background:linear-gradient(135deg,#FFE9A8,#F0C040 45%,#A8761A);color:#2A1E04;}
-
-/* ══════════ LES HABILLAGES EN MODE LÉGER ══════════
-   Le mode léger coupait les halos et les flammes du jeu, mais ignorait tout ce que les
-   habillages ont ajouté depuis : flous d'arrière-plan, brillances, ombres larges.
-   backdrop-filter est l'effet le plus cher du CSS — le téléphone refloute ce qui est
-   derrière l'élément à chaque image, et il y en a un par tuile. */
-html.lite[data-skin="verre"] .borne,
-html.lite[data-skin="verre"] #but,
-html.lite[data-skin="verre"] #etape,
-html.lite[data-skin="verre"] .overlay .card{-webkit-backdrop-filter:none;backdrop-filter:none;}
-html.lite[data-skin="verre"] .borne{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 2px 8px rgba(0,0,0,.4);}
 html.lite[data-skin="elements"] .borne{box-shadow:none;}
 html.lite[data-skin="plastique"] .borne{box-shadow:inset 0 1px 0 rgba(255,255,255,.4);}
 html.lite[data-skin="coris"] .borne{box-shadow:none;}
 /* le cadre : on garde le trait, on retire les halos qui le font rayonner */
 html.lite[data-skin="plastique"] body::after,
 html.lite[data-skin="elements"] body::after{box-shadow:none;}
-/* les particules et les lueurs dérivantes, sur tous les habillages */
-html.lite[data-skin="verre"] #ambiance .glow,
-html.lite[data-skin="plastique"] #ambiance .glow{display:none;}
 
 /* ══════════ COMPACTAGE POUR 3 RANGÉES DE 4 ══════════
    La main réclame maintenant 3 rangées au lieu de 2. Sans rendre de la hauteur, ajusteMain
@@ -2829,7 +2265,6 @@ function gouttes(n){
 /* Coins de carte : une pastille de couleur, sans emblème. */
 function miniPastille(p){ return `<i style="background:${ORB[p]}"></i>`; }
 function orbe(p, cls){ if(!EMBLEME_IMG[p]) return `<span class="orb ${cls||''}" style="background:radial-gradient(circle at 35% 28%, rgba(255,255,255,.6), ${ORB[p]} 58%, #1a0a04 130%)">${EMB[p]}</span>`; return `<span class="orb ${EMB_CLS[p]} ${cls||''}"></span>`; }
-function miniOrb(p){ if(!EMBLEME_IMG[p]) return `<i style="background:${ORB[p]}"></i>`; return `<span class="mo ${EMB_CLS[p]}"></span>`; }
 
 let MODE='classique';
 
@@ -3137,18 +2572,6 @@ function _bass(t,freq,vol){
   o.connect(lp); lp.connect(g); g.connect(MUSG); o.start(t); o.stop(t+0.32);
 }
 /* Clap / contretemps clair */
-function _clap(t,vol){
-  const a=AC; if(!a||!MUSG) return;
-  for(let k=0;k<2;k++){
-    const len=Math.max(1,Math.floor(a.sampleRate*0.03)), buf=a.createBuffer(1,len,a.sampleRate), d=buf.getChannelData(0);
-    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,1.2);
-    const src=a.createBufferSource(); src.buffer=buf;
-    const bp=a.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=1500; bp.Q.value=0.9;
-    const g=a.createGain(); g.gain.value=vol; src.connect(bp); bp.connect(g); g.connect(MUSG);
-    if(AC._verb){ const s=a.createGain(); s.gain.value=0.25; g.connect(s); s.connect(AC._verb); }
-    const tt=t+k*0.012; src.start(tt); src.stop(tt+0.04);
-  }
-}
 /* Basse djembé (dun) feutrée : sinus qui chute + passe-bas */
 function _dun(t,vol){
   const a=AC; if(!a||!MUSG) return;
@@ -3160,16 +2583,6 @@ function _dun(t,vol){
   o.connect(lp); lp.connect(g); g.connect(MUSG); o.start(t); o.stop(t+0.4);
 }
 /* Tone de peau : bruit passe-bande court */
-function _tone(t,vol){
-  const a=AC; if(!a||!MUSG) return;
-  const len=Math.max(1,Math.floor(a.sampleRate*0.18)), buf=a.createBuffer(1,len,a.sampleRate), d=buf.getChannelData(0);
-  for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.2);
-  const src=a.createBufferSource(); src.buffer=buf;
-  const bp=a.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=330; bp.Q.value=1.3;
-  const g=a.createGain(); g.gain.value=vol; src.connect(bp); bp.connect(g); g.connect(MUSG);
-  if(AC._verb){ const s=a.createGain(); s.gain.value=0.16; g.connect(s); s.connect(AC._verb); }
-  src.start(t); src.stop(t+0.2);
-}
 /* Hochet doux : bruit HF très court */
 function _shaker(t,vol){
   const a=AC; if(!a||!MUSG) return;
@@ -3181,21 +2594,6 @@ function _shaker(t,vol){
   src.start(t); src.stop(t+0.07);
 }
 /* Voix piano feutré : fondamentale + partiels doux, attaque nette, longue décroissance, filtre qui adoucit */
-function _piano(t,freq,vol){
-  const a=AC; if(!a||!MUSG) return;
-  const lp=a.createBiquadFilter(); lp.type="lowpass";
-  lp.frequency.setValueAtTime(3200,t); lp.frequency.exponentialRampToValueAtTime(1300,t+0.6);
-  const out=a.createGain(); out.gain.value=1; lp.connect(out); out.connect(MUSG);
-  const parts=[[1,1.0,1.1],[2,0.34,0.7],[3,0.14,0.45],[4,0.06,0.3]];
-  parts.forEach(([r,gv,dur],idx)=>{
-    const o=a.createOscillator(); o.type="sine"; o.frequency.value=freq*r*(idx?1+Math.random()*0.001:1); // légère inharmonicité
-    const g=a.createGain(); g.gain.setValueAtTime(0.0001,t);
-    g.gain.exponentialRampToValueAtTime(Math.max(0.0002,vol*gv),t+0.006);
-    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-    o.connect(g); g.connect(lp); o.start(t); o.stop(t+dur+0.05);
-  });
-  if(AC._verb){ const s=a.createGain(); s.gain.value=0.42; out.connect(s); s.connect(AC._verb); } // réverbe généreuse = douceur
-}
 /* Ambiance MODERNE (lo-fi / chill) : groove doux + basse ronde + nappe chaude + hook mélodique qui accroche */
 function startAmbient(){
   if(ambiOn||muted||!musOn) return;
@@ -3267,7 +2665,6 @@ function stopAmbient(){
     setTimeout(()=>{ try{ ambiNodes.oscs.forEach(o=>o.stop()); if(ambiNodes.lfo) ambiNodes.lfo.stop(); }catch(e){} ambiNodes=null; MUSG=null; },1400);
   }catch(e){ ambiNodes=null; MUSG=null; }
 }
-function ensureAudio(){ const a=ac(); if(a && !muted) startAmbient(); }
 function toggleMute(){
   muted=!muted;
   try{ localStorage.setItem(CLE_SON, muted?'0':'1'); }catch(e){}   // il était oublié à la fermeture
@@ -3763,7 +3160,6 @@ function penteNette(compteur, p){
 /* Le Phénix ne revient pas tout de suite : sa 2e question se mérite */
 const ECART_QUESTION = 5;
 let REPONSES={};
-function chargerReponses(){ try{ const s=JSON.parse(localStorage.getItem('qc_eq_rep_v1')); if(s&&typeof s==='object') REPONSES=s; }catch(e){} }
 function sauverReponses(){ try{ localStorage.setItem('qc_eq_rep_v1', JSON.stringify(REPONSES)); }catch(e){} }
 function oublierReponses(){ REPONSES={}; sauverReponses(); }
 /* REPONSES[pilier] = [ {k,n}, {k,n} ] — une case par question.
@@ -3821,17 +3217,6 @@ function lireQuestionSeq(p, i, manuel){
   try{ speechSynthesis.speak(u); }catch(e){ fini(); }
   majLireBtn();
 }
-function ouvrirQuestion(p, i){
-  const Q=(QUESTIONS[p]||[])[i]; if(!Q) return;
-  _qPil=p; _qNum=i;
-  document.getElementById('qTxt').innerHTML = `${embImg(p,16)} ${Q.q}`;
-  document.getElementById('qRep').innerHTML = Q.r.map(x=>`<button class="q-btn" onclick="repondre('${p}',${i},'${x.k}')">${x.t}</button>`).join("");
-  document.getElementById('qSkip').style.display='';
-  document.getElementById('qKick').textContent = i>0 ? "Le Phénix revient" : "Le Phénix te pose une question";
-  _lectureTxt = Q.q;                                // seule la question est dite à voix haute
-  document.getElementById('qphenix').classList.add('on');
-  setTimeout(()=>{ if(ecranOuvert('qphenix')) lireQuestionSeq(p, i); }, 420);   // lecture auto, si l'écran est encore là
-}
 function repondre(p, i, k){
   if(!p) return;
   /* LA MÉMOIRE DU MIROIR. Avant, répondre ÉCRASAIT la réponse précédente : il ne connaissait
@@ -3877,27 +3262,13 @@ function repondre(p, i, k){
   }
 }
 function _profilDefaut(){ P.forEach(p=>{ if(PROFIL.tot[p]==null)PROFIL.tot[p]=0; if(PROFIL.neglige[p]==null)PROFIL.neglige[p]=0; if(PROFIL.fort[p]==null)PROFIL.fort[p]=0; }); }
-function chargerProfil(){ try{ const s=JSON.parse(localStorage.getItem('qc_eq_profil_v1')); if(s&&typeof s==='object'){ PROFIL=Object.assign({parties:0,victoires:0,tot:{},neglige:{},fort:{}},s); } }catch(e){} _profilDefaut(); }
 function sauverProfil(){ try{ localStorage.setItem('qc_eq_profil_v1', JSON.stringify(PROFIL)); }catch(e){} }
-function majProfil(win){
-  const tot=P.reduce((s,p)=>s+(bilanPiliers[p]||0),0); if(tot<=0) return;    // solo uniquement (duel: bilan vide)
-  PROFIL.parties++; if(win) PROFIL.victoires++;
-  P.forEach(p=>PROFIL.tot[p]+=(bilanPiliers[p]||0));
-  const tri=P.slice().sort((a,b)=>(bilanPiliers[b]||0)-(bilanPiliers[a]||0));
-  PROFIL.fort[tri[0]]++; PROFIL.neglige[tri[3]]++;
-  sauverProfil();
-}
 /* Miroir supprimé : aucun profil n'est chargé ni enregistré. */
 
 /* ══════════ BOUTIQUE DES HABILLAGES (moteur) ══════════ */
 const SKINS = [
   {id:'defaut',    nom:'Classique',           emoji:'⚖️', prix:0,     desc:"Thème par défaut — l'or et la nuit."},
-  {id:'bronze',    nom:'Bronze',              emoji:'🟤', prix:100,   desc:"Chaleur ancestrale — métal patiné, lumière orangée."},
   {id:'plastique', nom:'Plastique',           emoji:'🔵', prix:0,     desc:"Ciel de laque — bleu éclatant, nuages clairs. Habillage de départ."},
-  {id:'verre',     nom:'Verre',               emoji:'🔷', prix:500,   desc:"Élégance cristalline — translucide, reflets glacés."},
-  {id:'argent',    nom:'Argent',              emoji:'🥈', prix:1000,  desc:"Raffinement métallique — argent poli, halo blanc."},
-  {id:'or',        nom:'Or',                  emoji:'🥇', prix:2000,  desc:"Majesté royale — cadres dorés, lumière chaude."},
-  {id:'diamant',   nom:'Diamant',             emoji:'💎', prix:5000,  desc:"Prestige absolu — cristal, reflets arc-en-ciel."},
   {id:'coris',     nom:'Coris Ancestraux',    emoji:'🐚', prix:8000,  desc:"Âme africaine — cauris sculptés, sable lumineux."},
   {id:'phenix',    nom:'Phénix',              emoji:'🔥', prix:12000, desc:"Feu de renaissance — flammes vivantes, braises."},
   {id:'elements',  nom:'Les Quatre Éléments', emoji:'🌍', prix:18000, desc:"Les piliers prennent vie — chaque pilier s'anime."}
@@ -3970,7 +3341,12 @@ function sauverBoutique(){
     localStorage.setItem(CLE_BOUT, JSON.stringify(c));
   }catch(e){}
 }
-function appliquerSkin(id){ try{ document.documentElement.setAttribute('data-skin', id||'defaut'); }catch(e){}
+const SKINS_VALIDES = SKINS.map(s=>s.id);
+function appliquerSkin(id){
+  /* Les habillages Bronze, Verre, Argent, Or et Diamant ont été retirés. Un joueur qui
+     en avait un d'actif serait resté sur un thème qui n'existe plus, donc sur un plateau
+     sans style. On le ramène au Plastique, l'habillage de départ. */
+  if(SKINS_VALIDES.indexOf(id) < 0) id = 'plastique'; try{ document.documentElement.setAttribute('data-skin', id||'defaut'); }catch(e){}
   try{ _kActuel=0; _ajRangs=-1; ajusteMain(true); }catch(e){}
 }
 function skinParId(id){ return SKINS.find(s=>s.id===id) || SKINS[0]; }
@@ -4507,14 +3883,6 @@ function prochainMiroir(){
   return Math.max(0, resteJeu, resteParole);
 }
 /* Le miroir a-t-il quelque chose à livrer maintenant ? (une parole assez vieille pour être croisée) */
-function miroirMur(){
-  if(enLigne() || (PROFIL.parties||0) < SEUIL_MIROIR) return false;
-  return P.some(p=>{
-    const r=laParole(p); if(!r || !_laReponse(p, r.i, r.k)) return false;
-    const o=_repArr(p)[r.i]; if(!o) return false;
-    return _depuisMiroir(o) >= SEUIL_MIROIR;      // vu, pas n : le miroir a son propre rythme
-  });
-}
 /* Le miroir a parlé : on remet son compteur à zéro. Il te reverra dans SEUIL parties. */
 /* ⚠️ DEUX DATES, DEUX USAGES — ne jamais les confondre :
      o.n  = QUAND LE JOUEUR A PARLÉ. Sert à espacer les questions et à dater sa mémoire.
@@ -5019,17 +4387,6 @@ function pilierDeLaQuestion(win){
 /* ── La Révélation des Coris : déclenchement après le tableau de résultats final ──
    1ère victoire du jour, puis toutes les 3 victoires. N'interfère pas avec le reste
    du jeu : bouton sur l'écran de résultats, ouverture en surimpression (iframe). */
-function corisShouldTrigger(){
-  try{
-    var d=new Date();
-    var key=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
-    var last=localStorage.getItem('qc_coris_last_daily');
-    if(last!==key){ localStorage.setItem('qc_coris_last_daily', key); return true; }   // 1ère victoire du jour
-    var v=(typeof PROFIL==='object' && PROFIL && PROFIL.victoires)||0;
-    if(v>0 && v%3===0) return true;                                                // toutes les 3 victoires
-    return false;
-  }catch(e){ return false; }
-}
 function ouvrirCoris(){
   var ov=document.getElementById('corisOverlay'), fr=document.getElementById('corisFrame');
   if(!ov||!fr) return;
@@ -5174,6 +4531,11 @@ function render(){
     + `</div>`
     + `<div class="c ia"><div class="lbl">${advLabel()}</div>${g2} pilier${g2>1?"s":""}</div>`;
 
+  /* Filet : une carte peut disparaître de la main — brûlée, jouée, nettoyée — alors que
+     la sélection la désigne encore. Le jeu attendait alors qu'on pose une carte qui
+     n'existe plus, et aucun village ne s'allumait. On annule la sélection. */
+  if(sel !== null && !mainJ[sel]) sel = null;
+  if(sel2 !== null && !mainIA[sel2]) sel2 = null;
   const carteSel = sel!==null ? mainJ[sel] : null;
   const carteSel2 = (DUO && attend2 && sel2!==null) ? mainIA[sel2] : null;
   const ciblesSel2 = carteSel2 ? ciblesDe(carteSel2,T,2) : [];
@@ -5234,21 +4596,31 @@ function render(){
   }
 
   const mz=document.getElementById("main");
-  const feux = [];
+  /* Ce tableau restait vide depuis la suppression de l'ancien moteur : le repère qui
+     signale les cartes capables d'éteindre un feu ne s'allumait donc jamais. */
+  const feux = casesQuiBrulent();
 
   /* Toucher une carte pour la choisir ne change QUE la classe .sel — mais on rasait et
      rebâtissait les 12 cartes (182 nœuds, 7,5 ms de mise en page) à chaque toucher.
      C'était le « ça rame » au moment de jouer. Si le contenu de la main n'a pas bougé,
      on ne touche plus que les classes : de 7,5 ms à quelques centièmes. */
+  /* La signature ne porte QUE sur les cartes. Elle contenait aussi les scores du
+     plateau : le moindre coup, même celui de l'adversaire, rebâtissait donc les douze
+     cartes et leurs vingt-quatre dessins, alors que la main n'avait pas changé.
+     Ce qui dépend du plateau — jouable ou non, éteint un feu ou non — n'est plus
+     qu'une affaire de classes, posées sans rien reconstruire. */
   const _sigMain = mainJ.map(c=>c.n+'|'+c.pts+'|'+(c.type||'')+'|'+(c.p||'')+'|'+(c.q||'')).join('#')
-                 + '§' + P.map(p=>T[p][1]+','+T[p][2]+','+T[p].n1).join(';')
-                 + '§' + MODE + '§' + feux.join(',');
+                 + '§' + MODE;
   const _memes = (_sigMain === mz.dataset.sig) && mz.children.length === mainJ.length;
 
   if(_memes){
     mainJ.forEach((c,i)=>{
       const el=mz.children[i]; if(!el) return;
-      el.classList.toggle('sel', sel===i);          // le seul changement possible
+      const cib = ciblesDe(c,T,1);
+      el.classList.toggle('sel', sel===i);
+      el.classList.toggle('dim', cib.length===0);
+      el.classList.toggle('eau', feux.length>0 && !c.cibleAdverse && feux.some(p=>cib.includes(p)));
+      el.classList.remove('neuve');
     });
   } else {
   mz.dataset.sig = _sigMain;
@@ -5397,7 +4769,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v103";
+const BUILD_TAG = "cases-v107";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -5504,7 +4876,6 @@ function reprendrePartie(){
    l'écran sans que le bouton apparaisse. */
 const ECART_FEU = 10;
 function casesQuiBrulent(){ return P.filter(p => T[p][2]-T[p][1] >= ECART_FEU); }
-function pilierEnFeu(){ const f=casesQuiBrulent(); return f.length ? f[0] : null; }
 /* Trois façons d'éteindre, trois qualités de travail :
    le SEAU noie les flammes mais laisse la case fumante ; l'EXTINCTEUR fait le travail
    proprement, sur une case ; l'ORAGE lave tout, mais ne vient que si ça déborde. */
@@ -5535,43 +4906,6 @@ function phenixDispo(){
 function majPhenix(){
   const btn=document.getElementById("phenixBtn"); if(!btn) return;
   btn.style.display = phenixDispo() ? "block" : "none";
-}
-function braisesPhenix(p){
-  if(document.documentElement.classList.contains('lite')) return;
-  const el=document.getElementById("borne-"+P.indexOf(p)); if(!el) return;
-  const host=el.querySelector('.emb')||el, r=host.getBoundingClientRect();
-  const cx=r.left+r.width/2, cy=r.top+r.height/2;
-  const flare=document.createElement('div'); flare.className='phx-flare';
-  flare.style.left=cx+'px'; flare.style.top=cy+'px'; document.body.appendChild(flare);
-  setTimeout(()=>flare.remove(),820);
-  for(let i=0;i<20;i++){
-    const b=document.createElement('div'); b.className='braise';
-    const s=(3+Math.random()*4).toFixed(1);
-    b.style.left=cx+'px'; b.style.top=cy+'px'; b.style.width=s+'px'; b.style.height=s+'px';
-    b.style.setProperty('--dx',((Math.random()*2-1)*75).toFixed(0)+'px');
-    b.style.setProperty('--dy',(-(55+Math.random()*130)).toFixed(0)+'px');
-    const dur=(0.8+Math.random()*0.9);
-    b.style.animationDuration=dur.toFixed(2)+'s';
-    b.style.animationDelay=(Math.random()*0.18).toFixed(2)+'s';
-    document.body.appendChild(b);
-    setTimeout(()=>b.remove(), (dur+0.4)*1000);
-  }
-}
-function ailePhenix(p){
-  if(document.documentElement.classList.contains('lite')) return;
-  const el=document.getElementById("borne-"+P.indexOf(p)); if(!el) return;
-  const host=el.querySelector('.emb')||el, r=host.getBoundingClientRect();
-  const cx=r.left+r.width/2, cy=r.top+r.height/2;
-  const w=document.createElement('div'); w.className='phx-wing';
-  w.style.left=cx+'px'; w.style.top=cy+'px';
-  w.innerHTML=`<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"><defs>
-    <linearGradient id="pxg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff4c0"/><stop offset=".5" stop-color="#ffb54a"/><stop offset="1" stop-color="#ff6a12"/>
-    </linearGradient></defs>
-    <path fill="url(#pxg)" d="M100 18 C96 30 96 40 98 50 C70 44 40 40 18 22 C40 52 66 60 90 64 C66 74 44 84 20 96 C50 96 78 88 98 76 C96 92 92 108 100 132 C108 108 104 92 102 76 C122 88 150 96 180 96 C156 84 134 74 110 64 C134 60 160 52 182 22 C160 40 130 44 102 50 C104 40 104 30 100 18 Z"/>
-  </svg>`;
-  document.body.appendChild(w);
-  setTimeout(()=>w.remove(), 2500);
 }
 /* ══════════ L'ORAGE ══════════
    L'averse couvre tout l'écran, s'arrête d'elle-même et se nettoie. Elle s'allège
@@ -5727,6 +5061,12 @@ async function brulerUne(main, i, mz, msg){
   main.splice(i, 1);
   locked = false;
   try{ render(); }catch(e){}
+  /* Si c'était la dernière carte, plus personne ne concluait la manche : le jeu restait
+     figé sur une main vide, avec un message qui attendait un geste impossible. */
+  try{
+    if(finiePartie()){ terminer(); return; }
+    if(main === mainJ && !mainJ.length && !fini) lancerIA();
+  }catch(e){}
 }
 function choisir(i){
   if(fini||locked) return;
@@ -5760,7 +5100,6 @@ function choisir(i){
   render();
   if(COACH){ if(sel!==null){ coachStep=1; coachPilier(); } else { coachStep=0; coachCarte(); } }
 }
-function annuler(){ if(locked) return; sel=null; dire("<b>Touchez une carte</b> de votre main.",1); render(); }
 
 function reagitPilier(p, who, delta){
   if(!delta) return;
@@ -6207,19 +5546,6 @@ function fermerModemploi(){
 
 function flashMsg(t){ const d=document.createElement('div'); d.className='toast'; d.textContent=t; document.body.appendChild(d);
   requestAnimationFrame(()=>d.classList.add('on')); setTimeout(()=>d.classList.remove('on'),1800); setTimeout(()=>d.remove(),2300); }
-function partagerJeu(){
-  try{ ac(); }catch(e){}
-  const txt = `🛖 LES QUATRE CASES\n`
-    + `Spiritualité · Amour · Santé · Argent.\n`
-    + `Ton pilier le plus faible décide de la partie.\n\n`
-    + `Et au bout de quelques parties, le jeu te dit qui tu es.\n`
-    + `👉 ${LIEN_JEU}`;
-  if(navigator.share){ navigator.share({ text:txt, url:LIEN_JEU }).catch(()=>{}); return; }
-  try{ window.open("https://wa.me/?text="+encodeURIComponent(txt), "_blank"); return; }catch(e){}
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(()=>flashMsg("Copié")).catch(()=>flashMsg(LIEN_JEU));
-  } else flashMsg(LIEN_JEU);
-}
 /* Partager SA victoire — pas le jeu à froid. Le lien voyage avec l'exploit. */
 function partagerVictoire(){
   try{ ac(); }catch(e){}
@@ -6319,122 +5645,6 @@ let miroirRetour='splash';
    la porte 🪞 mène à l'écran muet — qui garde le décompte et « Effacer ce que j'ai confié »,
    donc rien n'est perdu — jusqu'au retour du Phœnix. */
 function miroirLisible(){ return PROFIL.miroirLe!=null && !PROFIL.miroirLu; }
-function ouvrirMiroir(auto){
-  ac();
-  if(auto){
-    /* Le Phœnix révèle : il laisse UNE lecture en réserve et règle le compteur — ICI,
-       une seule fois. (Avant, reglerLeCompteur() tournait à chaque fermeture : le joueur
-       était puni de relire, chaque relecture repoussait le Phœnix suivant.) */
-    PROFIL.miroirLe = (PROFIL.parties||0); PROFIL.miroirLu = false; sauverProfil();
-    reglerLeCompteur();
-  }
-  let _consomme = false;
-  if(!auto){                                  // ouverture normale : on vient du menu
-    miroirRetour = document.getElementById('niveau').classList.contains('on') ? 'niveau' : 'splash';
-    fermerOverlays();
-    _consomme = miroirLisible();              // c'est LA lecture : elle sera dépensée
-  }
-  document.getElementById("miroir").classList.toggle('auto', !!auto);   // auto = par-dessus l'écran de fin
-  const body=document.getElementById("miroirBody");
-  // Le miroir ne parle pas avant d'avoir assez vu : mieux vaut se taire que dire n'importe quoi.
-  if(PROFIL.parties < SEUIL_MIROIR || !miroirLisible()){
-    const paroles = P.map(p=>laParole(p)).filter(Boolean);
-    const reste = prochainMiroir();            // la même source que le Phénix
-    const aDitQqch = paroles.length > 0;              // une esquive n'est pas une parole
-    const aEfface  = P.some(p=>_repArr(p).length);     // mais elle laisse une trace à effacer
-    const pl = reste>1 ? 's' : '';
-    const nb = PROFIL.parties||0;
-    // Le joueur compte en MANCHES, le miroir en PARTIES : afficher le déjà-joué le recale.
-    const compte = `<span class="mir-compte">Tu as joué <b>${nb}</b> partie${nb>1?'s':''} — un match complet chacune.</span><br>`;
-    const tete = aDitQqch
-      ? `<b>Le miroir a entendu.</b><br>Il attend d'en voir assez pour te répondre.<br>`
-      : `<b>Le miroir est muet.</b><br>Il lui faut ${SEUIL_MIROIR} parties pour te voir.<br>`;
-    body.innerHTML=`<p class="mir-empty"><span class="mm-emb">🪞</span><br>${tete}${compte}
-      Encore <b>${reste} partie${pl}</b>.</p>`
-      + (aEfface ? `<button class="conf-oubli" onclick="effacerConfidences()">Effacer ce que j'ai confié</button>` : '');
-    _lectureTxt = (aDitQqch
-      ? `Le miroir a entendu. Il attend d'en voir assez pour te répondre.`
-      : `Le miroir est muet. Il lui faut ${SEUIL_MIROIR} parties pour te voir.`)
-      + ` Tu as joué ${nb} partie${nb>1?'s':''}. Encore ${reste} partie${pl}.`;
-    document.getElementById("miroir").classList.add("on");
-    setTimeout(()=>{ parleSurEcran('miroir', _lectureTxt); }, 450);
-    return;
-  }
-  const _am = P.slice().sort((a,b)=> (PROFIL.neglige[b]-PROFIL.neglige[a]) || (PROFIL.tot[a]-PROFIL.tot[b]))[0];
-  const _rf = P.slice().sort((a,b)=> (PROFIL.fort[b]-PROFIL.fort[a]) || (PROFIL.tot[b]-PROFIL.tot[a]))[0];
-  const angleMort = penteNette(PROFIL.neglige, _am) ? _am : null;   // null = le miroir ne voit rien de net
-  const refuge    = penteNette(PROFIL.fort, _rf)    ? _rf : null;
-  const triTot = P.slice().sort((a,b)=>PROFIL.tot[b]-PROFIL.tot[a]);
-  const ax = axeNet(triTot) ? AXE_L[ck(triTot[0],triTot[1])] : null;   // sinon : rien de net à déclarer
-  const maxTot=Math.max(...P.map(p=>PROFIL.tot[p]))||1;
-  const barres = P.map(p=>`<div class="mir-row">
-      <span class="mir-emb">${embImg(p,20)}</span>
-      <span class="mir-lbl">${p}</span>
-      <span class="mir-bar"><i style="width:${Math.round(PROFIL.tot[p]/maxTot*100)}%;background:linear-gradient(90deg,${ORB[p]},#fff6)"></i></span>
-    </div>`).join('');
-  const negF = angleMort ? PROFIL.neglige[angleMort] : 0;
-  // Ce que le miroir peut honnêtement dire, selon ce qu'il voit vraiment
-  // Sans pente, ne pas s'arrêter à « rien à dire » : montrer OÙ ça penche et CE QU'IL MANQUE.
-  // Le texte évolue alors à chaque partie, et le joueur apprend comment le miroir pense.
-  const _reqP = penteRequise(), _nP = _am ? (PROFIL.neglige[_am]||0) : 0;
-  const ligneAngle = angleMort
-    ? `<p>Ton <b>angle mort</b> : ${embImg(angleMort,15)} <b>${angleMort}</b> — laissé pour compte <b>${negF}</b> fois sur ${PROFIL.parties}. ${MIR_ANGLE[angleMort]}</p>`
-    : `<p>Le miroir ne voit <b>aucune pente</b> nette en toi : tes quatre piliers se valent.</p>`
-      + (_nP>0 ? `<p class="mir-proche">${embImg(_am,14)} <b>${_am}</b> penche le plus — <b>${_nP}</b> fois sur ${PROFIL.parties}.<br>
-          Il en faudrait <b>${_reqP}</b> pour qu'il tranche.</p>` : '');
-  const ligneRefuge = refuge
-    ? `<p>Ton <b>refuge</b> : ${embImg(refuge,15)} <b>${refuge}</b> — ${MIR_REFUGE[refuge]}</p>`
-    : '';
-  const ligneDefi = angleMort
-    ? `<p style="color:var(--goldL)">Ton défi : oser nourrir ${embImg(angleMort,15)} <b>${angleMort}</b>, là où tu détournes les yeux.</p>`
-    : `<p style="color:var(--goldL)">Il n'a rien à te reprocher. C'est rare.</p>`;
-  body.innerHTML = `
-    <div class="mir-stat">${PROFIL.parties} partie${PROFIL.parties>1?'s':''} · ${PROFIL.victoires} victoire${PROFIL.victoires>1?'s':''}</div>
-    <div class="mir-cap">Où va ton énergie, au fil des parties</div>
-    <div class="mir-bars">${barres}</div>
-    <div class="lecture">
-      <button class="lire-btn mir-lire" onclick="toggleLecture()" title="Lire / arrêter">🔊</button>
-      <div class="lec-h">✦ Ce que ton jeu dit de toi ✦</div>
-      ${ligneAngle}
-      ${ligneRefuge}
-      ${ax
-        ? `<p>Ton âme penche vers l'axe ${embImg(triTot[0],15)}${embImg(triTot[1],15)} <b>${ax.t}</b> — ${ax.r}</p>`
-        : (PROFIL.parties>=SEUIL_MIROIR
-            ? `<p>Aucun axe ne se dessine encore : tes deux piliers de tête se tiennent de trop près. Un axe, ça se mérite.</p>` : '')}
-      ${ligneDefi}
-    </div>` + blocConfidences(angleMort, refuge);
-  // texte parlé (sans balises)
-  let mt = `Le reflet de ton jeu. ${PROFIL.parties} parties, ${PROFIL.victoires} victoire${PROFIL.victoires>1?'s':''}. `;
-  mt += angleMort
-    ? `Ton angle mort : ${angleMort}, laissé pour compte ${negF} fois sur ${PROFIL.parties}. ${MIR_ANGLE[angleMort]} `
-    : `Le miroir ne voit aucune pente nette en toi : tes quatre piliers se valent. `
-      + (_nP>0 ? `${_am} penche le plus, ${_nP} fois sur ${PROFIL.parties}. Il en faudrait ${_reqP} pour qu'il tranche. ` : '');
-  if(refuge) mt += `Ton refuge : ${refuge}. ${MIR_REFUGE[refuge]} `;
-  if(ax) mt += `Ton âme penche vers l'axe ${ax.t}. ${ax.r} `;
-  else if(PROFIL.parties>=SEUIL_MIROIR) mt += `Aucun axe ne se dessine encore : tes deux piliers de tête se tiennent de trop près. Un axe, ça se mérite. `;
-  mt += angleMort
-    ? `Ton défi : oser nourrir ${angleMort}, là où tu détournes les yeux.`
-    : `Il n'a rien à te reprocher. C'est rare.`;
-  // A-t-il livré un reflet (et non une attente) ? Si oui, sa fermeture remettra le compteur à zéro.
-  _miroirAParle = P.some(p=>{ const g=_regardMiroir(p, angleMort, refuge); return g && !g.attend; });
-  mt += texteConfidences(angleMort, refuge);
-  _lectureTxt = mt;
-  document.getElementById("miroir").classList.add("on");
-  /* LA LECTURE EST DÉPENSÉE. Le verdict est affiché : le jeton est consommé, et le miroir
-     redeviendra muet dès la prochaine ouverture — jusqu'à ce que le Phœnix revienne. */
-  if(_consomme){ PROFIL.miroirLu = true; sauverProfil(); }
-  // La carte met 2,6 s à monter du flou. La voix ne doit pas parler pendant qu'on ne peut pas lire.
-  setTimeout(()=>{ parleSurEcran('miroir', mt); }, auto ? 1900 : 450);
-}
-function fermerMiroir(){
-  const el=document.getElementById("miroir");
-  const auto=el.classList.contains('auto');
-  el.classList.remove("on","auto");
-  taire();
-  _miroirAParle=false;   // le compteur est réglé à l'OUVERTURE par le Phœnix, pas ici
-  if(auto) return;                                                // l'écran de fin est resté dessous
-  if(miroirRetour==='niveau') ouvrirNiveau(); else ouvrirSplash();
-}
 /* ══════════ LE MIROIR ══════════
    Il ne confirme pas : il met la parole et le jeu côte à côte, et se tait.
    Ce qui frappe n'est jamais la cohérence — c'est l'écart. */
@@ -7546,7 +6756,6 @@ function pouf(x, y){
   }catch(e){}
 }
 function guideEteindre(){ guideOn = false; clearTimeout(guideT); guideRentrer(); }
-function guideCache(){ guideStopViser(); const g=guideEl(); if(g){ g.classList.add('dedans'); g.classList.remove('court'); } guideSorti=false; }
 function guidePorte(){                       // une porte de case au hasard
   const b = document.querySelectorAll('#bornes .borne');
   if(!b.length) return null;
@@ -7574,14 +6783,6 @@ function guideSelection(){ return guideJoueur() === 2 ? sel2 : sel; }
 function guideFeux(){                     // les villages en feu DE CELUI QUI JOUE
   const j = guideJoueur(), o = (j === 1 ? 2 : 1);
   return P.filter(function(p){ return T[p][o] - T[p][j] >= ECART_FEU; });
-}
-function guideCarteVers(pilier){          // une carte de SA main qui peut nourrir CE village
-  const m = guideMain(), j = guideJoueur();
-  for(let n=0;n<m.length;n++){
-    if(m[n].type !== 'normal') continue;
-    if(ciblesDe(m[n],T,j).indexOf(pilier) >= 0) return n;
-  }
-  return -1;
 }
 function guideCibles(){
   const bt = document.getElementById('phenixBtn');
