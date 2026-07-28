@@ -510,20 +510,32 @@ html.lite .pouf{animation-duration:.45s;}
 .guide-vise{outline:3px solid #FFD86A !important;outline-offset:2px;
   box-shadow:0 0 24px rgba(255,216,106,.8) !important;z-index:60;}
 
-/* Rara. Les trois portraits sont empilés au même endroit ; on ne joue que sur
+/* Rara. Tous les portraits sont empilés au même endroit ; on ne joue que sur
    l'opacité, ce qui ne coûte rien au processeur. */
 .rara-photo{position:relative;display:block;width:100%;}
 .rara-photo img{display:block;width:100%;height:auto;}
-.rara-photo .rp-clos,.rara-photo .rp-parle{position:absolute;inset:0;opacity:0;pointer-events:none;}
-/* le clin d'œil */
+.rara-photo .rp-clos,.rara-photo .rp-m{position:absolute;inset:0;opacity:0;pointer-events:none;}
 .rara-photo .rp-clos{animation:raraCligne 5.6s infinite;}
 @keyframes raraCligne{0%,93%,100%{opacity:0} 94.4%,96.6%{opacity:1}}
-/* la bouche, seulement pendant qu'elle parle */
-.rara-photo.parle .rp-parle{animation:raraParle .30s steps(1,end) infinite;}
-@keyframes raraParle{0%,45%{opacity:0} 46%,100%{opacity:1}}
+/* Les six bouches défilent sur 1,08 s — six huitièmes de seconde chacune, avec des
+   durées inégales pour que ça ne batte pas la mesure. */
+.rara-photo.parle .rp-m{animation-duration:1.08s;animation-iteration-count:infinite;
+  animation-timing-function:steps(1,end);}
+.rara-photo.parle .rp-m1{animation-name:vm1;}
+.rara-photo.parle .rp-m2{animation-name:vm2;}
+.rara-photo.parle .rp-m3{animation-name:vm3;}
+.rara-photo.parle .rp-m4{animation-name:vm4;}
+.rara-photo.parle .rp-m5{animation-name:vm5;}
+.rara-photo.parle .rp-m6{animation-name:vm6;}
+@keyframes vm1{0%,13%{opacity:1} 14%,100%{opacity:0}}
+@keyframes vm2{0%,27%{opacity:0} 28%,40%{opacity:1} 41%,100%{opacity:0}}
+@keyframes vm3{0%,47%{opacity:0} 48%,56%{opacity:1} 57%,100%{opacity:0}}
+@keyframes vm4{0%,14%{opacity:0} 15%,26%{opacity:1} 27%,100%{opacity:0}}
+@keyframes vm5{0%,62%{opacity:0} 63%,76%{opacity:1} 77%,100%{opacity:0}}
+@keyframes vm6{0%,80%{opacity:0} 81%,92%{opacity:1} 93%,100%{opacity:0}}
 .rara-photo.parle .rp-clos{animation:none;opacity:0;}
-html.lite .rara-photo .rp-clos,html.lite .rara-photo.parle .rp-parle{animation:none;}
-@media (prefers-reduced-motion: reduce){ .rara-photo .rp-clos,.rara-photo.parle .rp-parle{animation:none;} }
+html.lite .rara-photo .rp-clos,html.lite .rara-photo.parle .rp-m{animation:none;}
+@media (prefers-reduced-motion: reduce){ .rara-photo .rp-clos,.rara-photo.parle .rp-m{animation:none;} }
 
 /* ══ L'accueil de Rara : son visage remplit l'écran ══ */
 .rara-ov{position:fixed;inset:0;z-index:10000;display:none;flex-direction:column;
@@ -4488,7 +4500,7 @@ function demarrer(){
   mainJ = tireNormales(dn).concat(ds.splice(0,SPEC_PAR_MAIN));
   mainIA= tireNormales(dn).concat(ds.splice(0,SPEC_PAR_MAIN));
   trier(mainJ);
-  T=tableVide(); resetFeux(); resetFumee(); guideFeuxVus=[]; guideUrgence=false; tour=0; sel=null; sel2=null; attend2=false; fini=false; locked=false; histo=[]; prevOwners={};
+  T=tableVide(); resetFeux(); resetFumee(); guideFeuxVus=[]; guideUrgence=false; guideDebutManche(); tour=0; sel=null; sel2=null; attend2=false; fini=false; locked=false; histo=[]; prevOwners={};
   guideOn=true;
   fermerOverlays();
   document.getElementById("niveauBadge").textContent = NIVEAU.emb+" "+NIVEAU.label;
@@ -4779,7 +4791,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v121";
+const BUILD_TAG = "cases-v126";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -5075,7 +5087,13 @@ async function brulerUne(main, i, mz, msg){
      figé sur une main vide, avec un message qui attendait un geste impossible. */
   try{
     if(finiePartie()){ terminer(); return; }
-    if(main === mainJ && !mainJ.length && !fini) lancerIA();
+    if(!fini){
+      /* La main vidée doit faire avancer le tour, des DEUX côtés. Je n'avais traité que
+         le joueur 1 : quand le joueur 2 brûlait sa dernière carte, plus rien ne se
+         passait et la partie restait figée sur « Au joueur 2 ». */
+      if(main === mainJ  && !mainJ.length)  lancerIA();
+      else if(main === mainIA && !mainIA.length){ attend2 = false; finTourAdverse(); }
+    }
   }catch(e){}
 }
 function choisir(i){
@@ -6091,7 +6109,7 @@ function netDealManche(){
   mainJ = tireNormales(dn).concat(ds.splice(0,SPEC_PAR_MAIN));   // hôte = joueur 1
   mainIA= tireNormales(dn).concat(ds.splice(0,SPEC_PAR_MAIN));   // invité = joueur 2
   trier(mainJ);
-  T=tableVide(); resetFeux(); resetFumee(); guideFeuxVus=[]; guideUrgence=false; tour=0; sel=null; sel2=null; attend2=false; fini=false; locked=false; histo=[]; prevOwners={};
+  T=tableVide(); resetFeux(); resetFumee(); guideFeuxVus=[]; guideUrgence=false; guideDebutManche(); tour=0; sel=null; sel2=null; attend2=false; fini=false; locked=false; histo=[]; prevOwners={};
   guideOn=true;
   const hoteOuvre = (mancheNo % 2 === 1);          // alternance : hôte ouvre les manches impaires
   NET.aQui = hoteOuvre ? 'host' : 'guest';
@@ -6601,15 +6619,21 @@ function cori(x, y, r, a){
 }
 /* une tresse : un cordon sombre, texturé, avec un cori au bout */
 function raraVisage(){
-  /* Trois portraits entiers, empilés et recalés au pixel près : le repos, le clin d'œil,
-     la bouche ouverte. On les échange au lieu de coller des bandes — le générateur ayant
-     légèrement changé la pose à chaque image, une découpe par morceaux se serait vue. */
-  const img = (cl, f, alt) => '<img class="' + cl + '" src="./' + f + '" alt="' + alt + '"'
+  /* Huit portraits empilés : le repos, les yeux fermés, et six formes de bouche —
+     les visèmes A, O, I, M et deux ouvertures intermédiaires. Pendant qu'elle parle,
+     on les fait défiler dans un ordre irrégulier : c'est l'irrégularité qui fait
+     croire à de la parole, une alternance régulière ferait mâchoire mécanique. */
+  const img = (cl, f) => '<img class="' + cl + '" src="./' + f + '" alt=""'
     + ' onerror="this.style.display=\'none\'"/>';
   return '<div class="rara-photo">'
-       + img('rp-base',   'accueil.webp',        'Rara')
-       + img('rp-clos',   'accueil-yeux.webp',   '')
-       + img('rp-parle',  'accueil-bouche.webp', '')
+       + '<img class="rp-base" src="./accueil.webp" alt="Rara" onerror="this.closest(\'.rara-photo\').style.display=\'none\'"/>'
+       + img('rp-clos', 'accueil-yeux.webp')
+       + img('rp-m rp-m1', 'accueil-a.webp')
+       + img('rp-m rp-m2', 'accueil-o.webp')
+       + img('rp-m rp-m3', 'accueil-i.webp')
+       + img('rp-m rp-m4', 'accueil-b.webp')
+       + img('rp-m rp-m5', 'accueil-c.webp')
+       + img('rp-m rp-m6', 'accueil-m.webp')
        + '</div>';
 }
 function raraBouche(actif){
@@ -6875,16 +6899,24 @@ const GUIDE_VOIX = {
   "…ou là"           : "ou bien là.",
   "L'orage !"        : "Fais tomber l'orage !"
 };
-let _ditQuoi = '', _ditQuand = 0;
+/* Elle ne bloquait que la phrase PRÉCÉDENTE. Comme elle balaie entre deux cibles, ses
+   deux consignes redevenaient « nouvelles » à chaque aller-retour et elle tournait en
+   boucle. Deux verrous maintenant : chaque phrase a sa propre mémoire de douze secondes,
+   et elle ne dit pas plus de deux phrases par sortie. Montrer est son métier ; parler
+   n'est qu'un appoint. */
+const _ditVu = Object.create(null);
+let _ditQuand = 0, _ditNb = 0;
+function guideDireReset(){ _ditNb = 0; }
 function guideDire(txt){
   if(!txt) return;
   let dit = false;
   try{ dit = !!voixOn; }catch(e){}
   if(!dit) return;
   const t = Date.now();
-  if(txt === _ditQuoi && t - _ditQuand < 10000) return;   // elle ne se répète pas
-  if(t - _ditQuand < 2200) return;                        // ni ne parle par-dessus elle-même
-  _ditQuoi = txt; _ditQuand = t;
+  if(_ditNb >= 2) return;                                  // deux phrases, pas davantage
+  if(_ditVu[txt] && t - _ditVu[txt] < 12000) return;       // cette phrase-là a déjà été dite
+  if(t - _ditQuand < 2200) return;                         // pas par-dessus elle-même
+  _ditVu[txt] = t; _ditQuand = t; _ditNb++;
   try{ parle(GUIDE_VOIX[txt] || txt); }catch(e){}
 }
 function guideEteindreVise(){
@@ -6912,6 +6944,15 @@ function guideViser(){
 function guideStopViser(){ clearTimeout(guideViseT); guideEteindreVise(); guideEls = []; guideTextes = []; guideIdx = 0; }
 /* On quitte le plateau : elle disparaît sur-le-champ, sans courir vers une porte
    qui n'existe plus. */
+/* Elle n'attend plus qu'on s'ennuie : dès qu'une manche s'ouvre, elle vient montrer
+   la première carte. Neuf dixièmes de seconde — le temps que le plateau se pose et que
+   les cartes finissent d'arriver. */
+function guideDebutManche(){
+  try{
+    clearTimeout(guideT);
+    guideT = setTimeout(function(){ try{ guideSortir(); }catch(e){} }, 900);
+  }catch(e){}
+}
 function guideCacheNet(){
   guideStopViser();
   clearTimeout(guideT); clearTimeout(guideRentreT);
@@ -7055,6 +7096,7 @@ function guideSortir(){
   guideRentreT = setTimeout(function(){
     const gg = guideEl(); if(!gg) return;
     gg.classList.remove('court');
+    guideDireReset();
     guideEls = cib.els; guideTextes = cib.textes; guideIdx = 0; guideViser();
     /* recalage : si le rendu a bougé d'un cheveu pendant la course, le doigt se remet
        en place tout seul au lieu de rester à côté */
@@ -7070,7 +7112,7 @@ function guideSortir(){
 function guideRentrer(){
   const g = guideEl(); if(!g || !guideSorti) return;
   guideStopViser();
-  _ditQuoi = '';                        // elle repart de zéro : au prochain geste elle pourra le redire
+  guideDireReset();                     // sortie terminée : son quota de paroles repart à zéro
   const b = document.getElementById('guideBras'); if(b) b.style.width = '8px';
   const porte = guidePorte();
   g.classList.add('court');
@@ -7087,8 +7129,19 @@ function guideRentrer(){
 /* Toute action remet le compte à zéro : elle ne sort qu'après trois secondes
    d'immobilité — SAUF si un feu vient de se déclarer, auquel cas elle accourt. */
 let guideFeuxVus = [], guideUrgence = false;
+/* Filet de sécurité, vérifié à chaque rendu : si le jeu attend un geste de quelqu'un
+   qui n'a plus de cartes, il débloque tout seul. Deux blocages différents sont déjà
+   passés par là ; celui-ci les rattrape quelle qu'en soit la cause. */
+function guideDebloque(){
+  try{
+    if(fini || locked) return;
+    if(DUO && attend2 && !mainIA.length){ attend2 = false; finTourAdverse(); return; }
+    if(!attend2 && !mainJ.length && !finiePartie()) lancerIA();
+  }catch(e){}
+}
 function guideActivite(surRendu){
   clearTimeout(guideT);
+  try{ guideDebloque(); }catch(e){}
   if(!guideEnPartie()){ guideRentrer(); guideCacheNet(); return; }
   try{
     const f = guideFeux();

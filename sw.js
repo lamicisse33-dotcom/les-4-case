@@ -2,10 +2,10 @@
    Dépôt dédié : le cache garde tout de même un nom propre au jeu, et la purge ne
    touche que les caches commençant par ce préfixe. Bumper à chaque déploiement,
    EN MÊME TEMPS que BUILD_TAG dans index.html. */
-const CACHE = 'les4cases-v121';
+const CACHE = 'les4cases-v126';
 const PREFIXE = 'les4cases-';
 const ASSETS = ['./','./index.html','./manifest.json',
-  './accueil.webp','./accueil-yeux.webp','./accueil-bouche.webp','./icon-192.png','./icon-512.png','./icon-180.png','./icon-maskable-512.png','./favicon.ico'];
+  './accueil.webp','./accueil-yeux.webp','./accueil-a.webp','./accueil-b.webp','./accueil-c.webp','./accueil-o.webp','./accueil-i.webp','./accueil-m.webp','./icon-192.png','./icon-512.png','./icon-180.png','./icon-maskable-512.png','./favicon.ico'];
 
 /* PAS de skipWaiting ici : la nouvelle version doit ATTENDRE, sinon elle s'active
    toute seule et la page ne peut jamais proposer « Mettre à jour ». C'est le bouton
