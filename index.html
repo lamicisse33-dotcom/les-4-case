@@ -474,7 +474,7 @@ html.lite .pouf{animation-duration:.45s;}
 /* Compact : quatre comparaisons faisaient 800 px à elles seules et repoussaient les
    boutons hors de l'écran. Elles tiennent maintenant dans un tiers de cette hauteur. */
 .fin-duo{padding:3px 6px 2px;border-radius:11px;margin-bottom:4px;
-  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.16));
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(0,0,0,.14));
   border:1px solid rgba(255,255,255,.08);}
 .fin-duo.hero{border-color:rgba(232,200,96,.6);box-shadow:0 0 12px rgba(232,200,96,.22);}
 .fd-nom{font-family:'Cinzel',serif;font-weight:900;font-size:9.5px;letter-spacing:1.2px;
@@ -499,7 +499,7 @@ html.lite .pouf{animation-duration:.45s;}
 #finbtns{position:sticky;bottom:0;z-index:5;
   margin:12px -20px 4px;
   padding:12px 20px 12px;
-  background:linear-gradient(180deg,rgba(24,10,48,0),rgba(24,10,48,.94) 34%,rgba(24,10,48,.99));
+  background:linear-gradient(180deg,rgba(18,62,119,0),rgba(18,62,119,.94) 34%,rgba(18,62,119,.99));
   border-radius:0 0 18px 18px;}
 #finbtns .btn{box-shadow:0 4px 16px rgba(0,0,0,.5);}
 
@@ -509,6 +509,24 @@ html.lite .pouf{animation-duration:.45s;}
    Le contour doré suffit à désigner, et ne coûte rien. */
 .guide-vise{outline:3px solid #FFD86A !important;outline-offset:2px;
   box-shadow:0 0 24px rgba(255,216,106,.8) !important;z-index:60;}
+
+/* Rara en photo. Le calque des yeux fermés est posé en pourcentage du visage : il suit
+   donc l'image quelle que soit la taille de l'écran, sans un seul calcul. */
+.rara-photo{position:relative;display:block;width:100%;}
+.rara-photo img{display:block;width:100%;height:auto;}
+.rara-photo .rp-clos{position:absolute;left:29.3%;top:44.98%;width:56.64%;height:auto;
+  opacity:0;animation:raraCligne 5.4s infinite;pointer-events:none;}
+@keyframes raraCligne{0%,93%,100%{opacity:0} 94.6%,96.4%{opacity:1}}
+/* Les deux bouches sont posées au même endroit, invisibles au repos. Quand elle parle,
+   elles se relaient — c'est ce décalage qui donne l'impression qu'elle articule. */
+.rara-photo .rp-b1,.rara-photo .rp-b2{position:absolute;left:39.06%;top:70.94%;width:23.44%;
+  height:auto;opacity:0;pointer-events:none;}
+.rara-photo.parle .rp-b1{animation:raraB1 .34s steps(1,end) infinite;}
+.rara-photo.parle .rp-b2{animation:raraB2 .34s steps(1,end) infinite;}
+@keyframes raraB1{0%,49%{opacity:1} 50%,100%{opacity:0}}
+@keyframes raraB2{0%,49%{opacity:0} 50%,84%{opacity:1} 85%,100%{opacity:0}}
+html.lite .rara-photo .rp-clos,html.lite .rara-photo.parle .rp-b1,html.lite .rara-photo.parle .rp-b2{animation:none;}
+@media (prefers-reduced-motion: reduce){ .rara-photo .rp-clos{animation:none;} }
 
 /* ══ L'accueil de Rara : son visage remplit l'écran ══ */
 .rara-ov{position:fixed;inset:0;z-index:10000;display:none;flex-direction:column;
@@ -810,11 +828,13 @@ span.orb{width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);b
 
 .overlay{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
   padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));
-  background:rgba(6,3,14,.92);backdrop-filter:blur(3px);}
+  background:rgba(8,26,58,.92);backdrop-filter:blur(3px);}
 .overlay.on{display:flex;animation:ovin .3s ease;}
 @keyframes ovin{0%{opacity:0;}100%{opacity:1;}}
 .card{width:min(92vw,360px);text-align:center;padding:24px 20px;border-radius:18px;
-  border:1.5px solid var(--gold);background:linear-gradient(160deg,#160a30,#1e0b3c,#2a0d5e);
+  /* Bleu du jeu, plus le violet sombre du jeu pour adultes : c'est le même monde que
+     le plateau, pas une salle des trophées. */
+  border:1.5px solid var(--gold);background:linear-gradient(160deg,#123E77,#1B57A0,#2C6FC4);
   box-shadow:0 0 40px rgba(201,162,39,.35);animation:cardin .4s cubic-bezier(.2,1.2,.3,1) both;
   max-height:84vh;            /* repli pour les iOS qui ignorent dvh ; sans hauteur
                                  maximale la carte ne defile plus du tout */
@@ -2976,14 +2996,16 @@ let prevOwners={};
 const STATS_KEY='qc_eq_stats_v1';
 let STATS={matchsGagnes:0, matchsJoues:0, serie:0, meilleureSerie:0, xp:0};
 /* Rangs (titres) par paliers d'XP */
+/* Des noms qu'un enfant comprend et dont il a envie. « Âme Novice » et « Chercheur
+   d'Équilibre » venaient du jeu pour adultes. */
 const RANGS=[
-  {n:"Âme Novice",             s:0},
-  {n:"Chercheur d'Équilibre",  s:120},
-  {n:"Équilibriste",           s:320},
-  {n:"Gardien des Voies",      s:640},
-  {n:"Sage des Quatre Vents",  s:1100},
-  {n:"Maître de l'Équilibre",  s:1800},
-  {n:"Oracle Suprême",         s:2900}
+  {n:"Petit Voisin",        s:0},
+  {n:"Ami du Village",      s:120},
+  {n:"Gardien des Cases",   s:320},
+  {n:"Chef du Village",     s:640},
+  {n:"Maître de la Pluie",  s:1100},
+  {n:"Prince des Villages", s:1800},
+  {n:"Roi des Quatre Cases",s:2900}
 ];
 function niveauInfo(xp){
   xp=xp||0; let idx=0;
@@ -3513,47 +3535,39 @@ let bilanPiliers={};
 function resetBilan(){ bilanPiliers={}; P.forEach(p=>bilanPiliers[p]=0); }
 const _pick = a => a[Math.floor(Math.random()*a.length)];
 /* Textes oracle — éditables : remplace-les par tes propres interprétations */
-const PILIER_L = {
-  "Spiritualité":{n:"ta quête de sens",   neg:"Ton feu intérieur attend qu'on le ranime."},
-  "Amour":       {n:"tes liens du cœur",  neg:"Les tiens réclament un peu plus de ta présence."},
-  "Santé":       {n:"ta vitalité",        neg:"Ton corps murmure qu'il faudrait le réécouter."},
-  "Argent":      {n:"tes assises",        neg:"Tes fondations matérielles restent à consolider."}
-};
 /* Lecture de l'axe dominant (les 2 piliers les plus nourris) — clé = ck(a,b) */
-const AXE_L = {
-  "Amour+Argent":       {t:"Générosité",         r:"tu as lié le cœur et les moyens — donner sans te démunir."},
-  "Amour+Santé":        {t:"Élan vital",         r:"tu as fait croître les liens et la vie ensemble, la chaleur du vivant."},
-  "Amour+Spiritualité": {t:"Cœur ouvert",        r:"tu as uni l'amour et le sens — aimer comme une manière de croire."},
-  "Argent+Santé":       {t:"Sagesse pratique",   r:"tu as bâti du solide et du durable, sans précipitation."},
-  "Argent+Spiritualité":{t:"Juste usage",        r:"tu as cherché le sens dans les moyens — l'avoir au service d'une intention."},
-  "Santé+Spiritualité": {t:"Harmonie intérieure",r:"tu as accordé le corps et l'esprit, l'ancrage et le souffle."}
-};
-const HARM_G = ["Rare équilibre, et la victoire au bout : tes quatre piliers ont avancé ensemble. La vraie force n'est pas d'exceller en un point, mais de ne rien laisser tomber."];
-const HARM_P = ["Bel équilibre, malgré la défaite : tu n'as rien sacrifié. Il t'a juste manqué un souffle — l'harmonie, elle, était déjà là."];
 let _lectureMatchTxt="";
 const _strip = h => String(h).replace(/<[^>]+>/g,'');
 function lectureFinale(win){
+  /* Ceci disait à un enfant de quatre ans : « Ton axe : Cœur ouvert — tu as uni l'amour
+     et le sens — aimer comme une manière de croire. » C'était le texte du jeu pour
+     adultes, resté en place. On lui dit maintenant une chose qu'il comprend et qu'il
+     peut appliquer au coup suivant : quel village il a laissé de côté. */
   if(enLigne()){ _lectureMatchTxt=""; return ""; }
-  const tot=P.reduce((s,p)=>s+(bilanPiliers[p]||0),0);
-  if(tot<=0){ _lectureMatchTxt=""; return ""; }
-  const tri=P.slice().sort((a,b)=>(bilanPiliers[b]||0)-(bilanPiliers[a]||0));
-  const fort=tri[0], second=tri[1], faible=tri[3];
-  const ecart=((bilanPiliers[fort]||0)-(bilanPiliers[faible]||0))/((tot/4)||1);
-  let parts=[], spk=[];
-  if(ecart<0.5){
-    const h=_pick(win?HARM_G:HARM_P); parts.push(h); spk.push(_strip(h));
+  let faible = null, mini = Infinity;
+  P.forEach(p=>{ const v = T[p][1]; if(v < mini){ mini = v; faible = p; } });
+  if(faible === null){ _lectureMatchTxt=""; return ""; }
+  const grand = P.reduce((m,p)=> T[p][1] > T[m][1] ? p : m, P[0]);
+  const serre = (T[grand][1] - T[faible][1]) <= 20;
+
+  let phrase, dit;
+  if(serre){
+    phrase = win
+      ? `Tes quatre villages ont grandi <b>ensemble</b>. C'est comme ça qu'on gagne&nbsp;!`
+      : `Tes quatre villages ont grandi <b>ensemble</b>. Continue comme ça&nbsp;!`;
+    dit = win ? "Tes quatre villages ont grandi ensemble. C'est comme ça qu'on gagne !"
+              : "Tes quatre villages ont grandi ensemble. Continue comme ça !";
   } else {
-    const ax=AXE_L[ck(fort,second)];
-    if(ax){ parts.push(`Ton axe : ${embImg(fort,15)}${embImg(second,15)} <b>${ax.t}</b> — ${ax.r}`); spk.push(`Ton axe : ${ax.t}. ${ax.r}`); }
-    parts.push(`En revanche, ta ${caseColoree(faible)} est restée en retrait. ${PILIER_L[faible].neg}`);
-    spk.push(`En revanche, ta case ${nomCase(faible).toLowerCase()} est restée en retrait. ${PILIER_L[faible].neg}`);
-    const out = win
-      ? "Tu l'as emporté malgré ce déséquilibre — imagine si tout avançait de front."
-      : "C'est peut-être là, sur ce pilier oublié, que la partie s'est jouée.";
-    parts.push(out); spk.push(out);
+    phrase = win
+      ? `Bravo&nbsp;! Pense quand même à ta ${caseColoree(faible)} — c'est la plus petite.`
+      : `Ta ${caseColoree(faible)} est restée toute petite. La prochaine fois, donne-lui à boire&nbsp;!`;
+    const nf = nomCase(faible).toLowerCase();
+    dit = win ? ("Bravo ! Pense quand même à ta case " + nf + ", c'est la plus petite.")
+              : ("Ta case " + nf + " est restée toute petite. La prochaine fois, donne-lui à boire !");
   }
-  _lectureMatchTxt = (win?"Victoire. ":"Défaite. ") + spk.join(' ');
-  return `<div class="lecture"><button class="lire-btn mir-lire" onclick="toggleLecture()" title="Lire / arrêter">🔊</button><div class="lec-h">✦ La lecture des piliers ✦</div>${parts.map(x=>`<p>${x}</p>`).join('')}</div>`;
+  _lectureMatchTxt = dit;
+  return `<div class="lecture"><button class="lire-btn" onclick="toggleLecture()" title="Écouter">🔊</button>`
+       + `<div class="lec-h">✦ Le mot de Rara ✦</div><div class="lec-t">${phrase}</div></div>`;
 }
 /* ── Annonce vocale de fin de match (synthèse française) ── */
 const PIL_ART = {"Spiritualité":"la spiritualité","Amour":"l'amour","Santé":"la santé","Argent":"l'argent"};
@@ -3602,6 +3616,9 @@ function dit(cle, secours, adulte){
     a.volume = (typeof volume === 'number') ? volume : 1;
     a.currentTime = 0;
     _voixEnCours = a;
+    a.onplay  = function(){ raraBouche(true); };
+    a.onended = function(){ raraBouche(false); };
+    a.onpause = function(){ raraBouche(false); };
     const pr = a.play();
     if(pr && pr.catch) pr.catch(function(){ _voix[cle] = false; parle(secours, adulte); });
   }catch(e){ parle(secours, adulte); }
@@ -3612,6 +3629,9 @@ function parle(txt, adulte){
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(txt);
     u.lang = 'fr-FR'; u.volume = 1;
+    u.onstart = function(){ raraBouche(true); };
+    u.onend   = function(){ raraBouche(false); };
+    u.onerror = function(){ raraBouche(false); };
     if(adulte){ u.rate = 0.97; u.pitch = 1; }
     else       { u.rate = 1.06; u.pitch = 1.85; }   // 1.85 : le maximum admis, et c'est ce qu'il faut
     const vs = speechSynthesis.getVoices();
@@ -4769,7 +4789,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v107";
+const BUILD_TAG = "cases-v112";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -5367,7 +5387,7 @@ function terminer(){
   ft.style.color="";
   if(matchFini){
     fe.textContent = matchMe>matchIA ? "👑" : "🌩️";
-    ft.textContent = matchMe>matchIA ? "MATCH REMPORTÉ" : "L'adversaire REMPORTE LE MATCH";
+    ft.textContent = matchMe>matchIA ? "TU AS GAGNÉ !" : "C'EST LUI QUI GAGNE";
     if(matchMe>matchIA){
       sWin(); joueMusique('victoire', musiqueVictoireSynth); feuxArtifice(6200);
       setTimeout(function(){ try{
@@ -6590,61 +6610,31 @@ function cori(x, y, r, a){
     + '<path d="M' + (-r*0.30) + ' ' + (r*0.48) + ' h' + (r*0.42) + '"/></g></g>';
 }
 /* une tresse : un cordon sombre, texturé, avec un cori au bout */
-function tresse(x1, y1, x2, y2, ep, rc){
-  const dx = x2-x1, dy = y2-y1, n = Math.max(3, Math.round(Math.sqrt(dx*dx+dy*dy)/(ep*1.15)));
-  let g = '<path d="M' + x1 + ' ' + y1 + ' L' + x2 + ' ' + y2 + '" stroke="#1B1008" stroke-width="' + ep + '" stroke-linecap="round" fill="none"/>';
-  for(let i=1;i<n;i++){
-    const t=i/n, cx=x1+dx*t, cy=y1+dy*t;
-    g += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + (ep*0.40).toFixed(1) + '" fill="#3A2412" opacity=".85"/>';
-  }
-  g += cori(x2, y2 + ep*0.5, rc || ep*0.42, (dx>0?14:-14));
-  return g;
-}
 function raraVisage(){
-  const T = [];
-  /* tresses en couronne autour du visage */
-  const pousses = [[62,52,26,4],[92,38,10,-6],[128,38,-10,6],[158,52,-26,4]];
-  for(let i=0;i<pousses.length;i++){
-    const q=pousses[i];
-    T.push(tresse(q[0], q[1], q[0]+q[2]*2.1, q[1]-30, 11, 5.5));
-  }
-  T.push(tresse(40, 92, 16, 150, 12, 6));
-  T.push(tresse(46, 118, 22, 178, 11, 5.5));
-  T.push(tresse(180, 92, 204, 150, 12, 6));
-  T.push(tresse(174, 118, 198, 178, 11, 5.5));
-  return '<svg viewBox="0 0 220 220" aria-hidden="true">'
-    + '<defs>'
-    + '<radialGradient id="rPeau" cx="36%" cy="28%" r="76%">'
-    + '<stop offset="0" stop-color="#B4763F"/><stop offset="52%" stop-color="#8A5227"/><stop offset="100%" stop-color="#54300F"/></radialGradient>'
-    + '<radialGradient id="rLum" cx="34%" cy="24%" r="52%">'
-    + '<stop offset="0" stop-color="#fff" stop-opacity=".38"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>'
-    + '</defs>'
-    + T.join('')
-    + '<ellipse cx="110" cy="112" rx="70" ry="74" fill="url(#rPeau)"/>'
-    + '<ellipse cx="110" cy="112" rx="70" ry="74" fill="url(#rLum)"/>'
-    /* chevelure sur le crâne */
-    + '<path d="M40 96 C 44 26, 176 26, 180 96 C 162 62, 58 62, 40 96 Z" fill="#1B1008"/>'
-    + '<g fill="#3A2412" opacity=".9">'
-    + '<circle cx="70" cy="72" r="7"/><circle cx="92" cy="60" r="7.5"/><circle cx="114" cy="58" r="7.5"/>'
-    + '<circle cx="136" cy="62" r="7.5"/><circle cx="156" cy="74" r="7"/></g>'
-    + cori(110, 44, 8, 0) + cori(80, 50, 6.5, -18) + cori(140, 50, 6.5, 18)
-    /* boucles d oreilles */
-    + '<circle cx="36" cy="122" r="11" fill="none" stroke="#E8C860" stroke-width="6"/>'
-    + '<circle cx="184" cy="122" r="11" fill="none" stroke="#E8C860" stroke-width="6"/>'
-    /* yeux */
-    + '<g class="r-yeux">'
-    + '<ellipse cx="84" cy="112" rx="19" ry="17" fill="#FFF8EE"/><ellipse cx="136" cy="112" rx="19" ry="17" fill="#FFF8EE"/>'
-    + '<circle cx="86" cy="113" r="10.5" fill="#2A1608"/><circle cx="138" cy="113" r="10.5" fill="#2A1608"/>'
-    + '<circle cx="90" cy="108" r="4" fill="#fff"/><circle cx="142" cy="108" r="4" fill="#fff"/></g>'
-    + '<path d="M64 92 Q 84 82, 102 92" fill="none" stroke="#2A1608" stroke-width="5" stroke-linecap="round"/>'
-    + '<path d="M118 92 Q 136 82, 156 92" fill="none" stroke="#2A1608" stroke-width="5" stroke-linecap="round"/>'
-    /* nez et sourire */
-    + '<path d="M104 130 Q 110 140, 116 130" fill="none" stroke="#5A3315" stroke-width="4" stroke-linecap="round"/>'
-    + '<path d="M76 152 Q 110 190, 144 152 Q 110 166, 76 152 Z" fill="#4A1A12"/>'
-    + '<path d="M80 154 Q 110 162, 140 154 Q 110 172, 80 154 Z" fill="#FFF8EE"/>'
-    + '<ellipse cx="60" cy="140" rx="13" ry="9" fill="#C2603C" opacity=".33"/>'
-    + '<ellipse cx="160" cy="140" rx="13" ry="9" fill="#C2603C" opacity=".33"/>'
-    + '</svg>';
+  /* Rara est une photo. Le clignement ne recharge pas un second visage — ce serait
+     150 Ko pour deux images presque identiques : on superpose une bande de 5 Ko
+     contenant seulement ses yeux fermés, et on la fait apparaître un instant. */
+  /* Si la photo manque — fichier oublié au dépôt, ou page ouverte seule —, on n'affiche
+     pas une icône cassée : l'image s'efface et l'écran reste net, le prénom se demande
+     quand même. */
+  return '<div class="rara-photo">'
+       + '<img src="./rara.webp" alt="Rara" width="520" height="753" fetchpriority="high"'
+       +      ' onerror="this.closest(\'.rara-photo\').style.display=\'none\'"/>'
+       + '<img class="rp-clos" src="./rara-yeux.webp" alt="" aria-hidden="true"'
+       +      ' onerror="this.style.display=\'none\'"/>'
+       + '<img class="rp-b1" src="./rara-bouche1.webp" alt="" aria-hidden="true"'
+       +      ' onerror="this.style.display=\'none\'"/>'
+       + '<img class="rp-b2" src="./rara-bouche2.webp" alt="" aria-hidden="true"'
+       +      ' onerror="this.style.display=\'none\'"/>'
+       + '</div>';
+}
+/* Sa bouche ne bouge que TANT QU'ELLE PARLE. Deux ouvertures alternées suffisent à
+   donner l'illusion de la parole ; une bouche qui remue en permanence ferait mécanique. */
+function raraBouche(actif){
+  try{
+    const b = document.querySelector('.rara-photo');
+    if(b) b.classList.toggle('parle', !!actif);
+  }catch(e){}
 }
 function raraOuvrir(force){
   let vu = false; try{ vu = localStorage.getItem('qc_rara_vu') === '1'; }catch(e){}
