@@ -519,7 +519,10 @@ html.lite .pouf{animation-duration:.45s;}
 @keyframes raraCligne{0%,93%,100%{opacity:0} 94.6%,96.4%{opacity:1}}
 /* Les deux bouches sont posées au même endroit, invisibles au repos. Quand elle parle,
    elles se relaient — c'est ce décalage qui donne l'impression qu'elle articule. */
-.rara-photo .rp-b1,.rara-photo .rp-b2{position:absolute;left:39.06%;top:70.94%;width:23.44%;
+/* Position MESURÉE sur les lèvres : la jointure est à y=1101 de la photo d'origine.
+   La première fois je m'étais fié à une détection de rougeur qui avait pris le menton,
+   et la bouche s'ouvrait 85 pixels trop bas. */
+.rara-photo .rp-b1,.rara-photo .rp-b2{position:absolute;left:45.898%;top:67.229%;width:20.117%;
   height:auto;opacity:0;pointer-events:none;}
 .rara-photo.parle .rp-b1{animation:raraB1 .34s steps(1,end) infinite;}
 .rara-photo.parle .rp-b2{animation:raraB2 .34s steps(1,end) infinite;}
@@ -4789,7 +4792,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v113";
+const BUILD_TAG = "cases-v114";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
