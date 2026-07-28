@@ -1,29 +1,35 @@
 {
+  "id": "/",
   "name": "Les Quatre Cases",
   "short_name": "4 Cases",
   "description": "Fais grandir tes quatre villages. À la fin, celui dont les cases sont éteintes gagne.",
   "lang": "fr",
-  "start_url": "./",
-  "scope": "./",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#100829",
   "theme_color": "#100829",
+  "categories": [
+    "games",
+    "education"
+  ],
   "icons": [
     {
-      "src": "./icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-512.png",
+      "src": "/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

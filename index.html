@@ -558,11 +558,14 @@ html.lite .rara-visage,html.lite .r-yeux{animation:none;}
 /* Le guide : il court d'une porte à l'autre. La transition sur left/top EST sa course.
    Son bras est un élément à part : on lui donne une longueur et un angle pour qu'il
    désigne un point précis de l'écran, ce qu'un dessin figé ne peut pas faire. */
-.guide{position:fixed;z-index:9995;width:116px;pointer-events:none;
+/* Elle se déplace en TRANSFORM, plus en left/top. Une transition sur left/top oblige
+   le navigateur à recalculer la mise en page à chaque image pendant six dixièmes de
+   seconde ; une transformation est confiée au processeur graphique et ne coûte rien
+   à la mise en page. C'est ce qui rendait son apparition pâteuse. */
+.guide{position:fixed;left:0;top:0;z-index:9995;width:116px;pointer-events:none;
   display:flex;flex-direction:column;align-items:center;
-  transform-origin:50% 100%;opacity:0;
-  transition:left .62s cubic-bezier(.32,.9,.36,1), top .62s cubic-bezier(.32,.9,.36,1),
-             transform .62s cubic-bezier(.32,.9,.36,1), opacity .34s ease-out;}
+  transform-origin:50% 100%;opacity:0;will-change:transform,opacity;
+  transition:transform .62s cubic-bezier(.32,.9,.36,1), opacity .34s ease-out;}
 .guide.dedans{opacity:0;pointer-events:none;}
 /* Face au joueur 2 : elle pivote, et sa bulle passe de l'autre côté pour rester
    au-dessus de sa tête de SON point de vue à lui. */
@@ -572,6 +575,9 @@ html.lite .rara-visage,html.lite .r-yeux{animation:none;}
 .g-corps{position:relative;width:116px;height:139px;}
 .guide .g-tete{width:116px;height:139px;display:block;
   filter:drop-shadow(0 6px 9px rgba(0,0,0,.55));}
+/* Sur une machine modeste, l'ombre portée est refabriquée à chaque image tant qu'elle
+   se déplace : on la retire, le dessin porte déjà sa propre ombre au sol. */
+html.lite .guide .g-tete,html.lite .g-main{filter:none!important;}
 .guide.court .g-tete{animation:gCourse .26s ease-in-out infinite alternate;}
 @keyframes gCourse{from{transform:rotate(-7deg) translateY(0)}to{transform:rotate(7deg) translateY(-6px)}}
 .guide:not(.court) .g-tete{animation:gFlotte 2.4s ease-in-out infinite;}
@@ -599,6 +605,12 @@ html.lite .rara-visage,html.lite .r-yeux{animation:none;}
   border:2px solid #C9A227;box-shadow:0 4px 12px rgba(0,0,0,.5);white-space:nowrap;
   transition:opacity .3s ease-out .3s;}
 html.lite .guide .g-tete,html.lite .g-main,html.lite .g-yeux{animation:none!important;}
+/* En mode léger, plus AUCUNE animation permanente : ce sont elles qui tiennent le
+   processeur graphique éveillé en continu et qui vident la mémoire vive. */
+html.lite .guide{transition:none!important;}
+html.lite .fumSeau circle,html.lite .flam,html.lite .fumn{animation:none!important;}
+html.lite #plateau{transition:none!important;}
+html.lite .pouf{display:none!important;}
 @media (prefers-reduced-motion: reduce){ .guide .g-tete,.g-main,.g-yeux{animation:none!important;} }
 #main .carte{touch-action:none;}
 .carte.fantome{position:fixed;z-index:9996;pointer-events:none;margin:0;
@@ -3334,7 +3346,11 @@ function appliquerMaj(){
 const CLE_INST = "qc_eq_inst";
 let _promptAndroid = null;
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); _promptAndroid = e; majInstall(); });
-window.addEventListener('appinstalled', () => { try{ localStorage.setItem(CLE_INST,'1'); }catch(e){} majInstall(); });
+window.addEventListener('appinstalled', () => {
+  try{ localStorage.setItem(CLE_INST,'1'); }catch(e){}
+  try{ flashMsg("✓ Le jeu est installé. Retrouve-le dans tes applications."); }catch(e){}
+  majInstall();
+});
 
 function dejaInstalle(){
   return (window.navigator.standalone === true)                                   // iOS
@@ -3350,7 +3366,17 @@ function ecarterInstall(){
 function installerAndroid(){
   if(!_promptAndroid) return;
   _promptAndroid.prompt();
-  _promptAndroid.userChoice.finally(()=>{ _promptAndroid=null; majInstall(); });
+  /* On dit ce qui s'est passé. Sans ça, le joueur accepte, ne voit aucune icône
+     apparaître — Android fabrique l'application en tâche de fond et la range dans le
+     tiroir, pas sur l'écran d'accueil — et croit que ça a échoué. */
+  _promptAndroid.userChoice.then(function(r){
+    const ok = r && r.outcome === 'accepted';
+    try{
+      if(ok) flashMsg("📲 Installation lancée — cherche « 4 Cases » dans tes applications.");
+      else   flashMsg("Installation annulée. Tu pourras réessayer plus tard.");
+    }catch(e){}
+    if(ok){ try{ localStorage.setItem(CLE_INST,'1'); }catch(e){} }
+  }).catch(function(){}).finally(function(){ _promptAndroid=null; majInstall(); });
 }
 function majInstall(){
   const bar=document.getElementById('instBar'); if(!bar) return;
@@ -4305,7 +4331,10 @@ function feuxArtifice(duree){
     cv.className = 'feux-cv';
     document.body.appendChild(cv);
     const ctx = cv.getContext('2d');
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    /* Une toile plein écran en double densité, c'est huit millions de pixels en mémoire.
+       Sur un téléphone juste en mémoire vive, c'est ce qui fait tousser le jeu. */
+    const dpr = Math.min(document.documentElement.classList.contains('lite') ? 1 : 2,
+                         window.devicePixelRatio || 1);
     const W = cv.width = Math.floor(window.innerWidth * dpr);
     const H = cv.height = Math.floor(window.innerHeight * dpr);
     cv.style.width = window.innerWidth + 'px';
@@ -5368,7 +5397,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v99";
+const BUILD_TAG = "cases-v103";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -5377,6 +5406,22 @@ function appliqueLite(){
   const b=document.getElementById('liteBtn');
   if(b){ b.classList.toggle('off', !liteOn); b.title = liteOn ? "Mode léger actif — touche pour les effets" : "Mode léger (fluidité)"; }
 }
+/* Un téléphone peu doté ne devrait pas avoir à découvrir un réglage caché pour que le
+   jeu soit fluide. Au premier lancement, on regarde ce que la machine annonce — mémoire
+   vive et nombre de cœurs — et on allume le mode léger nous-mêmes. Le joueur reste
+   maître : s'il l'éteint, son choix est enregistré et on n'y revient plus. */
+(function(){
+  try{
+    if(localStorage.getItem('qc_lite') !== null) return;      // il a déjà choisi
+    const ram = navigator.deviceMemory || 0;                  // en Go, Android surtout
+    const coeurs = navigator.hardwareConcurrency || 0;
+    const modeste = (ram && ram <= 4) || (coeurs && coeurs <= 4);
+    if(modeste){
+      localStorage.setItem('qc_lite','1');
+      document.documentElement.classList.add('lite');
+    }
+  }catch(e){}
+})();
 function toggleLite(){
   try{ ac(); }catch(e){}
   liteOn=!liteOn;
@@ -5558,7 +5603,7 @@ function pluieOrage(duree){
   const cv=document.createElement('canvas'); cv.className='orage-cv';
   document.body.appendChild(cv);
   const ctx=cv.getContext('2d');
-  const dpr=Math.min(2, window.devicePixelRatio||1);
+  const dpr=Math.min(document.documentElement.classList.contains('lite') ? 1 : 2, window.devicePixelRatio||1);
   const W=cv.width=Math.floor(innerWidth*dpr), H=cv.height=Math.floor(innerHeight*dpr);
   cv.style.width=innerWidth+'px'; cv.style.height=innerHeight+'px';
   const N = red ? 0 : (lite ? 55 : 170);
@@ -7486,7 +7531,7 @@ function bruitPouf(monte){
 function pouf(x, y){
   try{
     const lite = document.documentElement.classList.contains('lite');
-    const n = lite ? 4 : 10;
+    const n = lite ? 0 : 6;
     for(let i=0;i<n;i++){
       const d = document.createElement('i');
       d.className = 'pouf';
@@ -7512,8 +7557,11 @@ function guidePorte(){                       // une porte de case au hasard
 }
 function guidePlacer(x, y, k, opac){
   const g=guideEl(); if(!g) return;
-  g.style.left = x + 'px'; g.style.top = y + 'px';
-  g.style.transform = 'translate(-50%,-100%) scale(' + k + ')';
+  /* Un seul réglage : la transformation. On l'amène au point voulu, puis on la recentre
+     sur ses pieds, puis on la met à l'échelle — les transformations se lisent de droite
+     à gauche. Aucune mise en page recalculée. */
+  g.style.transform = 'translate3d(' + Math.round(x) + 'px,' + Math.round(y) + 'px,0)'
+                    + ' translate(-50%,-100%) scale(' + k + ')';
   g.style.opacity = opac;
 }
 /* Rara sert LES DEUX joueurs. En duo, quand c'est au joueur 2, elle regarde SA main
