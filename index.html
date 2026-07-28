@@ -653,6 +653,25 @@ html.lite .eau-gt{animation-duration:.4s;}
   transition:transform .55s cubic-bezier(.2,.7,.3,1), opacity .55s ease-out;}
 .ext-jet.go{transform:scale(11);opacity:0;}
 .feux-cv{position:fixed;inset:0;z-index:9999;pointer-events:none;}
+/* L'embrasement : la toile de flammes couvre le plateau, et chaque case rougeoie. */
+.feu-cv{z-index:9997;pointer-events:none;}
+.borne.embrase{animation:embraseCase 1.9s ease-out both;}
+@keyframes embraseCase{
+  0%{filter:none;box-shadow:none}
+  22%{filter:brightness(1.5) saturate(1.4);box-shadow:0 0 34px 8px rgba(255,120,30,.85)}
+  60%{filter:brightness(1.35) saturate(1.5);box-shadow:0 0 44px 12px rgba(255,80,20,.9)}
+  100%{filter:brightness(.62) saturate(.5);box-shadow:0 0 16px 2px rgba(120,40,10,.6)}}
+html.lite .borne.embrase{animation:none;filter:brightness(.7) saturate(.6);}
+/* La case qui explose : un éclair blanc, une secousse, puis la cendre. */
+.borne.explose{animation:exploseCase .9s cubic-bezier(.2,1.4,.4,1) both;z-index:40;}
+@keyframes exploseCase{
+  0%{transform:scale(1);filter:brightness(1)}
+  8%{transform:scale(1.14);filter:brightness(3.4) saturate(.2)}
+  16%{transform:scale(.94) translateX(-5px);filter:brightness(1.7)}
+  26%{transform:scale(1.04) translateX(5px)}
+  38%{transform:scale(.99) translateX(-3px)}
+  100%{transform:scale(1);filter:brightness(.42) saturate(.35) contrast(.9)}}
+html.lite .borne.explose{animation:none;filter:brightness(.45) saturate(.35);}
 .orage-cv{position:fixed;inset:0;z-index:9998;pointer-events:none;}
 .orage-eclair{position:fixed;inset:0;z-index:9999;pointer-events:none;
   background:radial-gradient(120% 80% at 50% 0%,#e8f6ff,#9fd0ff 60%,transparent 100%);
@@ -1841,7 +1860,7 @@ html[data-skin="coris"] #score .lbl{color:#7C5B36;}
     <div class="mem-sec">
       <div class="mem-h">⚡ Les cartes spéciales</div>
       <p>Elles se glissent parfois dans ta main et frappent où tu veux :</p>
-      <div class="mem-spec"><span class="ic">🧯</span><span><b>Extincteur</b> — il <b>éteint complètement</b> le village visé : au moins +30, et davantage s'il le faut pour rattraper l'adversaire. En échange, −15 sur ton plus grand village : l'eau vient bien de quelque part.</span></div>
+      <div class="mem-spec"><span class="ic">🧯</span><span><b>Extincteur</b> — il <b>éteint complètement</b> le village visé : au moins +30, et davantage s'il le faut pour rattraper Rara. En échange, −15 sur ton plus grand village : l'eau vient bien de quelque part.</span></div>
       <div class="mem-spec"><span class="ic">🪣</span><span><b>Seau</b> — tu puises chez le voisin : +10 chez toi, −10 chez lui, sur la même couleur.</span></div>
       <div class="mem-spec"><span class="ic">🚿</span><span><b>Arrosoir percé</b> — −20 sur un village de l'autre joueur. Celui-là ne te donne rien.</span></div>
       <div class="mem-card">Ces cartes-là frappent <b>partout — même un village déjà plein</b> — et ne comptent pas dans la limite des 3.</div>
@@ -1862,7 +1881,7 @@ html[data-skin="coris"] #score .lbl{color:#7C5B36;}
 
     <div class="mem-sec">
       <div class="mem-h">⛈️ Le feu &amp; l'Orage</div>
-      <p>Quand une de tes cases prend <b>10 points de retard</b> sur celle d'en face, elle <b>prend feu</b>. Une fois par match, tu peux faire tomber l'<b>Orage</b> : la pluie éteint <b>toutes tes cases en feu d'un seul coup</b> et les remonte à hauteur de l'adversaire.</p>
+      <p>Quand une de tes cases prend <b>10 points de retard</b> sur celle d'en face, elle <b>prend feu</b>. Une fois par match, tu peux faire tomber l'<b>Orage</b> : la pluie éteint <b>toutes tes cases en feu d'un seul coup</b> et les remonte à hauteur de Rara.</p>
       <div class="mem-card">L'Orage te <b>relève</b> — il ne te <b>donne</b> pas la victoire. Une seule averse par partie : à toi de choisir le bon moment.</div>
     </div>
 
@@ -1938,7 +1957,7 @@ html[data-skin="coris"] #score .lbl{color:#7C5B36;}
     </div>
   </div>
   <h1>🛖 LES QUATRE CASES</h1>
-  <div class="sub">2 manches gagnantes · cartes spéciales · l'adversaire cherche vraiment</div>
+  <div class="sub">2 manches gagnantes · cartes spéciales · Rara cherche vraiment</div>
   <div id="matchbar"></div>
   <div id="balance">
     <div class="cap">Le plus faible</div>
@@ -2452,11 +2471,11 @@ function perfNow(){ return (window.performance&&performance.now)?performance.now
    Il perd donc parce qu'il joue mal, jamais parce qu'on fausse les règles. */
 const NIVEAUX = {
   facile: {key:"facile", label:"FACILE",  emb:"🌱", mult:0.35, rand:0.30, mauvais:1.0,
-           desc:"L'adversaire se trompe presque à chaque tour. Pour les plus petits."},
+           desc:"Rara se trompe presque à chaque tour. Pour les plus petits."},
   normal: {key:"normal", label:"NORMAL",  emb:"⚖️", mult:1.0,  rand:0.60, mauvais:0.35,
-           desc:"Il joue correctement, mais il hésite souvent. Une partie serrée."},
+           desc:"Rara joue correctement, mais elle hésite souvent. Une partie serrée."},
   maitre: {key:"maitre", label:"MAÎTRE",  emb:"🔥", mult:2.6,  rand:0,    mauvais:0,
-           desc:"Il explore bien plus de scénarios et ne pardonne rien."},
+           desc:"Rara explore bien plus de scénarios et ne pardonne rien."},
 };
 let NIVEAU = NIVEAUX.normal;
 function budgetR(){
@@ -3153,11 +3172,6 @@ const RETOUR_QUESTION = 8;
    Avec 6 % d'écart exigé : déclaré à 6 % des joueurs plats seulement, à 76 % de ceux qui
    ont un vrai penchant, et JUSTE À 94 %. L'axe cesse d'être donné : il se mérite. */
 const AXE_ECART = 0.06;
-function axeNet(triTot){
-  const t2=PROFIL.tot[triTot[1]]||0, t3=PROFIL.tot[triTot[2]]||0;
-  if(t2<=0) return false;
-  return ((t2-t3)/t2) >= AXE_ECART;
-}
 const PENTE_Z = 2.6, PENTE_FOIS = 4;
 function penteRequise(n){
   n = n || PROFIL.parties || 1;      // sans argument : aujourd'hui. Avec : une partie future.
@@ -3188,9 +3202,6 @@ function _glissement(p){
   if(ec <= -0.20 && av >= 0.35)
     return {sens:"remonte", av, ap, negAv, negAp, nAv, nAp, dejaAM:false};
   return null;
-}
-function penteNette(compteur, p){
-  return (compteur[p]||0) >= penteRequise();
 }
 /* Le Phénix ne revient pas tout de suite : sa 2e question se mérite */
 const ECART_QUESTION = 5;
@@ -3252,52 +3263,6 @@ function lireQuestionSeq(p, i, manuel){
   try{ speechSynthesis.speak(u); }catch(e){ fini(); }
   majLireBtn();
 }
-function repondre(p, i, k){
-  if(!p) return;
-  /* LA MÉMOIRE DU MIROIR. Avant, répondre ÉCRASAIT la réponse précédente : il ne connaissait
-     que ton dernier mot, et une question posée était morte pour toujours. Maintenant :
-       - h[] garde les paroles d'avant, avec leur date
-       - neg photographie le compteur d'abandons du pilier À CET INSTANT
-     C'est cette photo qui permet de dire « avant tu tombais 8 fois sur 12, depuis 3 sur 12 ».
-     Sans elle on n'a qu'un cumul depuis toujours, donc rien à comparer. */
-  const a=_repArr(p);
-  const av=a[i];
-  const hist=(av && av.h) ? av.h.slice() : [];
-  if(av && av.k && av.k!=="—") hist.push({k:av.k, n:av.n||0, neg:av.neg||0});   // l'ancienne descend
-  if(hist.length>4) hist.shift();                                   // 4 paroles suffisent
-  a[i] = {k:(k||"—"), n:(PROFIL.parties||0), neg:(PROFIL.neglige[p]||0), h:hist};
-  REPONSES[p]=a; sauverReponses();
-  taire();
-  // Pas de remerciement : un oracle ne remercie pas. Il donne rendez-vous.
-  const merci = k
-    ? (()=>{ const r=prochainMiroir();          // pas SEUIL_MIROIR en dur : ce qu'il reste VRAIMENT
-        return `<b>Le miroir a entendu.</b><br>` + (r>0
-          ? `Joue encore ${r} partie${r>1?'s':''}.<br><b>Il s'ouvrira et te révélera tout ce qu'il sait de toi.</b>`
-          : `<b>Il s'ouvre. Il va te révéler tout ce qu'il sait de toi.</b>`); })()
-    : `C'est entendu. Le Phénix ne te le redemandera pas.`;
-  document.getElementById('qTxt').innerHTML = `<span class="q-merci">${merci}</span>`;
-  document.getElementById('qRep').innerHTML = '';
-  document.getElementById('qSkip').style.display='none';
-  _lectureTxt = merci.replace(/<br\s*\/?>/gi,' ').replace(/<[^>]+>/g,'');   // le retour à la ligne devient une respiration
-  try{ buzz(20); }catch(e){}
-  // L'écran ne se ferme pas sur un chrono : il attend que la voix ait fini sa phrase.
-  let ferme=false;
-  const partir=()=>{ if(ferme) return; ferme=true;
-    setTimeout(()=>{ document.getElementById('qphenix').classList.remove('on'); taire(); _qPil=null; }, 800); };
-  if(voixOn && ('speechSynthesis' in window)){
-    const moi={}; _qSeq=moi;
-    const u=_voixFr(new SpeechSynthesisUtterance(_lectureTxt));
-    u.onend=()=>{ if(_qSeq===moi) _qSeq=null; majLireBtn(); partir(); };
-    u.onerror=()=>{ if(_qSeq===moi) _qSeq=null; majLireBtn(); partir(); };
-    try{ speechSynthesis.speak(u); }catch(e){ partir(); }
-    majLireBtn();
-    setTimeout(partir, 12000);                 // filet : si la voix ne rend jamais la main
-  } else {
-    setTimeout(partir, Math.max(2600, _lectureTxt.length*62));   // voix coupée : le temps de lire
-  }
-}
-function _profilDefaut(){ P.forEach(p=>{ if(PROFIL.tot[p]==null)PROFIL.tot[p]=0; if(PROFIL.neglige[p]==null)PROFIL.neglige[p]=0; if(PROFIL.fort[p]==null)PROFIL.fort[p]=0; }); }
-function sauverProfil(){ try{ localStorage.setItem('qc_eq_profil_v1', JSON.stringify(PROFIL)); }catch(e){} }
 /* Miroir supprimé : aucun profil n'est chargé ni enregistré. */
 
 /* ══════════ BOUTIQUE DES HABILLAGES (moteur) ══════════ */
@@ -3860,10 +3825,10 @@ function pilierNeglige(){
 function texteManche(v, gagne, pFaibleV){
   const nom = PIL_VIE[pFaibleV] || 'une case';
   if(v.motif==="feux"){
-    if(v.f1===0) return `Bravo ! Toutes tes cases sont éteintes. L'adversaire en a ` + v.f2 + ` qui brûlent encore.`;
+    if(v.f1===0) return `Bravo ! Toutes tes cases sont éteintes. ${advLabel()} en a ` + v.f2 + ` qui brûlent encore.`;
     return gagne
       ? `Manche gagnée. Il te reste ` + v.f1 + ` case en feu, à lui ` + v.f2 + `.`
-      : `Manche perdue. ` + nom + ` brûle encore. L'adversaire a mieux éteint que toi.`;
+      : `Manche perdue. ` + nom + ` brûle encore. Rara a mieux éteint que toi.`;
   } else if(v.motif==="braises"){
     return gagne ? `Manche gagnée de justesse : moins de braises chez toi.`
                  : `Manche perdue de justesse : il restait plus de braises chez toi.`;
@@ -3906,15 +3871,6 @@ function annonceFinMatch(win, nouveauRang){
    UNE SEULE fonction, appelée par le Phénix ET par le miroir. Tant qu'ils calculaient
    chacun de leur côté, le Phénix promettait 6 pendant que le miroir en comptait 3.
    Ils ne peuvent plus se contredire : c'est la même phrase qui les nourrit. */
-function prochainMiroir(){
-  const paroles = P.map(p=>laParole(p)).filter(Boolean);
-  const resteJeu = SEUIL_MIROIR - (PROFIL.parties||0);        // il lui faut assez de jeu pour lire
-  const resteParole = paroles.length                          // la PREMIÈRE parole qui mûrit
-    ? Math.min(...paroles.map(r => { const o=P.map(x=>_repArr(x)[r.i]).find(Boolean);
-        return SEUIL_MIROIR - ((PROFIL.parties||0) - (r.n||0)); }))
-    : 0;                    // rien de confié : seul le temps de jeu compte, pas SEUIL en dur
-  return Math.max(0, resteJeu, resteParole);
-}
 /* Le miroir a-t-il quelque chose à livrer maintenant ? (une parole assez vieille pour être croisée) */
 /* Le miroir a parlé : on remet son compteur à zéro. Il te reverra dans SEUIL parties. */
 /* ⚠️ DEUX DATES, DEUX USAGES — ne jamais les confondre :
@@ -4420,23 +4376,6 @@ function pilierDeLaQuestion(win){
 /* ── La Révélation des Coris : déclenchement après le tableau de résultats final ──
    1ère victoire du jour, puis toutes les 3 victoires. N'interfère pas avec le reste
    du jeu : bouton sur l'écran de résultats, ouverture en surimpression (iframe). */
-function ouvrirCoris(){
-  var ov=document.getElementById('corisOverlay'), fr=document.getElementById('corisFrame');
-  if(!ov||!fr) return;
-  try{ if(typeof taire==='function') taire(); }catch(e){}   // couper la voix du jeu
-  fr.src='./la-revelation-des-coris.html';
-  ov.classList.add('on');
-}
-// La Révélation (dans le cadre) a son propre bouton « Retour au jeu » : quand il est touché, on ferme le cadre.
-window.addEventListener('message', function(e){
-  if(!e || !e.data || typeof e.data.coris === 'undefined') return;
-  if(e.data.coris === 'retour'){ try{ fermerCoris(); }catch(e2){} }
-});
-function fermerCoris(){
-  var ov=document.getElementById('corisOverlay'), fr=document.getElementById('corisFrame');
-  if(ov) ov.classList.remove('on');
-  if(fr) fr.src='about:blank';                              // stoppe l'audio et l'animation
-}
 function majFinMatch(win, histo){
   effacerPartie();          // le match est joué : plus rien à reprendre
   STATS.matchsJoues++;
@@ -4461,11 +4400,27 @@ function majFinMatch(win, histo){
      et surtout un cadre plein ecran qui chargeait un fichier externe. Absent, ce fichier
      laissait un ecran NOIR dont on ne pouvait plus sortir : le bouton de retour etait
      dedans. Une porte ne doit jamais dependre de ce qu'il y a derriere. */
-  let corisNow=false;
-  if(corisNow){ var _cfb=document.getElementById('finbtns'); if(_cfb){ _cfb.insertAdjacentHTML('afterbegin', '<button class="btn coris-btn" style="flex:1 0 100%;margin-bottom:8px" onclick="ouvrirCoris()">\u2728 La R\u00e9v\u00e9lation des Coris</button>'); } }
   const finEl=document.getElementById('fin');
   finEl.classList.remove('epicwin','epicloss'); finEl.classList.add(win?'epicwin':'epicloss');
+  const _fbAvant = document.getElementById('finbtns');
+  const _fbHTML  = _fbAvant ? _fbAvant.outerHTML : '';
   document.getElementById('findetail').innerHTML = panneauProgression(histo) + panneauXP(gain, avant, apres, levelUp) + lectureFinale(win);
+  /* Filet : si la barre de boutons a disparu dans la réécriture, on la remet. Sans
+     elle, l'écran de fin de match n'offre aucune issue — plus moyen de rejouer. */
+  try{
+    if(!document.getElementById('finbtns')){
+      const carte = document.querySelector('#fin .card');
+      if(carte){
+        carte.insertAdjacentHTML('beforeend', _fbHTML ||
+          '<div class="orow" id="finbtns" style="margin-top:12px"></div>');
+        const fb2 = document.getElementById('finbtns');
+        if(fb2 && !fb2.children.length){
+          fb2.innerHTML = '<button class="btn fb-grand" onclick="nouveauMatch()">▶ ON REJOUE&nbsp;!</button>'
+                        + '<button class="btn ghost fb-mi" onclick="ouvrirNiveau()">Niveau</button>';
+        }
+      }
+    }
+  }catch(e){}
   _lectureTxt = _lectureMatchTxt ? (_lectureMatchTxt + (levelUp?` Nouveau rang : ${apres.titre}.`:'')) : '';
   countUp(document.getElementById('finMatchsN'), STATS.matchsGagnes, 950);
   if(win){ confetti(120); flash('#f2d98a'); buzz([20,40,20,60]); setTimeout(()=>confetti(70),480); setTimeout(()=>confetti(50),980); }
@@ -4474,7 +4429,6 @@ function majFinMatch(win, histo){
   const qp = null;   // les questions du Miroir sont supprimées
   setTimeout(()=>{
     if(!ecranOuvert('fin')) return;                 // l'écran a été fermé entre-temps : on se tait
-    if(corisNow){ ouvrirCoris(); return; }          // la Révélation des Coris vient — définitivement, sans que le Phénix la remplace
     // Le Phénix est rare : quand il parle, il ne rivalise pas avec la lecture des piliers
     /* LES QUESTIONS D'ABORD. Le joueur en répond plusieurs, le miroir accumule.
        pilierDeLaQuestion() les épuise tout seul : une question par pilier faible, jamais
@@ -4484,7 +4438,7 @@ function majFinMatch(win, histo){
 
     if(_lectureTxt){ parle(_lectureTxt); majLireBtn(); }
     else annonceFinMatch(win, levelUp?apres.titre:null);
-  }, corisNow ? 1100 : (qp ? 1600 : 900));
+  }, qp ? 1600 : 900);
 }
 let JEU='solo';                       // 'solo' | 'net'
 const NET={ role:null, aQui:null, connected:false, sendRaw:null, peer:null, conn:null, dernier:null, vu:0, pouls:null, code:null, enPartie:false, reprise:false };
@@ -4499,7 +4453,7 @@ function plateauEndroit(){ try{ document.documentElement.classList.remove('tour-
 const NOM_COULEUR = {"Spiritualité":"VIOLET", "Amour":"ROUGE", "Santé":"VERT", "Argent":"JAUNE"};
 function nomCase(p){ return NOM_COULEUR[p] || p; }
 function caseColoree(p){ return `<b style="color:${COL[p]}">case ${nomCase(p).toLowerCase()}</b>`; }
-function advLabel(){ return DUO ? 'J2' : 'Adv'; }
+function advLabel(){ return enLigne() ? 'Adversaire' : (DUO ? 'J2' : 'Rara'); }
 const MATCH_CIBLE=2;                  // premier à 2 manches
 
 function nouveauMatch(){ try{ musPrecharger(); }catch(e){} effacerPartie(); MODE='classique'; matchMe=0; matchIA=0; mancheNo=1; mancheHisto=[]; resetBilan(); phenixUse=false; demarrer(); }
@@ -4519,7 +4473,7 @@ function demarrer(){
   render();
   initCardTilt();
   if(mancheNo % 2 === 0){                     // alternance : l'adversaire ouvre les manches paires
-    locked=true; dire("<b>L'adversaire ouvre cette manche…</b>",1); lancerIA();
+    locked=true; dire("<b>${advLabel()} ouvre cette manche…</b>",1); lancerIA();
   } else {
     dire("<b>Touche une carte</b> de ta main, puis un <b>pilier</b> à nourrir.",1);
   }
@@ -4638,7 +4592,7 @@ function render(){
      C'était le « ça rame » au moment de jouer. Si le contenu de la main n'a pas bougé,
      on ne touche plus que les classes : de 7,5 ms à quelques centièmes. */
   /* La signature ne porte QUE sur les cartes. Elle contenait aussi les scores du
-     plateau : le moindre coup, même celui de l'adversaire, rebâtissait donc les douze
+     plateau : le moindre coup, même celui de Rara, rebâtissait donc les douze
      cartes et leurs vingt-quatre dessins, alors que la main n'avait pas changé.
      Ce qui dépend du plateau — jouable ou non, éteint un feu ou non — n'est plus
      qu'une affaire de classes, posées sans rien reconstruire. */
@@ -4802,7 +4756,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v129";
+const BUILD_TAG = "cases-v140";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -5127,8 +5081,8 @@ function choisir(i){
   if(sel!==null){
     sSelect();
     if(estSpec(c)){
-      if(c.type==="tempete") dire(`<b>⛈️ Tempête.</b> Touchez le <b>pilier de l'adversaire</b> à foudroyer (−20).`,2);
-      else if(c.type==="vol") dire(`<b>🗡️ Vol.</b> Touchez un pilier : vous y versez <b>+10</b> et dérobez <b>−10</b> à l'adversaire.`,2);
+      if(c.type==="tempete") dire(`<b>⛈️ Tempête.</b> Touchez le <b>pilier de Rara</b> à foudroyer (−20).`,2);
+      else if(c.type==="vol") dire(`<b>🗡️ Vol.</b> Touchez un pilier : vous y versez <b>+10</b> et dérobez <b>−10</b> à Rara.`,2);
       else dire(`<b>🧯 Extincteur.</b> Touche un village : le feu y est <b>éteint complètement</b> (au moins <b>+30</b>), mais <b>−15</b> sur ton plus grand village.`,2);
     } else {
       dire(cibles.length===2
@@ -5178,7 +5132,7 @@ function poser(p){
     if(estSpec(c)){ sSpecial(c.type); } else { sPose(p,c.pts); } buzz(18);
     volerCarte(cardEl, borneEl, c, "moi", ()=>{
       netSend({t:'coup', idx, p});
-      dire("Coup envoyé — en attente de l'adversaire…",3);
+      dire("Coup envoyé — en attente de Rara…",3);
     });
     render();
     return;
@@ -5255,7 +5209,7 @@ function txtCoup(qui,c,p){
 }
 
 /* ══════════ TOUR DE L'adversaire ══════════ */
-/* Le tour de l'adversaire est en deux morceaux : jouerCoupAdverse() exécute un coup,
+/* Le tour de Rara est en deux morceaux : jouerCoupAdverse() exécute un coup,
    finTourAdverse() clôt le tour. L'IA et le joueur 2 empruntent le même second morceau. */
 async function finTourAdverse(){
   tour++;
@@ -5306,7 +5260,7 @@ async function lancerIA(){
     render();
     return;
   }
-  dire(`<span class="dots">L'adversaire cherche son coup</span>`,3);
+  dire(`<span class="dots">${advLabel()} cherche son coup</span>`,3);
   setThink(0);
   const R=budgetR();
   const mv=await coupIAAsync(mainIA, mainJ, T, tour, R, setThink);
@@ -5335,10 +5289,10 @@ function poser2(p){
   jouerCoupAdverse(mv);
 }
 function msgIA(c,p){
-  if(c.type==="tempete") return `L'adversaire vide son 🚿 <b>Arrosoir percé</b> sur ta ${caseColoree(p)} : −20 pour toi.`;
-  if(c.type==="vol")     return `L'adversaire plonge son 🪣 <b>Seau</b> dans ta ${caseColoree(p)} et te prend 10.`;
-  if(c.type==="sacrifice")return `L'adversaire vide son 🧯 <b>Extincteur</b> sur sa ${caseColoree(p)}.`;
-  return `L'adversaire pose <b>${c.pts}</b> sur sa ${caseColoree(p)}.`;
+  if(c.type==="tempete") return `Rara vide son 🚿 <b>Arrosoir percé</b> sur ta ${caseColoree(p)} : −20 pour toi.`;
+  if(c.type==="vol")     return `${advLabel()} plonge son 🪣 <b>Seau</b> dans ta ${caseColoree(p)} et te prend 10.`;
+  if(c.type==="sacrifice")return `Rara vide son 🧯 <b>Extincteur</b> sur sa ${caseColoree(p)}.`;
+  return `${advLabel()} pose <b>${c.pts}</b> sur sa ${caseColoree(p)}.`;
 }
 function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
@@ -5389,10 +5343,182 @@ function volerDepuisIA(borneEl, c, cb){
 }
 
 /* ══════════ FIN DE MANCHE / MATCH ══════════ */
-function terminer(){
+/* ══════════ L'EMBRASEMENT ══════════
+   Les mains sont vides, plus une carte pour éteindre : ce qui brûlait ne sera plus
+   sauvé. Alors tout s'embrase — les quatre cases, les jauges, les scores — avant que
+   le verdict tombe. C'est la sanction rendue visible, celle qu'un enfant comprend
+   sans qu'on lui explique. */
+function embrasement(explose){
+  return new Promise(function(fin){
+    let cv = null, raf = 0;
+    try{
+      const zone = document.getElementById('plateau') || document.getElementById('bornes');
+      if(!zone){ fin(); return; }
+      const r = zone.getBoundingClientRect();
+      if(!r.width){ fin(); return; }
+
+      const bornes = Array.prototype.slice.call(document.querySelectorAll('#bornes .borne'));
+      bornes.forEach(function(b){ b.classList.add('embrase'); });
+      /* Les cases qui explosent : celles qui brûlent encore de mon côté. */
+      const enFeu = explose ? bornes.filter(function(b){
+        const q = b.dataset.p;
+        return q && (T[q][2] - T[q][1]) >= ECART_FEU;
+      }) : [];
+      try{ rugissement(); }catch(e){}
+      try{ buzz([28,50,28,50,60]); }catch(e){}
+
+      const reduit = document.documentElement.classList.contains('lite')
+                  || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+      if(reduit){
+        enFeu.forEach(function(b){ b.classList.add('explose'); });
+        setTimeout(function(){ nettoie(); fin(); }, 1200); return;
+      }
+
+      cv = document.createElement('canvas');
+      cv.className = 'feu-cv';
+      document.body.appendChild(cv);
+      const ctx = cv.getContext('2d');
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      const W = cv.width  = Math.floor(r.width * dpr);
+      const H = cv.height = Math.floor(r.height * dpr);
+      cv.style.cssText = 'position:fixed;left:' + r.left + 'px;top:' + r.top + 'px;width:'
+                       + r.width + 'px;height:' + r.height + 'px;';
+      const COUL = ['#FFE9A8','#FFB03A','#FF7A21','#E0441B','#8C2410'];
+      const flam = [];
+      const t0 = performance.now(), DUREE = explose ? 2600 : 1900;
+      const fumee = [], debris = [];
+      /* Chaque case explose à son tour, à un cinquième de seconde d'intervalle : les
+         voir partir l'une après l'autre frappe bien plus qu'un fracas unique. */
+      enFeu.forEach(function(b, i){
+        setTimeout(function(){
+          try{
+            b.classList.add('explose');
+            const rb = b.getBoundingClientRect();
+            const ex = (rb.left + rb.width/2 - r.left) * dpr;
+            const ey = (rb.top + rb.height/2 - r.top) * dpr;
+            detonation();
+            for(let k=0;k<70;k++){                 // la fumée, épaisse et lente
+              const a2 = Math.random()*Math.PI*2, v2 = (0.3 + Math.random()*1.5)*dpr;
+              fumee.push({x:ex, y:ey, vx:Math.cos(a2)*v2, vy:Math.sin(a2)*v2 - (0.5+Math.random()*1.4)*dpr,
+                          r:(12 + Math.random()*30)*dpr, vie:1, g:38 + Math.random()*46});
+            }
+            for(let k=0;k<26;k++){                 // les éclats, rapides
+              const a2 = Math.random()*Math.PI*2, v2 = (2.5 + Math.random()*7)*dpr;
+              debris.push({x:ex, y:ey, vx:Math.cos(a2)*v2, vy:Math.sin(a2)*v2, vie:1,
+                           r:(1.6 + Math.random()*3.4)*dpr,
+                           col: COUL[(Math.random()*3)|0]});
+            }
+          }catch(e){}
+        }, 220 + i*200);
+      });
+      function frame(t){
+        const k = (t - t0) / DUREE;
+        if(k >= 1){ nettoie(); fin(); return; }
+        const naissance = k < 0.72 ? 14 : 0;
+        for(let i=0;i<naissance;i++){
+          flam.push({x: Math.random()*W, y: H + 8*dpr,
+                     vy: -(1.6 + Math.random()*3.4)*dpr,
+                     vx: (Math.random()-0.5)*1.1*dpr,
+                     r: (7 + Math.random()*20)*dpr, vie: 1,
+                     col: COUL[(Math.random()*COUL.length)|0]});
+        }
+        ctx.clearRect(0,0,W,H);
+        ctx.globalCompositeOperation = 'lighter';
+        for(let i=flam.length-1;i>=0;i--){
+          const f = flam[i];
+          f.x += f.vx; f.y += f.vy; f.vy *= 0.985; f.vie -= 0.017;
+          if(f.vie <= 0){ flam.splice(i,1); continue; }
+          ctx.globalAlpha = Math.max(0, f.vie) * 0.42;
+          ctx.fillStyle = f.col;
+          ctx.beginPath(); ctx.arc(f.x, f.y, f.r*(0.4+f.vie*0.9), 0, 6.284); ctx.fill();
+        }
+        /* les éclats, puis la fumée par-dessus : elle doit recouvrir la scène */
+        for(let i=debris.length-1;i>=0;i--){
+          const d2 = debris[i];
+          d2.x += d2.vx; d2.y += d2.vy; d2.vy += 0.14*dpr; d2.vie -= 0.022;
+          if(d2.vie <= 0){ debris.splice(i,1); continue; }
+          ctx.globalAlpha = d2.vie;
+          ctx.fillStyle = d2.col;
+          ctx.beginPath(); ctx.arc(d2.x, d2.y, d2.r, 0, 6.284); ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+        for(let i=fumee.length-1;i>=0;i--){
+          const f2 = fumee[i];
+          f2.x += f2.vx; f2.y += f2.vy; f2.vy -= 0.012*dpr;
+          f2.vx *= 0.992; f2.vy *= 0.994; f2.r += 0.72*dpr; f2.vie -= 0.0062;
+          if(f2.vie <= 0){ fumee.splice(i,1); continue; }
+          ctx.globalAlpha = Math.min(0.62, f2.vie*0.72);
+          ctx.fillStyle = 'rgb(' + (f2.g|0) + ',' + ((f2.g*0.93)|0) + ',' + ((f2.g*0.88)|0) + ')';
+          ctx.beginPath(); ctx.arc(f2.x, f2.y, f2.r, 0, 6.284); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        raf = requestAnimationFrame(frame);
+      }
+      raf = requestAnimationFrame(frame);
+    }catch(e){ nettoie(); fin(); }
+    function nettoie(){
+      try{ cancelAnimationFrame(raf); }catch(e){}
+      try{ if(cv) cv.remove(); }catch(e){}
+      try{ document.querySelectorAll('.embrase').forEach(function(b){ b.classList.remove('embrase'); }); }catch(e){}
+    }
+  });
+}
+/* la détonation : un coup sourd, court, qui part très bas */
+function detonation(){
+  try{
+    const c = ac(); if(!c || !c.createBuffer) return;
+    const t0 = c.currentTime;
+    const n = Math.floor(c.sampleRate * 0.55), b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0);
+    let m = 0;
+    for(let i=0;i<n;i++){ m = m*0.90 + (Math.random()*2-1)*0.10; d[i] = m*3.4*Math.pow(1-i/n, 1.5); }
+    const src = c.createBufferSource(); src.buffer = b;
+    const lp = c.createBiquadFilter(); lp.type='lowpass';
+    lp.frequency.setValueAtTime(900, t0);
+    lp.frequency.exponentialRampToValueAtTime(90, t0+0.45);
+    const g = c.createGain(); g.gain.value = 0.42;
+    const o = c.createOscillator(); o.type='sine';
+    o.frequency.setValueAtTime(160, t0);
+    o.frequency.exponentialRampToValueAtTime(34, t0+0.42);
+    const go = c.createGain();
+    go.gain.setValueAtTime(0.34, t0);
+    go.gain.exponentialRampToValueAtTime(0.0001, t0+0.5);
+    src.connect(lp); lp.connect(g); g.connect(MASTER || c.destination);
+    o.connect(go); go.connect(MASTER || c.destination);
+    src.start(t0); o.start(t0); o.stop(t0+0.55);
+  }catch(e){}
+}
+/* le grondement : un souffle grave et long, filtré comme un brasier */
+function rugissement(){
+  try{
+    const c = ac(); if(!c || !c.createBuffer) return;
+    const t0 = c.currentTime, dur = 1.9;
+    const n = Math.floor(c.sampleRate * dur), b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0);
+    let m = 0;
+    for(let i=0;i<n;i++){ m = m*0.86 + (Math.random()*2-1)*0.14; d[i] = m*2.6; }
+    const src = c.createBufferSource(); src.buffer = b;
+    const lp = c.createBiquadFilter(); lp.type='lowpass';
+    lp.frequency.setValueAtTime(1600, t0);
+    lp.frequency.exponentialRampToValueAtTime(320, t0+dur);
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(0.34, t0+0.30);
+    g.gain.setValueAtTime(0.34, t0+dur*0.62);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    src.connect(lp); lp.connect(g); g.connect(MASTER || c.destination);
+    src.start(t0); src.stop(t0+dur+0.05);
+  }catch(e){}
+}
+
+async function terminer(){
   if(enLigne()) return terminerDuel();
   fini=true; sel=null; locked=false; render();
   const v=verdict(T);
+  /* Plus une carte en main : ce qui brûle ne sera plus éteint. Tout s'embrase — et si
+     la défaite est jouée, les cases en feu EXPLOSENT avant que le verdict s'affiche. */
+  try{
+    const mesFeux = feuxDe(T,1);
+    if(mesFeux || feuxDe(T,2)) await embrasement(v.gagnant === 2 && mesFeux > 0);
+  }catch(e){}
   const gagne = v.gagnant===1;
   if(v.gagnant===1) matchMe++; else if(v.gagnant===2) matchIA++;
   mancheHisto.push(v.gagnant);
@@ -5489,12 +5615,12 @@ function terminer(){
   d += `<div id="fin-slot"></div>`;   // les boutons viendront ici, avant l'explication
   if(v.motif==="feux"){
     d += gagne
-      ? `<div class="reason win"><span class="ric">🛡️</span><div>${v.f1===0 ? "Toutes tes cases sont <b>éteintes</b>" : "Il te reste moins de feu que lui"} — la sienne brûle à <b style="color:#45c97a">${v.f1}</b> — a mieux tenu que celui de l'adversaire (${v.f2}). <b>C'est ça, l'équilibre.</b></div><button id="lireBtn" class="reason-btn lire-btn" onclick="toggleLecture()" title="Lire / arrêter">🔊</button></div>`
-      : `<div class="reason lose"><span class="ric">⚠️</span><div>Tu as perdu parce que <b style="color:${COL[pFaibleV]}">${PIL_VIE[pFaibleV]}</b> brûle encore, à <b style="color:#e0708a">${v.f1}</b>. L'adversaire a mieux protégé le sien (${v.f2}). <b>Ne laisse plus aucune case aussi basse.</b></div><button id="lireBtn" class="reason-btn lire-btn" onclick="toggleLecture()" title="Lire / arrêter">🔊</button></div>`;
+      ? `<div class="reason win"><span class="ric">🛡️</span><div>${v.f1===0 ? "Toutes tes cases sont <b>éteintes</b>" : "Il te reste moins de feu que lui"} — la sienne brûle à <b style="color:#45c97a">${v.f1}</b> — a mieux tenu que celui de Rara (${v.f2}). <b>C'est ça, l'équilibre.</b></div><button class="reason-btn lire-btn" onclick="toggleLecture()" title="Lire / arrêter">🔊</button></div>`
+      : `<div class="reason lose"><span class="ric">⚠️</span><div>Tu as perdu parce que <b style="color:${COL[pFaibleV]}">${PIL_VIE[pFaibleV]}</b> brûle encore, à <b style="color:#e0708a">${v.f1}</b>. Rara a mieux protégé le sien (${v.f2}). <b>Ne laisse plus aucune case aussi basse.</b></div><button class="reason-btn lire-btn" onclick="toggleLecture()" title="Lire / arrêter">🔊</button></div>`;
   } else if(v.motif==="braises"){
-    d += `<div class="reason ${gagne?'win':'lose'}"><span class="ric">⚖️</span><div>Vous avez le même nombre de cases en feu (<b>${v.f1}</b>). ${gagne?'Tu':'L\'adversaire'} l'emporte au <b>total</b> : ${v.t1} contre ${v.t2}.${gagne?'':' Relève ta plus petite case pour ne plus dépendre du total.'}</div><button id="lireBtn" class="reason-btn lire-btn" onclick="toggleLecture()" title="Lire / arrêter">🔊</button></div>`;
+    d += `<div class="reason ${gagne?'win':'lose'}"><span class="ric">⚖️</span><div>Vous avez le même nombre de cases en feu (<b>${v.f1}</b>). ${gagne?'Tu':'L\'adversaire'} l'emporte au <b>total</b> : ${v.t1} contre ${v.t2}.${gagne?'':' Relève ta plus petite case pour ne plus dépendre du total.'}</div><button class="reason-btn lire-btn" onclick="toggleLecture()" title="Lire / arrêter">🔊</button></div>`;
   } else if(v.motif==="nul"){
-    d += `<div class="reason win"><span class="ric">☯️</span><div><b>Personne ne brûle.</b> Vos quatre couleurs se tiennent à moins de dix. Parfait équilibre.</div><button id="lireBtn" class="reason-btn lire-btn" onclick="toggleLecture()" title="Lire / arrêter">🔊</button></div>`;
+    d += `<div class="reason win"><span class="ric">☯️</span><div><b>Personne ne brûle.</b> Vos quatre couleurs se tiennent à moins de dix. Parfait équilibre.</div><button class="reason-btn lire-btn" onclick="toggleLecture()" title="Lire / arrêter">🔊</button></div>`;
   }
   _lectureTxt = texteManche(v, gagne, pFaibleV);
   if(!matchFini) document.getElementById("findetail").innerHTML=d;
@@ -5529,8 +5655,14 @@ function terminer(){
   /* Les boutons remontent juste sous les quatre villages, avant l'explication :
      tout en bas de la carte, il fallait défiler pour les atteindre. */
   try{
-    const slot = document.getElementById("fin-slot");
-    if(slot && fb) slot.appendChild(fb);
+    /* On ne les déplace QUE pour une fin de manche. En fin de match, l'emplacement de
+       la manche précédente traîne encore dans le bloc de détail : les boutons y
+       retournaient, puis l'écran de victoire réécrivait ce bloc et les emportait.
+       C'est pour ça qu'il n'y avait aucun bouton après le dernier match. */
+    if(!matchFini){
+      const slot = document.getElementById("fin-slot");
+      if(slot && fb) slot.appendChild(fb);
+    }
   }catch(e){}
   document.getElementById("fin").classList.add("on");
   // ── Boutique : points par manche gagnée (immédiat) + suivi + cadeau ──
@@ -5628,7 +5760,6 @@ function ouvrirNiveau(){
 }
 /* La voix ne lit que ce qui est à l'écran : ni après fermeture, ni avant ouverture. */
 function ecranOuvert(id){ const e=document.getElementById(id); return !!(e && e.classList.contains('on')); }
-function parleSurEcran(id, txt){ if(!ecranOuvert(id)) return; parle(txt); try{ majLireBtn(); }catch(e){} }
 /* Fermer une fenêtre fait taire la voix : elle ne lit que ce qui est à l'écran. */
 function taire(){
   _qSeq=null;
@@ -5894,28 +6025,6 @@ function blocConfidences(angleMort, refuge){
     <button class="conf-oubli" onclick="effacerConfidences()">Effacer ce que j'ai confié</button>
   </div>`;
 }
-function texteConfidences(angleMort, refuge){
-  const dits=_confiees();
-  if(!dits.length) return "";
-  let t=" Ce que le miroir a vu. ";
-  const att=[], flous=[];
-  dits.forEach(p=>{
-    const g=_regardMiroir(p, angleMort, refuge); if(!g) return;
-    if(g.attend) att.push({p, reste:g.reste});
-    else if(g.fait==="mitige" && !g.hier && !g.sacr && !g.gliss) flous.push(g.mot);
-    else t += _texteMiroir(p,g).map(x=>_strip(x)).join(' ')+' ';
-  });
-  if(flous.length){                                          // un seul verdict pour toutes ces paroles
-    t += flous.map(m=>`Tu dis ${/^[aeiouâêîôûéèàïüœ]/i.test(m)?"qu'":"que "}${m}.`).join(' ')
-       + " Ton jeu, lui, ne tranche pas encore. Le miroir observe. ";
-  }
-  if(att.length){                                            // une seule fois, puis la liste
-    att.sort((a,b)=>a.reste-b.reste);
-    t += "Le miroir a entendu. Il attend d'en voir assez : "
-       + att.map(x=>`${x.p}, encore ${x.reste} partie${x.reste>1?'s':''}`).join(" ; ") + ". ";
-  }
-  return t;
-}
 let _oubliArme=false, _oubliT=null;
 /* Effacer se fait en deux temps : un geste malheureux ne doit pas emporter une confidence. */
 /* Ce bouton vivait UNIQUEMENT dans le miroir. Or le miroir ne s'ouvre plus que par le Phœnix :
@@ -6080,7 +6189,7 @@ function netRecv(m){
     netPerdu();
     return;
   }
-  if(m.t==='bye'){ duelTermineParAutre(); return; }   // l'adversaire a appuyé sur « Se déconnecter » : fin nette, pas de reprise
+  if(m.t==='bye'){ duelTermineParAutre(); return; }   // Rara a appuyé sur « Se déconnecter » : fin nette, pas de reprise
   if(NET.role==='host'){
     if(m.t==='coup') netHoteCoup(m.idx, m.p);
     else if(m.t==='relance'){
@@ -6137,7 +6246,7 @@ function netDealManche(){
     locked=false; dire("<b>À vous d'ouvrir la manche.</b> Touchez une carte.",1);
     netEnvoyerEtat(false, "L'hôte ouvre la manche…");
   } else {
-    locked=true; dire("L'adversaire ouvre la manche…",3);
+    locked=true; dire("${advLabel()} ouvre la manche…",3);
     netEnvoyerEtat(true, null);
   }
   render(); initCardTilt();
@@ -6156,10 +6265,10 @@ function netApres(){
   if(next==='host'){
     locked=false; sel=null;
     dire("<b>À vous.</b> Touchez une carte.",1);
-    netEnvoyerEtat(false, "En attente de l'adversaire…");
+    netEnvoyerEtat(false, "En attente de Rara…");
   } else {
     locked=true; sel=null;
-    dire("Au tour de l'adversaire…",3);
+    dire("Au tour de Rara…",3);
     netEnvoyerEtat(true, null);
   }
   render();
@@ -6209,13 +6318,13 @@ function _poserVue(v){
   fermerOverlays(); fermerDuel();
   document.getElementById("niveauBadge").textContent="⚔️ Duel";
   majMatch();
-  dire(v.aToi ? "<b>À vous de jouer.</b> Touchez une carte." : (v.msg||"En attente de l'adversaire…"), v.aToi?1:3);
+  dire(v.aToi ? "<b>À vous de jouer.</b> Touchez une carte." : (v.msg||"En attente de Rara…"), v.aToi?1:3);
   render();
   sauvegarderDuel();       // l'invité mémorise qu'il est en duel (code + rôle) pour reprendre après fermeture
 }
 
 /* — Fin de manche/match (hôte calcule, envoie la vue à l'invité) — */
-/* ── Retour de l'adversaire, côté hôte ──
+/* ── Retour de Rara, côté hôte ──
    Cette séquence forçait « fini=false » sans regarder si la manche était terminée. Quand
    les deux mains étaient vides, elle ressuscitait une manche sans cartes : plateau figé,
    aucune carte à jouer, et plus d'écran de fin — celui-ci ayant été écrasé par l'écran
@@ -6423,7 +6532,7 @@ function netPerdu(){
   const fe=document.getElementById("finemoji"), ft=document.getElementById("fintitre");
   fe.textContent="🔌"; ft.style.color=""; ft.textContent="CONNEXION PERDUE";
   document.getElementById("finpips").innerHTML="";
-  document.getElementById("findetail").innerHTML=`<div style="text-align:center;color:var(--muet)">La liaison avec l'adversaire a été interrompue.</div>`;
+  document.getElementById("findetail").innerHTML=`<div style="text-align:center;color:var(--muet)">La liaison avec Rara a été interrompue.</div>`;
   document.getElementById("finbtns").innerHTML=`<button class="btn" style="flex:1" onclick="quitterDuel()">Retour au menu</button>`;
   document.getElementById("fin").classList.add("on");
 }
@@ -6846,9 +6955,9 @@ function guideCibles(){
     if(!bs.length) return null;
     /* PRIORITÉ AU FEU, ici aussi : quand une carte peut aller sur plusieurs villages —
        l'extincteur les accepte tous les quatre — il ne balaie pas au hasard, il désigne
-       celui qui brûle. Sauf pour l'arrosoir, qui frappe chez l'adversaire : ses flammes
+       celui qui brûle. Sauf pour l'arrosoir, qui frappe chez Rara : ses flammes
        à lui ne nous concernent pas. */
-    /* Priorité au feu, y compris pour l'arrosoir : il frappe chez l'adversaire, mais
+    /* Priorité au feu, y compris pour l'arrosoir : il frappe chez Rara, mais
        c'est bien SUR LA COULEUR QUI BRÛLE chez toi qu'il faut le viser. */
     const feux = guideFeux();
     const chauds = bs.filter(function(el){ return feux.indexOf(el.dataset.p) >= 0; });
@@ -7152,10 +7261,34 @@ let guideFeuxVus = [], guideUrgence = false;
 function guideDebloque(){
   try{
     if(fini || locked) return;
+    if(!document.getElementById('bornes')) return;
+    /* 1. Une main vide doit faire avancer le tour. */
     if(DUO && attend2 && !mainIA.length){ attend2 = false; finTourAdverse(); return; }
-    if(!attend2 && !mainJ.length && !finiePartie()) lancerIA();
+    if(!attend2 && !mainJ.length){
+      if(finiePartie()) terminer(); else lancerIA();
+      return;
+    }
+    /* 2. Une carte choisie qui ne peut aller nulle part laisse le joueur devant un
+          message sans issue : aucun village ne s'allume et rien ne se passe. */
+    const j = (DUO && attend2) ? 2 : 1;
+    const main = (j === 2) ? mainIA : mainJ;
+    const idx  = (j === 2) ? sel2 : sel;
+    if(idx !== null && main[idx] && !ciblesDe(main[idx], T, j).length){
+      if(j === 2) sel2 = null; else sel = null;
+      brulerUne(main, idx, document.getElementById(j===2?'main2':'main'),
+                "Cette carte ne sert plus : elle se consume.");
+      return;
+    }
+    /* 3. Plus aucune carte jouable en main : on nettoie plutôt que d'attendre. */
+    if(idx === null && main.length && !main.some(c => ciblesDe(c, T, j).length)){
+      if(j === 2) brulerMortes2(); else brulerMortes();
+    }
   }catch(e){}
 }
+/* Ce filet tournait UNIQUEMENT au rafraîchissement du plateau — or un jeu bloqué ne se
+   rafraîchit plus, et le filet ne se déclenchait donc jamais au moment où il servait.
+   Il bat maintenant de lui-même, toutes les 1,5 seconde. */
+setInterval(function(){ try{ guideDebloque(); }catch(e){} }, 1500);
 function guideActivite(surRendu){
   clearTimeout(guideT);
   try{ guideDebloque(); }catch(e){}
