@@ -4789,7 +4789,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v112";
+const BUILD_TAG = "cases-v113";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -6637,22 +6637,48 @@ function raraBouche(actif){
   }catch(e){}
 }
 function raraOuvrir(force){
-  let vu = false; try{ vu = localStorage.getItem('qc_rara_vu') === '1'; }catch(e){}
-  if(vu && !force) return false;
+  /* Elle se présente À CHAQUE OUVERTURE — c'est elle qui accueille l'enfant, pas un
+     écran de chargement. Mais on ne redemande pas le prénom tous les jours : s'il est
+     déjà connu, elle le salue par son nom, sans champ à remplir, et s'efface d'elle-même
+     au bout de quatre secondes. L'enfant peut aussi toucher pour passer tout de suite. */
   const v = document.getElementById('raraVisage'); if(v) v.innerHTML = raraVisage();
-  const n = document.getElementById('raraNom'); if(n) n.value = PRENOM;
   const o = document.getElementById('rara'); if(!o) return false;
+  const champ = document.getElementById('raraNom');
+  const mot   = document.getElementById('raraMot');
+  const ok    = o.querySelector('.rara-ok');
+  const plus  = o.querySelector('.rara-plus');
+  const connu = !!PRENOM;
+
+  if(connu && !force){
+    if(mot)   mot.innerHTML = "Bonjour <b>" + PRENOM + "</b>&nbsp;!<br/>C'est moi, <b>RARA</b>.";
+    if(champ) champ.style.display = 'none';
+    if(ok)    ok.textContent = "ON JOUE\u00A0!";
+    if(plus)  plus.style.display = 'none';
+  } else {
+    if(mot)   mot.innerHTML = "Bonjour&nbsp;! Moi c'est <b>RARA</b>.<br/>Et toi, comment tu t'appelles&nbsp;?";
+    if(champ){ champ.style.display = ''; champ.value = PRENOM; }
+    if(ok)    ok.textContent = "C'EST PARTI\u00A0!";
+    if(plus)  plus.style.display = '';
+  }
+
   try{ fermerOverlays(); }catch(e){}
   o.classList.add('on');
   setTimeout(function(){
     try{
-      if(PRENOM) parle("Bonjour " + PRENOM + " ! C'est Rara.");     // contient un prénom : synthèse
-      else dit('accueil', "Bonjour ! Moi c'est Rara. Et toi, comment tu t'appelles ?");
+      if(connu && !force) dit('rebonjour', "Bonjour " + PRENOM + " ! C'est moi, Rara.");
+      else if(PRENOM)     parle("Bonjour " + PRENOM + " ! C'est moi, Rara.");
+      else                dit('accueil', "Bonjour ! Moi c'est Rara. Et toi, comment tu t'appelles ?");
     }catch(e){}
   }, 620);
+
+  clearTimeout(_raraSeul);
+  if(connu && !force) _raraSeul = setTimeout(raraPasser, 4200);   // elle s'efface toute seule
   return true;
 }
+let _raraSeul = null;
 function raraFermer(){
+  clearTimeout(_raraSeul);
+  try{ tairVoix(); speechSynthesis.cancel(); raraBouche(false); }catch(e){}
   const o = document.getElementById('rara'); if(o) o.classList.remove('on');
   try{ localStorage.setItem('qc_rara_vu','1'); }catch(e){}
   try{ majPrenomReglage(); }catch(e){}
@@ -7164,7 +7190,7 @@ glisseBrancher();
   }catch(e){}
 })();
 try{ majPrenomReglage(); }catch(e){}
-setTimeout(function(){ try{ raraOuvrir(false); }catch(e){} }, 400);
+setTimeout(function(){ try{ raraOuvrir(false); }catch(e){} }, 400);   // à chaque ouverture du jeu
 
 nouveauMatch();
 if(!reprendreDuelSauve()) ouvrirSplash();   // un duel était en cours ? on s'y rebranche seul, sinon accueil normal

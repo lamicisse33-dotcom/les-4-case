@@ -2,7 +2,7 @@
    Dépôt dédié : le cache garde tout de même un nom propre au jeu, et la purge ne
    touche que les caches commençant par ce préfixe. Bumper à chaque déploiement,
    EN MÊME TEMPS que BUILD_TAG dans index.html. */
-const CACHE = 'les4cases-v112';
+const CACHE = 'les4cases-v113';
 const PREFIXE = 'les4cases-';
 const ASSETS = ['./','./index.html','./manifest.json',
   './rara.webp','./rara-yeux.webp','./rara-bouche1.webp','./rara-bouche2.webp','./icon-192.png','./icon-512.png','./icon-180.png','./icon-maskable-512.png','./favicon.ico'];
