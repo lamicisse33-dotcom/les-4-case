@@ -35,7 +35,7 @@
      contrastante, que chaque habillage peut regler sans toucher au reste de sa palette. */
   --vise:#F0D060;--viseTxt:#241703;
   /* échelle des cartes : calculée en JS pour que tout l'écran tienne (design natif préservé) */
-  --k:1;
+  --k:1; --k2:.5;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;user-select:none;}
 /* les champs de saisie restent éditables et sélectionnables */
@@ -173,6 +173,11 @@ button.reg-l:active{background:rgba(255,255,255,.06);border-color:rgba(201,162,3
    Au centre, elle s'affiche pareil partout, quelle que soit la forme de l'écran.
    pointer-events:none tant qu'elle est masquée : centrée et transparente, elle
    intercepterait sinon toutes les touches au milieu du plateau. */
+/* Un voile sombre derrière : la bannière était centrée, mais elle se fondait dans le
+   jeu. Là, tout s'assombrit et elle devient le seul point net de l'écran. */
+.maj-voile{position:fixed;inset:0;z-index:10000;background:rgba(6,3,14,.72);
+  backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s ease;}
+.maj-voile.on{opacity:1;pointer-events:auto;}
 .maj{position:fixed;left:50%;top:50%;
   transform:translate(-50%,-50%) scale(.9);opacity:0;pointer-events:none;
   z-index:10001;
@@ -214,6 +219,8 @@ button.reg-l:active{background:rgba(255,255,255,.06);border-color:rgba(201,162,3
   cursor:pointer;white-space:nowrap;animation:ibPulse 1.5s ease-in-out infinite}
 @keyframes ibPulse{0%,100%{box-shadow:0 0 0 0 rgba(240,208,96,0);transform:scale(1)}50%{box-shadow:0 0 16px 2px rgba(240,208,96,.7);transform:scale(1.04)}}
 @media (prefers-reduced-motion: reduce){.instbar .ib-b{animation:none}}
+.instbar .ib-ic{display:inline-block;padding:0 5px;border-radius:5px;
+  background:rgba(255,255,255,.16);font-weight:900;transform:translateY(-1px);}
 .instbar .ib-x{flex-shrink:0;background:none;border:none;color:#8d84a8;font-size:18px;line-height:1;padding:4px 4px;cursor:pointer;font-family:inherit}
 .inst-t{font-family:'Cinzel',serif;font-weight:700;font-size:11.5px;letter-spacing:1.1px;
   text-transform:uppercase;color:var(--goldL);margin-bottom:6px;padding-right:22px;}
@@ -435,10 +442,13 @@ html.lite .jfill{transition:none;}
 /* La main de celui qui NE joue PAS reste petite : elle est là pour être vue, pas lue.
    On utilise « zoom » et non « scale » : zoom réduit vraiment la place occupée, alors
    qu'une mise à l'échelle laisserait un trou de la taille d'origine. */
-#main2{zoom:.5;}
-#main2 .carte{margin:-3px -2px;}
-html.tour-j2 #main2{zoom:1;}
-html.tour-j2 #main{zoom:.5;}
+/* Un SEUL niveau de zoom par carte. Un zoom sur le conteneur PLUS le zoom de chaque
+   carte, c'était un zoom imbriqué : WebKit recalcule alors toute la mise en page à
+   chaque image, et le jeu devenait pâteux. « --k2 » vaut la moitié de « --k » et se
+   pose directement sur la carte. */
+#main2 .carte{zoom:var(--k2,.5);margin:-3px -2px;}
+html.tour-j2 #main .carte{zoom:var(--k2,.5);}
+html.tour-j2 #main2 .carte{zoom:var(--k,1);}
 /* ══ DUO : seul LE PLATEAU pivote ══
    Faire tourner tout l'écran était une erreur de géométrie : les deux mains
    échangeaient alors de bord, et celle du joueur 2 s'éloignait de lui au lieu de
@@ -515,12 +525,11 @@ html.lite .pouf{animation-duration:.45s;}
 #finbtns .btn{box-shadow:0 4px 16px rgba(0,0,0,.5);}
 
 /* Ce que Rara désigne s'allume : la désignation devient certaine. */
+/* Halo FIXE. Il clignotait par un filtre de luminosité : un filtre animé sur une carte
+   pleine de dessins force un repeint complet à chaque image, soixante fois par seconde.
+   Le contour doré suffit à désigner, et ne coûte rien. */
 .guide-vise{outline:3px solid #FFD86A !important;outline-offset:2px;
-  box-shadow:0 0 24px rgba(255,216,106,.8) !important;
-  animation:viseBat 1s ease-in-out infinite;z-index:60;}
-@keyframes viseBat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
-html.lite .guide-vise{animation:none;}
-@media (prefers-reduced-motion: reduce){ .guide-vise{animation:none;} }
+  box-shadow:0 0 24px rgba(255,216,106,.8) !important;z-index:60;}
 
 /* ══ L'accueil de Rara : son visage remplit l'écran ══ */
 .rara-ov{position:fixed;inset:0;z-index:10000;display:none;flex-direction:column;
@@ -2273,6 +2282,7 @@ html[data-skin="coris"] #score .lbl{color:#7C5B36;}
     <button class="minibtn" onclick="ouvrirModemploi('splash')">Comment jouer</button>
   </div>
 </div></div>
+<div id="majVoile" class="maj-voile"></div>
 <div id="majBar" class="maj">
   <div class="maj-t"><b>Nouvelle version disponible</b><br>Mets à jour pour profiter des dernières améliorations.</div>
   <button class="maj-b" onclick="appliquerMaj()">Mettre à jour</button>
@@ -3298,12 +3308,23 @@ let reglagesRetour='splash';
    il décide. (Sa partie serait reprise, mais forcer un rechargement reste une agression.) */
 function montrerMaj(){
   const b=document.getElementById('majBar'); if(!b) return;
+  const v=document.getElementById('majVoile'); if(v) v.classList.add('on');
   b.classList.add('on');
   try{ buzz(12); }catch(e){}
 }
+let _swAttente = null;
 function appliquerMaj(){
   try{ sauverPartie(); }catch(e){}          // on ne perd pas la partie en cours
-  location.reload();
+  const b = document.getElementById('majBar');
+  if(b){ const t=b.querySelector('.maj-b'); if(t){ t.disabled=true; t.textContent='Mise à jour…'; } }
+  /* On demande au nouveau service worker de prendre la main, PUIS on recharge quand
+     il l'a réellement prise. Recharger avant, c'est recharger l'ancienne version. */
+  if(_swAttente){
+    try{ _swAttente.postMessage({type:'SKIP_WAITING'}); }catch(e){}
+    setTimeout(function(){ location.reload(); }, 1800);   // filet, si le message se perd
+  } else {
+    location.reload();
+  }
 }
 /* ══════════ L'INVITATION À INSTALLER ══════════
    Sur iPhone, Safari n'affiche JAMAIS de bannière d'installation : personne ne sait que le jeu
@@ -3343,9 +3364,19 @@ function majInstall(){
   const sub=document.getElementById('ibSub');
   const act=document.getElementById('ibAction');
   if(_promptAndroid){
+    /* Android : installation en un geste */
     sub.innerHTML='Plein écran, <b>même sans connexion</b>.';
     act.style.display=''; act.textContent='Installer'; act.onclick=installerAndroid;
-  } else { hide(); return; }   // iPhone & ordinateur : pas de bannière (l'install 1-clic n'existe pas, et elle gênait sur iPhone)
+  } else if(_safariIOS()){
+    /* iPhone : aucune API d'installation n'existe. On ne peut pas le faire à sa place,
+       alors on montre le chemin — deux gestes, écrits noir sur blanc. */
+    sub.innerHTML='Appuie sur <b>Partager</b> <span class="ib-ic">⎋</span> puis <b>« Sur l\'écran d\'accueil »</b>.';
+    act.style.display=''; act.textContent='Compris'; act.onclick=ecarterInstall;
+  } else if(_iOS()){
+    /* Chrome ou Firefox sur iPhone : l'ajout à l'écran d'accueil n'existe que dans Safari */
+    sub.innerHTML='Ouvre le jeu dans <b>Safari</b> pour l\'ajouter à ton écran d\'accueil.';
+    act.style.display=''; act.textContent='Compris'; act.onclick=ecarterInstall;
+  } else { hide(); return; }   // ordinateur sans installation possible : on se tait
   bar.classList.add('on');
 }
 // la bannière suit l'écran d'accueil : elle apparaît sur le splash, disparaît dès qu'on le quitte
@@ -5120,7 +5151,20 @@ function render(){
   const ciblesSel = carteSel ? ciblesDe(carteSel,T,1) : [];
   const hostile = carteSel && carteSel.cibleAdverse;
 
-  const bz=document.getElementById("bornes"); bz.querySelectorAll('.borne').forEach(e=>e.remove());
+  const bz=document.getElementById("bornes");
+  /* Les quatre cases étaient rasées et redessinées à CHAQUE rendu — quatre villages
+     complets en SVG, leurs jauges et leurs boutons, même quand rien n'avait bougé.
+     C'est le plus gros coût du jeu. On compare d'abord une signature de tout ce qui
+     entre dans leur dessin ; identique, on ne touche à rien. */
+  const _sigB = P.map(p=>T[p][1]+','+T[p][2]+','+(T[p].n1||0)+','+(T[p].n2||0)
+                        +','+(FUMEE[p]?1:0)).join(';')
+    + '§' + (sel===null?'-':sel) + ',' + (sel2===null?'-':sel2)
+    + ',' + (attend2?1:0) + ',' + (locked?1:0) + ',' + (fini?1:0)
+    + ',' + (DUO?1:0) + '§' + MODE + '§' + tour;
+  const _bMemes = (_sigB === bz.dataset.sig) && bz.querySelectorAll('.borne').length === P.length;
+  if(!_bMemes){
+  bz.dataset.sig = _sigB;
+  bz.querySelectorAll('.borne').forEach(e=>e.remove());
   const _lo=Math.min(...P.map(p=>T[p][1]));    // ton pilier le plus faible
   // échelle COMMUNE aux 4 piliers : c'est ce qui rend les hauteurs comparables entre eux
   const _gmax=Math.max(20, ...P.map(p=>Math.max(T[p][1],T[p][2])));
@@ -5158,6 +5202,7 @@ function render(){
     else if(cible2) el.onclick=()=>poser2(p);
     bz.appendChild(el);
   });
+  }
 
   const mz=document.getElementById("main");
   const feux = [];
@@ -5213,6 +5258,14 @@ function render(){
     if(!DUO){ mz2z.style.display="none"; mz2.innerHTML=""; }
     else {
       mz2z.style.display="";
+      /* Même traitement pour la main du joueur 2 : douze cartes et vingt-quatre dessins
+         reconstruits à chaque rendu, alors qu'elle ne change qu'à son tour. */
+      const _sig2 = mainIA.map(c=>c.n+'|'+c.pts+'|'+(c.type||'')).join('#')
+        + '§' + (sel2===null?'-':sel2) + ',' + (attend2?1:0);
+      if(_sig2 === mz2.dataset.sig && mz2.children.length === mainIA.length){
+        mainIA.forEach((c,i)=>{ const e=mz2.children[i]; if(e) e.classList.toggle('sel', sel2===i); });
+      } else {
+      mz2.dataset.sig = _sig2;
       mz2.innerHTML="";
       mainIA.forEach((c,i)=>{
         const el=document.createElement("div");
@@ -5231,6 +5284,7 @@ function render(){
         el.onclick=()=>choisir2(i);
         mz2.appendChild(el);
       });
+      }
     }
   }
   const t1=document.getElementById("titreMain1"); if(t1) t1.textContent = DUO ? "Joueur 1" : "Votre main";
@@ -5301,6 +5355,7 @@ function ajusteMain(force){
   if(Math.abs(k-_kActuel) < 0.015) return;                                  // évite le frémissement
   _kActuel=k;
   document.documentElement.style.setProperty("--k", k.toFixed(3));
+  document.documentElement.style.setProperty("--k2", (k*0.5).toFixed(3));   // main de celui qui ne joue pas
 }
 addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true); guideRecaler(); }catch(e){} });
 /* ══════════ LE MODE LÉGER ══════════
@@ -5313,7 +5368,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v93";
+const BUILD_TAG = "cases-v99";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -6022,7 +6077,16 @@ function terminer(){
   if(!matchFini) document.getElementById("findetail").innerHTML=d;
   if(!matchFini) setTimeout(majLireBtn, 900);
   if(!matchFini && !enLigne()) setTimeout(()=>annonceManche(v, gagne, pFaibleV), 650);
-  const fb=document.getElementById("finbtns"); fb.innerHTML="";
+  const fb=document.getElementById("finbtns");
+  /* On le REMET D'ABORD dans la carte. À la manche précédente il a été déplacé dans
+     le bloc de détail ; or ce bloc est entièrement réécrit par l'écran de fin de match,
+     ce qui détruisait la barre de boutons avec lui. C'est pour ça qu'il n'y avait
+     plus aucun bouton sous les feux d'artifice. */
+  try{
+    const carte = document.querySelector('#fin .card');
+    if(fb && carte && fb.parentNode !== carte) carte.appendChild(fb);
+  }catch(e){}
+  fb.innerHTML="";
   if(matchFini){
     const _gagne = matchMe > matchIA;
     fb.innerHTML = `<button class="btn" style="flex:1" onclick="nouveauMatch()">Nouveau match</button>
@@ -7529,6 +7593,35 @@ function guideOrienter(){
   const g = guideEl();
   if(g) g.classList.toggle('j2', guideRot === 180);
 }
+/* Rara parle en montrant. Deux précautions, sinon c'est vite insupportable :
+   la bulle est courte parce qu'elle est écrite, mais à la voix on a besoin d'une
+   phrase entière ; et elle ne répète pas — même geste, même mot, elle se tait. */
+const GUIDE_VOIX = {
+  "Prends une carte" : "Prends une carte !",
+  "Ça brûle ici !"   : "Attention ! Ta case brûle.",
+  "Ça brûle !"       : "Attention ! Tes cases brûlent.",
+  "L'extincteur !"   : "Prends l'extincteur pour éteindre le feu.",
+  "Le seau !"        : "Prends le seau d'eau.",
+  "L'arrosoir !"     : "Prends l'arrosoir.",
+  "Nourris-la !"     : "Nourris cette case avec cette carte.",
+  "Éteins ici !"     : "Pose-la ici pour éteindre le feu.",
+  "Pose-la ici"      : "Pose-la ici.",
+  "Ici…"             : "Tu peux la poser ici,",
+  "…ou là"           : "ou bien là.",
+  "L'orage !"        : "Fais tomber l'orage !"
+};
+let _ditQuoi = '', _ditQuand = 0;
+function guideDire(txt){
+  if(!txt) return;
+  let dit = false;
+  try{ dit = !!voixOn; }catch(e){}
+  if(!dit) return;
+  const t = Date.now();
+  if(txt === _ditQuoi && t - _ditQuand < 10000) return;   // elle ne se répète pas
+  if(t - _ditQuand < 2200) return;                        // ni ne parle par-dessus elle-même
+  _ditQuoi = txt; _ditQuand = t;
+  try{ parle(GUIDE_VOIX[txt] || txt); }catch(e){}
+}
 function guideEteindreVise(){
   const v = document.querySelectorAll('.guide-vise');
   for(let i=0;i<v.length;i++) v[i].classList.remove('guide-vise');
@@ -7543,7 +7636,9 @@ function guideViser(){
   if(el) el.classList.add('guide-vise');
   if(el) guideBrasVers(el.getBoundingClientRect());   // rectangle FRAIS, jamais figé
   const t = document.getElementById('guideTxt');
-  if(t && guideTextes.length) t.textContent = guideTextes[guideIdx % n] || '';
+  const mot = guideTextes.length ? (guideTextes[guideIdx % n] || '') : '';
+  if(t) t.textContent = mot;
+  guideDire(mot);                       // elle dit ce qu'elle montre, au moment où elle le montre
   if(n > 1){
     clearTimeout(guideViseT);
     guideViseT = setTimeout(function(){ guideIdx++; guideViser(); }, 1600);
@@ -7635,9 +7730,16 @@ function guidePlacement(els){
   return {gx:gx, gy:gy, ech:ech};
 }
 /* Recalage : elle se replace et revise sans repasser par la porte. */
-function guideRecaler(){
+let _recalQuand = 0;
+function guideRecaler(force){
   if(!guideOn || !guideSorti) return;
   if(typeof GLISSE !== 'undefined' && GLISSE.actif) return;
+  /* Le recalage lit une dizaine de positions à l'écran, ce qui oblige le navigateur à
+     recalculer la mise en page sur-le-champ. À chaque redessin du plateau, c'était
+     plusieurs fois par seconde pour rien. Deux fois par seconde suffit. */
+  const _maintenant = Date.now();
+  if(!force && _maintenant - _recalQuand < 500) return;
+  _recalQuand = _maintenant;
   /* Les cibles sont RECALCULÉES : une carte jouée, un feu qui s'allume, et ce qu'elle
      doit montrer a changé. Sans ça elle suivait fidèlement… l'ancienne consigne. */
   const cib = guideCibles();
@@ -7650,7 +7752,9 @@ function guideRecaler(){
   guideEch = pl.ech;
   guidePlacer(pl.gx, pl.gy, pl.ech, 1);
   const t = document.getElementById('guideTxt');
-  if(t && guideTextes.length) t.textContent = guideTextes[guideIdx % guideEls.length] || '';
+  const mot = guideTextes.length ? (guideTextes[guideIdx % guideEls.length] || '') : '';
+  if(t) t.textContent = mot;
+  guideDire(mot);
   const e = guideEls[guideIdx % guideEls.length];
   if(e){ guideEteindreVise(); e.classList.add('guide-vise'); guideBrasVers(e.getBoundingClientRect()); }
 }
@@ -7702,6 +7806,7 @@ function guideSortir(){
 function guideRentrer(){
   const g = guideEl(); if(!g || !guideSorti) return;
   guideStopViser();
+  _ditQuoi = '';                        // elle repart de zéro : au prochain geste elle pourra le redire
   const b = document.getElementById('guideBras'); if(b) b.style.width = '8px';
   const porte = guidePorte();
   g.classList.add('court');
@@ -7838,7 +7943,7 @@ if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
     navigator.serviceWorker.register('./sw.js').then(function(reg){
       // une mise à jour déjà installée et en attente ? on l'affiche tout de suite
-      if(reg.waiting && navigator.serviceWorker.controller){ try{ montrerMaj(); }catch(e){} }
+      if(reg.waiting && navigator.serviceWorker.controller){ _swAttente = reg.waiting; try{ montrerMaj(); }catch(e){} }
       // une nouvelle version arrive-t-elle ?
       reg.addEventListener('updatefound', function(){
         var neuf = reg.installing;
@@ -7846,6 +7951,7 @@ if('serviceWorker' in navigator){
         neuf.addEventListener('statechange', function(){
           // « installed » + un contrôleur déjà là = c'est une MISE À JOUR, pas la 1re visite
           if(neuf.state === 'installed' && navigator.serviceWorker.controller){
+            _swAttente = reg.waiting || neuf;
             try{ montrerMaj(); }catch(e){}
           }
         });
@@ -7856,6 +7962,12 @@ if('serviceWorker' in navigator){
       });
       setInterval(function(){ try{ reg.update(); }catch(e){} }, 3600000);
     }).catch(function(){});
+    /* Le nouveau service worker a pris la main : c'est LE moment de recharger. */
+    var _rechargeFaite = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if(_rechargeFaite) return; _rechargeFaite = true;
+      location.reload();
+    });
   });
 }
 </script>

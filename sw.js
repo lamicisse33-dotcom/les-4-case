@@ -2,13 +2,18 @@
    Dépôt dédié : le cache garde tout de même un nom propre au jeu, et la purge ne
    touche que les caches commençant par ce préfixe. Bumper à chaque déploiement,
    EN MÊME TEMPS que BUILD_TAG dans index.html. */
-const CACHE = 'les4cases-v93';
+const CACHE = 'les4cases-v99';
 const PREFIXE = 'les4cases-';
 const ASSETS = ['./','./index.html','./manifest.json',
   './icon-192.png','./icon-512.png','./icon-180.png','./favicon.ico'];
 
+/* PAS de skipWaiting ici : la nouvelle version doit ATTENDRE, sinon elle s'active
+   toute seule et la page ne peut jamais proposer « Mettre à jour ». C'est le bouton
+   du joueur qui déclenche la bascule, via le message ci-dessous. */
+self.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
+});
 self.addEventListener('install', e => {
-  self.skipWaiting();
   // fichier par fichier : addAll rejette en bloc si un seul manque, et le cache reste vide
   e.waitUntil(caches.open(CACHE).then(c => Promise.all(ASSETS.map(u => c.add(u).catch(()=>{})))).catch(()=>{}));
 });
