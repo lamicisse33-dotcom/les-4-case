@@ -566,22 +566,28 @@ html.lite .rara-visage,html.lite .r-yeux{animation:none;}
 .guide.j2{flex-direction:column-reverse;}
 .guide.j2 .g-corps{transform:rotate(180deg);}
 .guide.j2 .g-bulle{transform:rotate(180deg);margin:2px 0 0;}
-.g-corps{position:relative;width:116px;height:143px;transform-origin:63.8% 62.6%;
-  transition:transform .45s ease-out;}
-.g-im{position:absolute;left:0;top:0;width:116px;height:auto;display:block;
-  filter:drop-shadow(0 5px 8px rgba(0,0,0,.5));}
-.g-cligne,.g-parle,.g-montre{opacity:0;}
-.guide .g-montre{opacity:1;}                    /* elle montre : c'est son état par défaut */
-.guide .g-repos{opacity:0;}
-.guide.court .g-montre{opacity:0;}
-.guide.court .g-repos{opacity:1;}               /* pendant qu'elle court, bras le long du corps */
-.guide:not(.court) .g-cligne{animation:gClin 5.2s infinite;}
-@keyframes gClin{0%,94%,100%{opacity:0} 95.4%,97.4%{opacity:1}}
-.guide.parle .g-parle{animation:gParle .3s steps(1,end) infinite;}
-@keyframes gParle{0%,45%{opacity:0} 46%,100%{opacity:1}}
-html.lite .g-im{filter:none;}
-html.lite .guide .g-cligne,html.lite .guide.parle .g-parle{animation:none;}
-
+.g-corps{position:relative;width:116px;height:139px;}
+.guide .g-tete{width:116px;height:139px;display:block;
+  filter:drop-shadow(0 6px 9px rgba(0,0,0,.55));}
+html.lite .guide .g-tete,html.lite .g-main{filter:none!important;}
+.guide.court .g-tete{animation:gCourse .26s ease-in-out infinite alternate;}
+@keyframes gCourse{from{transform:rotate(-7deg) translateY(0)}to{transform:rotate(7deg) translateY(-6px)}}
+.guide:not(.court) .g-tete{animation:gFlotte 2.4s ease-in-out infinite;}
+@keyframes gFlotte{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.g-yeux{animation:gCligne 4.2s infinite;transform-origin:55px 43px;}
+@keyframes gCligne{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.12)}98%{transform:scaleY(1)}}
+/* le bras : un élément à part, dont on règle la longueur et l'angle pour désigner
+   un point précis de l'écran — ce qu'un dessin figé ne peut pas faire. */
+.g-bras{position:absolute;left:78px;top:78px;height:16px;width:8px;z-index:-1;
+  transform-origin:0 50%;pointer-events:none;
+  transition:width .5s cubic-bezier(.28,1.5,.5,1), transform .5s ease-out;}
+.g-manche{position:absolute;inset:0;border-radius:9px;
+  background:linear-gradient(180deg,#8AE6FF,#2E9CC4 52%,#12455C);
+  box-shadow:inset 0 -4px 6px rgba(0,0,0,.35), 0 3px 7px rgba(0,0,0,.45);}
+.g-main{position:absolute;right:-34px;top:50%;width:40px;height:35px;
+  transform:translateY(-50%);filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));
+  animation:gPointe 1.1s ease-in-out infinite;}
+html.lite .guide .g-yeux,html.lite .g-main{animation:none!important;}
 @keyframes gPointe{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(-50%) translateX(7px)}}
 .guide.court .g-main{animation:none;}
 .guide.court .g-bulle{opacity:0;}
@@ -1957,10 +1963,11 @@ html[data-skin="coris"] #score .lbl{color:#7C5B36;}
   <div id="guide" class="guide dedans" onclick="guideEteindre()">
     <div class="g-bulle" id="guideTxt"></div>
     <div class="g-corps">
-      <img class="g-im g-repos"  src="./rara.webp"        alt="Rara" onerror="this.style.display='none'"/>
-      <img class="g-im g-cligne" src="./rara-yeux.webp"   alt=""     onerror="this.style.display='none'"/>
-      <img class="g-im g-parle"  src="./rara-bouche.webp" alt=""     onerror="this.style.display='none'"/>
-      <img class="g-im g-montre" src="./rara-bras.webp"   alt=""     onerror="this.style.display='none'"/>
+      <svg class="g-tete" viewBox="0 0 110 132" aria-hidden="true"><defs><radialGradient id="gPeau" cx="34%" cy="24%" r="80%"><stop offset="0" stop-color="#C98A50"/><stop offset="42%" stop-color="#9A5C2D"/><stop offset="100%" stop-color="#4A2A0E"/></radialGradient><linearGradient id="gTresse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3E2714"/><stop offset="42%" stop-color="#1C1109"/><stop offset="100%" stop-color="#0B0603"/></linearGradient><linearGradient id="gCheveux" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3E2714"/><stop offset="100%" stop-color="#150C05"/></linearGradient><linearGradient id="gBoubou" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9BEDFF"/><stop offset="42%" stop-color="#2E9CC4"/><stop offset="100%" stop-color="#0E3A50"/></linearGradient><linearGradient id="gOr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEFB8"/><stop offset="50%" stop-color="#E8C860"/><stop offset="100%" stop-color="#9E7622"/></linearGradient><linearGradient id="gCori" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFBF0"/><stop offset="58%" stop-color="#F2E4CA"/><stop offset="100%" stop-color="#C9B68E"/></linearGradient><radialGradient id="gLuisant" cx="32%" cy="20%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><ellipse cx="55" cy="127" rx="27" ry="5" fill="#000" opacity=".35"/><path d="M25 46 L14 78" stroke="#1B1008" stroke-width="6" stroke-linecap="round"/><path d="M85 46 L96 78" stroke="#1B1008" stroke-width="6" stroke-linecap="round"/><path d="M31 56 L23 86" stroke="#1B1008" stroke-width="6" stroke-linecap="round"/><path d="M79 56 L87 86" stroke="#1B1008" stroke-width="6" stroke-linecap="round"/><path d="M34 76 h42 l6 42 a5 5 0 0 1 -5 5 H33 a5 5 0 0 1 -5 -5 Z" fill="url(#gBoubou)" stroke="#0A2E40" stroke-width="3"/><path d="M34 76 h13 l-3 47 H33 a5 5 0 0 1 -5 -5 Z" fill="#fff" opacity=".2"/><path d="M40 76 q15 9 30 0 l-2 6 q-13 7 -26 0 Z" fill="#0A2E40" opacity=".35"/><path d="M20 80 C 8 92, 10 108, 20 116" fill="none" stroke="url(#gBoubou)" stroke-width="13" stroke-linecap="round"/><circle cx="21" cy="118" r="9.5" fill="url(#gPeau)" stroke="#3B2109" stroke-width="2.4"/><path d="M46 68 h18 v9 h-18 Z" fill="#7A4620"/><ellipse cx="55" cy="44" rx="32" ry="30.5" fill="url(#gPeau)"/><ellipse cx="55" cy="44" rx="32" ry="30.5" fill="url(#gLuisant)"/><ellipse cx="55" cy="44" rx="32" ry="30.5" fill="none" stroke="#3B2109" stroke-width="2.6"/><ellipse cx="30" cy="54" rx="5.6" ry="4" fill="#C2603C" opacity=".38"/><ellipse cx="81" cy="54" rx="5.6" ry="4" fill="#C2603C" opacity=".38"/><path d="M23 34 C 26 6, 84 6, 87 34 C 76 18, 34 18, 23 34 Z" fill="url(#gCheveux)"/><path d="M28 26 C 36 15, 74 15, 82 26" fill="none" stroke="#5A3A1E" stroke-width="2" opacity=".55"/><g fill="#3A2412" opacity=".9"><circle cx="20" cy="62" r="2.6"/><circle cx="90" cy="62" r="2.6"/><circle cx="27" cy="71" r="2.3"/><circle cx="83" cy="71" r="2.3"/></g><g><ellipse cx="13" cy="82" rx="3.4" ry="4.8" fill="url(#gCori)" stroke="#B9995F" stroke-width="1"/><ellipse cx="97" cy="82" rx="3.4" ry="4.8" fill="url(#gCori)" stroke="#B9995F" stroke-width="1"/><ellipse cx="22" cy="90" rx="3" ry="4.2" fill="url(#gCori)" stroke="#B9995F" stroke-width="1"/><ellipse cx="88" cy="90" rx="3" ry="4.2" fill="url(#gCori)" stroke="#B9995F" stroke-width="1"/><ellipse cx="55" cy="14" rx="4" ry="5.4" fill="url(#gCori)" stroke="#B9995F" stroke-width="1.1"/><ellipse cx="39" cy="18" rx="3.2" ry="4.4" fill="url(#gCori)" stroke="#B9995F" stroke-width="1"/><ellipse cx="71" cy="18" rx="3.2" ry="4.4" fill="url(#gCori)" stroke="#B9995F" stroke-width="1"/></g><circle cx="22.5" cy="50" r="5.4" fill="none" stroke="url(#gOr)" stroke-width="3"/><circle cx="87.5" cy="50" r="5.4" fill="none" stroke="url(#gOr)" stroke-width="3"/><path d="M37 32.5 Q 45 27.5 52 32" fill="none" stroke="#241608" stroke-width="3.4" stroke-linecap="round"/><path d="M58 32 Q 65 27.5 73 32.5" fill="none" stroke="#241608" stroke-width="3.4" stroke-linecap="round"/><g class="g-yeux"><path d="M35 43.5 Q 44 35.5 53 43 Q 44 50.5 35 43.5 Z" fill="#FFF7EC"/><path d="M57 43 Q 66 35.5 75 43.5 Q 66 50.5 57 43 Z" fill="#FFF7EC"/><circle cx="44.6" cy="43.2" r="4.9" fill="#3A1F0A"/><circle cx="65.4" cy="43.2" r="4.9" fill="#3A1F0A"/><circle cx="44.6" cy="43.2" r="2.4" fill="#120A03"/><circle cx="65.4" cy="43.2" r="2.4" fill="#120A03"/><circle cx="46.4" cy="41.2" r="1.7" fill="#fff"/><circle cx="67.2" cy="41.2" r="1.7" fill="#fff"/><path d="M35 43.5 Q 44 35.5 53 43" fill="none" stroke="#241608" stroke-width="2" stroke-linecap="round"/><path d="M57 43 Q 66 35.5 75 43.5" fill="none" stroke="#241608" stroke-width="2" stroke-linecap="round"/></g><path d="M55 45 Q 51.5 53 55 55.5 Q 58.5 53 55 45" fill="#000" opacity=".14"/><ellipse cx="51.6" cy="55.6" rx="2.1" ry="1.4" fill="#3A2008" opacity=".8"/><ellipse cx="58.4" cy="55.6" rx="2.1" ry="1.4" fill="#3A2008" opacity=".8"/><path d="M42 62 Q 55 56.5 68 62 Q 55 64.5 42 62 Z" fill="#6E2A24"/><path d="M42 62 Q 55 74 68 62 Q 55 66.5 42 62 Z" fill="#4A1610"/><path d="M45.5 63 Q 55 66.5 64.5 63 Q 55 70.5 45.5 63 Z" fill="#FFF8EE"/><path d="M43.5 68.5 Q 55 77 66.5 68.5 Q 55 72.5 43.5 68.5 Z" fill="#A64A3C"/></svg>
+      <div class="g-bras" id="guideBras">
+        <span class="g-manche"></span>
+        <svg class="g-main" viewBox="0 0 46 40" aria-hidden="true"><defs><linearGradient id="gMain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A96C39"/><stop offset="100%" stop-color="#5E360F"/></linearGradient></defs><path d="M2 12 h14 a10 10 0 0 1 10 10 v4 a10 10 0 0 1 -10 10 H2 Z" fill="url(#gMain)" stroke="#3B2109" stroke-width="2.6" stroke-linejoin="round"/><rect x="18" y="15.5" width="26" height="9" rx="4.5" fill="url(#gMain)" stroke="#3B2109" stroke-width="2.6"/><path d="M6 10 a5 5 0 0 1 9 3" fill="url(#gMain)" stroke="#3B2109" stroke-width="2.4"/></svg>
+      </div>
     </div>
   </div>
 
@@ -4772,7 +4779,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v118";
+const BUILD_TAG = "cases-v121";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -6681,6 +6688,21 @@ function majPrenomReglage(){
    jusqu'à la manche suivante. */
 let guideOn = true, guideT = null, guideSorti = false, guideRentreT = null;
 function guideEl(){ return document.getElementById('guide'); }
+/* Rara n'accompagne QUE le jeu. Elle ne se montrait pas sur les menus par hasard —
+   parce qu'aucune cible n'y existe — mais rien ne l'interdisait vraiment : un écran
+   ouvert par-dessus le plateau et elle restait plantée devant. On le dit maintenant
+   explicitement : si un panneau est ouvert, elle n'a rien à faire là. */
+function guideEnPartie(){
+  try{
+    for(const id of ['splash','fin','niveau','reglages','boutique','rara']){
+      const e = document.getElementById(id);
+      if(e && e.classList.contains('on')) return false;
+    }
+    const bz = document.getElementById('bornes');
+    if(!bz || !bz.querySelector('.borne')) return false;   // pas de plateau, pas de guide
+  }catch(e){ return false; }
+  return true;
+}
 /* Le passage : ce n'est pas un « pff » mais un souffle qui traverse. Trois ingrédients —
    un bruit rose dont le filtre balaie du grave à l'aigu, une couche basse qui glisse
    comme un moteur qui passe, et un panoramique d'une oreille à l'autre. C'est le balayage
@@ -6814,7 +6836,10 @@ function guideCibles(){
       if(c.type === 'sacrifice')     { g = 30;   m = "L'extincteur !"; }
       else if(c.type === 'tempete')  { g = 20;   m = "L'arrosoir !";   }
       else if(c.type === 'vol')      { g = 19.5; m = "Le seau !";      }
-      else                           { g = c.pts; m = "Nourris-la !";  }
+      /* Ce bloc ne tourne que pour un village EN FEU. Dire « nourris-la » y était un
+         contresens : on n'engraisse pas une case qui brûle, on l'éteint. Une carte
+         normale éteint aussi — en comblant l'écart qui a mis le feu. */
+      else                           { g = c.pts; m = "Éteins avec ça !"; }
       if(g > mieux){ mieux = g; idx = n; mot = m; }
     }
     if(idx >= 0 && mz.children[idx]){ els.push(mz.children[idx]); textes.push(mot); }
@@ -6843,7 +6868,7 @@ const GUIDE_VOIX = {
   "L'extincteur !"   : "Prends l'extincteur pour éteindre le feu.",
   "Le seau !"        : "Prends le seau d'eau.",
   "L'arrosoir !"     : "Prends l'arrosoir.",
-  "Nourris-la !"     : "Nourris cette case avec cette carte.",
+  "Éteins avec ça !" : "Éteins le feu avec cette carte.",
   "Éteins ici !"     : "Pose-la ici pour éteindre le feu.",
   "Pose-la ici"      : "Pose-la ici.",
   "Ici…"             : "Tu peux la poser ici,",
@@ -6885,27 +6910,42 @@ function guideViser(){
   }
 }
 function guideStopViser(){ clearTimeout(guideViseT); guideEteindreVise(); guideEls = []; guideTextes = []; guideIdx = 0; }
+/* On quitte le plateau : elle disparaît sur-le-champ, sans courir vers une porte
+   qui n'existe plus. */
+function guideCacheNet(){
+  guideStopViser();
+  clearTimeout(guideT); clearTimeout(guideRentreT);
+  const g = guideEl();
+  if(g){ g.classList.add('dedans'); g.classList.remove('court','jaillit'); }
+  guideSorti = false;
+}
 /* Son bras est peint dans l'image, il ne peut pas bouger tout seul. On oriente donc
    la figure entière : légère inclinaison vers la cible, et retournement gauche-droite
    quand elle est de l'autre côté. Au-delà de 34 degrés elle paraîtrait couchée, alors
    on borne — le doigt indique la direction, il n'a pas à toucher le pixel exact. */
-const G_DOIGT = {x:0.998, y:0.588};      // bout du doigt, en fraction de l'image
-const G_EPAULE = {x:0.638, y:0.626};
 function guideBrasVers(cible){
+  const b = document.getElementById('guideBras'); if(!b) return;
   const corps = document.querySelector('#guide .g-corps'); if(!corps) return;
+  /* L'ÉPAULE se déduit du corps, jamais du bras : le bras est en pleine transition de
+     rotation quand on le mesure, et sa boîte englobante n'a alors rien à voir avec son
+     point d'attache. */
   const r = corps.getBoundingClientRect();
-  if(!r.width) return;
-  const ex = r.left + r.width * G_EPAULE.x;
-  const ey = r.top  + r.height * G_EPAULE.y;
-  const tx = (cible.left + cible.right)/2;
-  const ty = (cible.top + cible.bottom)/2;
-  const gauche = tx < ex;                                   // la cible est-elle à sa gauche ?
-  const dx = (gauche ? -(tx-ex) : (tx-ex)), dy = ty-ey;
-  let ang = Math.atan2(dy, dx) * 180/Math.PI + 7.4;         // 7,4° : l'inclinaison native du bras
-  ang = Math.max(-34, Math.min(34, ang));
-  const g = guideEl();
-  if(g) g.classList.toggle('mire', gauche);
-  corps.style.transform = (gauche ? 'scaleX(-1) ' : '') + 'rotate(' + ang.toFixed(1) + 'deg)';
+  const ech = r.width / 116 || 1;
+  const j2 = (guideRot === 180);
+  const sx = j2 ? (r.right - 78 * ech) : (r.left + 78 * ech);
+  const sy = j2 ? (r.bottom - 86 * ech) : (r.top + 86 * ech);
+  const tx = (cible.left + cible.right) / 2;      // le centre : sans ambiguïté possible
+  const ty = (cible.top + cible.bottom) / 2;
+  const dx = tx - sx, dy = ty - sy;
+  const ang = Math.atan2(dy, dx) * 180 / Math.PI - (j2 ? 180 : 0);
+  /* la main est posée 36 unités au-delà du bout de la manche : on les déduit */
+  const REACH = 36;
+  const dist = Math.sqrt(dx*dx + dy*dy) / ech;
+  const len = Math.max(14, Math.min(620, dist - REACH));
+  requestAnimationFrame(function(){
+    b.style.width = len + 'px';
+    b.style.transform = 'rotate(' + ang.toFixed(1) + 'deg)';
+  });
 }
 /* Où doit-elle se tenir, maintenant ? Refait chaque fois que la mise en page bouge. */
 function guidePlacement(els){
@@ -6983,6 +7023,7 @@ function guideRecaler(force){
 }
 function guideSortir(){
   if(!guideOn || fini || locked) return;
+  if(!guideEnPartie()) return;
   if(typeof GLISSE !== 'undefined' && GLISSE.actif) return;
   if(guideSorti){ guideRecaler(); return; }      // déjà dehors : elle se replace, elle ne renaît pas
   const g = guideEl(); if(!g) return;
@@ -7048,6 +7089,7 @@ function guideRentrer(){
 let guideFeuxVus = [], guideUrgence = false;
 function guideActivite(surRendu){
   clearTimeout(guideT);
+  if(!guideEnPartie()){ guideRentrer(); guideCacheNet(); return; }
   try{
     const f = guideFeux();
     for(let i=0;i<f.length;i++) if(guideFeuxVus.indexOf(f[i]) < 0) guideUrgence = true;
