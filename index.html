@@ -502,6 +502,10 @@ html.lite .pouf{animation-duration:.45s;}
   background:linear-gradient(180deg,rgba(18,62,119,0),rgba(18,62,119,.94) 34%,rgba(18,62,119,.99));
   border-radius:0 0 18px 18px;}
 #finbtns .btn{box-shadow:0 4px 16px rgba(0,0,0,.5);}
+/* Le bouton principal : large, centré, impossible à manquer. */
+#finbtns .fb-grand{flex:1 0 100%;font-size:19px;padding:16px 22px;letter-spacing:2px;
+  border-radius:40px;}
+#finbtns .fb-mi{flex:1 1 40%;}
 
 /* Ce que Rara désigne s'allume : la désignation devient certaine. */
 /* Halo FIXE. Il clignotait par un filtre de luminosité : un filtre animé sur une carte
@@ -1048,10 +1052,12 @@ span.orb{width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);b
   animation:rayspin 22s linear infinite; will-change:transform;}
 #fin.epicwin #finrays{display:block;}
 @keyframes rayspin{to{transform:translate(-50%,-50%) rotate(360deg);}}
-#fin.epicwin>.card{background:radial-gradient(ellipse at 50% 38%, rgba(70,52,12,.55), #120826 68%);animation:ovin .35s ease both, winglow 2.6s ease-in-out .4s infinite;}
+/* Le fond noir et or, c'était la salle des trophées du jeu pour adultes. Un enfant de
+   quatre ans qui gagne doit voir de la lumière, pas une crypte. */
+#fin.epicwin>.card{background:radial-gradient(ellipse at 50% 34%, #3D8BE0, #1B57A0 52%, #123E77 100%);animation:ovin .35s ease both, winglow 2.6s ease-in-out .4s infinite;}
 @keyframes winglow{0%,100%{background:radial-gradient(ellipse at 50% 38%, rgba(70,52,12,.42), #120826 70%);}
   50%{background:radial-gradient(ellipse at 50% 38%, rgba(96,72,16,.6), #120826 66%);}}
-#fin.epicloss>.card{background:radial-gradient(ellipse at 50% 40%, rgba(70,20,30,.4), #120826 70%);}
+#fin.epicloss>.card{background:radial-gradient(ellipse at 50% 40%, #2E6FB0, #17497F 60%, #103867 100%);}
 #fin.epicwin #finemoji{animation:crownpop .7s cubic-bezier(.2,1.6,.3,1) both, crownfloat 3s ease-in-out .8s infinite;
   filter:drop-shadow(0 0 14px rgba(201,162,39,.85));}
 @keyframes crownpop{0%{transform:scale(.2) rotate(-16deg);opacity:0;}70%{transform:scale(1.25) rotate(6deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
@@ -1060,7 +1066,7 @@ span.orb{width:24px;height:24px;border-radius:50%;border:1px solid var(--gold);b
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:220% auto;
   animation:shine 2.6s linear infinite;text-shadow:none;}
 @keyframes shine{to{background-position:-220% center;}}
-#fin.epicloss>.card{border-color:#a33b4e;box-shadow:0 0 50px rgba(180,50,70,.4);}
+#fin.epicloss>.card{border-color:#7FB2E8;box-shadow:0 0 40px rgba(60,130,210,.45);}
 #fin.epicloss #finemoji{animation:lossdrop .6s ease both;filter:drop-shadow(0 0 10px rgba(200,60,80,.6));}
 @keyframes lossdrop{0%{transform:translateY(-12px) scale(.7);opacity:0;}100%{transform:translateY(0) scale(1);opacity:1;}}
 
@@ -4796,7 +4802,7 @@ addEventListener("resize", ()=>{ try{ _kActuel=0; _ajRangs=-1; ajusteMain(true);
    Sans marqueur visible, ni le joueur ni le testeur ne savent ce qu'ils jouent, et le
    développeur ne peut pas le lire sur une capture. On a perdu une journée à s'en douter.
    À bumper AVEC le CACHE de sw.js — les deux doivent toujours dire la même chose. */
-const BUILD_TAG = "cases-v127";
+const BUILD_TAG = "cases-v129";
 
 const CLE_LITE = "qc_eq_lite";
 let liteOn = false;
@@ -5506,14 +5512,20 @@ function terminer(){
   fb.innerHTML="";
   if(matchFini){
     const _gagne = matchMe > matchIA;
-    fb.innerHTML = `<button class="btn" style="flex:1" onclick="nouveauMatch()">Nouveau match</button>
+    fb.innerHTML = `<button class="btn fb-grand" onclick="nouveauMatch()">▶ ON REJOUE&nbsp;!</button>
       <button class="btn ghost fb-mi" onclick="ouvrirNiveau()">Niveau</button>`
       + (_gagne && !enLigne() ? `<button class="btn ghost fb-mi fb-part" onclick="partagerVictoire()">↗ Partager</button>` : '');
   } else {
-    fb.innerHTML = `<button class="btn" style="flex:1 0 100%" onclick="mancheSuivante()">Manche suivante →</button>
+    fb.innerHTML = `<button class="btn fb-grand" onclick="mancheSuivante()">SUIVANT →</button>
       <button class="btn ghost fb-mi" onclick="nouveauMatch()">↻ Rejouer</button>
       <button class="btn ghost fb-mi" onclick="ouvrirNiveau()">Niveau</button>`;
   }
+  /* Un enfant de quatre ans cherche UN bouton, pas trois. Le principal est large,
+     centré, et dit ce qu'il fait. Les autres restent, en retrait. */
+  try{
+    const p = fb.querySelector('.btn:not(.ghost)');
+    if(p) p.classList.add('fb-grand');
+  }catch(e){}
   /* Les boutons remontent juste sous les quatre villages, avant l'explication :
      tout en bas de la carte, il fallait défiler pour les atteindre. */
   try{
